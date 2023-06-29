@@ -1,10 +1,24 @@
+import thumb1 from "../images/recipeThumb-01.jpg";
+import thumb2 from "../images/recipeThumb-02.jpg";
+import thumb3 from "../images/recipeThumb-03.jpg";
+import thumb4 from "../images/recipeThumb-04.jpg";
+import thumb5 from "../images/recipeThumb-05.jpg";
+import thumb6 from "../images/recipeThumb-06.jpg";
+import thumb7 from "../images/recipeThumb-07.jpg";
+import thumb8 from "../images/recipeThumb-08.jpg";
+import thumb9 from "../images/recipeThumb-09.jpg";
+import author from "../images/author-photo.png";
+
+import React from "react";
+import { NavLink } from "react-router-dom";
+
 function MemberContent() {
   return (
     <div class='container'>
       {/*  Masonry */}
       <div class='twelve columns'>
         {/*  Headline */}
-        <h3 class='headline'>Latest Recipes</h3>
+        <h3 class='headline'>Meals Menu</h3>
         <span class='line rb margin-bottom-35'></span>
         <div class='clearfix'></div>
 
@@ -14,8 +28,8 @@ function MemberContent() {
           <div class='four recipe-box columns'>
             {/*  Thumbnail */}
             <div class='thumbnail-holder'>
-              <a href='recipe-page-1.html'>
-                <img src='images/recipeThumb-01.jpg' alt='' />
+              <a href='/detail'>
+                <img src={thumb1} alt='' />
                 <div class='hover-cover'></div>
                 <div class='hover-icon'>View Recipe</div>
               </a>
@@ -24,18 +38,13 @@ function MemberContent() {
             {/*  Content */}
             <div class='recipe-box-content'>
               <h3>
-                <a href='recipe-page-1.html'>
+                <a href='/detail'>
                   Mexican Grilled <br /> Corn Recipe
                 </a>
               </h3>
 
-              <div class='rating five-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
-
               <div class='recipe-meta'>
-                <i class='fa fa-clock-o'></i> 30 min
+                <i class='fa fa-check-circle'></i> Available
               </div>
 
               <div class='clearfix'></div>
@@ -46,8 +55,8 @@ function MemberContent() {
           <div class='four recipe-box columns'>
             {/*  Thumbnail */}
             <div class='thumbnail-holder'>
-              <a href='recipe-page-2.html'>
-                <img src='images/recipeThumb-02.jpg' alt='' />
+              <a href='/detail'>
+                <img src={thumb2} alt='' />
                 <div class='hover-cover'></div>
                 <div class='hover-icon'>View Recipe</div>
               </a>
@@ -56,18 +65,11 @@ function MemberContent() {
             {/*  Content */}
             <div class='recipe-box-content'>
               <h3>
-                <a href='recipe-page-2.html'>
-                  Choclate Cake With Green Tea Cream
-                </a>
+                <a href='/detail'>Choclate Cake With Green Tea Cream</a>
               </h3>
 
-              <div class='rating four-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
-
               <div class='recipe-meta'>
-                <i class='fa fa-clock-o'></i> 1 hr 30 min
+                <i class='fa fa-check-circle'></i> Available
               </div>
 
               <div class='clearfix'></div>
@@ -78,8 +80,8 @@ function MemberContent() {
           <div class='four recipe-box columns'>
             {/*  Thumbnail */}
             <div class='thumbnail-holder'>
-              <a href='recipe-page-1.html'>
-                <img src='images/recipeThumb-03.jpg' alt='' />
+              <a href='/detail'>
+                <img src={thumb3} alt='' />
                 <div class='hover-cover'></div>
                 <div class='hover-icon'>View Recipe</div>
               </a>
@@ -88,16 +90,11 @@ function MemberContent() {
             {/*  Content */}
             <div class='recipe-box-content'>
               <h3>
-                <a href='recipe-page-1.html'>Thai Yellow Curry Chicken</a>
+                <a href='/detail'>Thai Yellow Curry Chicken</a>
               </h3>
 
-              <div class='rating five-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
-
               <div class='recipe-meta'>
-                <i class='fa fa-clock-o'></i> 45 min
+                <i class='fa fa-check-circle'></i> Available
               </div>
 
               <div class='clearfix'></div>
@@ -108,8 +105,8 @@ function MemberContent() {
           <div class='four recipe-box columns'>
             {/*  Thumbnail */}
             <div class='thumbnail-holder'>
-              <a href='recipe-page-2.html'>
-                <img src='images/recipeThumb-04.jpg' alt='' />
+              <a href='/detail'>
+                <img src={thumb4} alt='' />
                 <div class='hover-cover'></div>
                 <div class='hover-icon'>View Recipe</div>
               </a>
@@ -118,18 +115,11 @@ function MemberContent() {
             {/*  Content */}
             <div class='recipe-box-content'>
               <h3>
-                <a href='recipe-page-2.html'>
-                  Avocado Melon Salad With Lime Vinaigrette
-                </a>
+                <a href='/detail'>Avocado Melon Salad With Lime Vinaigrette</a>
               </h3>
 
-              <div class='rating four-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
-
               <div class='recipe-meta'>
-                <i class='fa fa-clock-o'></i> 15 min
+                <i class='fa fa-check-circle'></i> Available
               </div>
 
               <div class='clearfix'></div>
@@ -140,8 +130,8 @@ function MemberContent() {
           <div class='four recipe-box columns'>
             {/*  Thumbnail */}
             <div class='thumbnail-holder'>
-              <a href='recipe-page-1.html'>
-                <img src='images/recipeThumb-05.jpg' alt='' />
+              <a href='/detail'>
+                <img src={thumb5} alt='' />
                 <div class='hover-cover'></div>
                 <div class='hover-icon'>View Recipe</div>
               </a>
@@ -150,18 +140,11 @@ function MemberContent() {
             {/*  Content */}
             <div class='recipe-box-content'>
               <h3>
-                <a href='recipe-page-1.html'>
-                  Pollo Borracho With Homemade Tortillas
-                </a>
+                <a href='/detail'>Pollo Borracho With Homemade Tortillas</a>
               </h3>
 
-              <div class='rating four-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
-
               <div class='recipe-meta'>
-                <i class='fa fa-clock-o'></i> 30 min
+                <i class='fa fa-check-circle'></i> Available
               </div>
 
               <div class='clearfix'></div>
@@ -172,8 +155,8 @@ function MemberContent() {
           <div class='four recipe-box columns'>
             {/*  Thumbnail */}
             <div class='thumbnail-holder'>
-              <a href='recipe-page-2.html'>
-                <img src='images/recipeThumb-06.jpg' alt='' />
+              <a href='/detail'>
+                <img src={thumb6} alt='' />
                 <div class='hover-cover'></div>
                 <div class='hover-icon'>View Recipe</div>
               </a>
@@ -182,18 +165,11 @@ function MemberContent() {
             {/*  Content */}
             <div class='recipe-box-content'>
               <h3>
-                <a href='recipe-page-2.html'>
-                  Sweet Chilli and Lime Chicken Wings
-                </a>
+                <a href='/detail'>Sweet Chilli and Lime Chicken Wings</a>
               </h3>
 
-              <div class='rating five-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
-
               <div class='recipe-meta'>
-                <i class='fa fa-clock-o'></i> 45 min
+                <i class='fa fa-check-circle'></i> Available
               </div>
 
               <div class='clearfix'></div>
@@ -204,8 +180,8 @@ function MemberContent() {
           <div class='four recipe-box columns'>
             {/*  Thumbnail */}
             <div class='thumbnail-holder'>
-              <a href='recipe-page-2.html'>
-                <img src='images/recipeThumb-07.jpg' alt='' />
+              <a href='/detail'>
+                <img src={thumb7} alt='' />
                 <div class='hover-cover'></div>
                 <div class='hover-icon'>View Recipe</div>
               </a>
@@ -214,16 +190,11 @@ function MemberContent() {
             {/*  Content */}
             <div class='recipe-box-content'>
               <h3>
-                <a href='recipe-page-2.html'>Roast Chicken With Lemon Gravy</a>
+                <a href='/detail'>Roast Chicken With Lemon Gravy</a>
               </h3>
 
-              <div class='rating five-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
-
               <div class='recipe-meta'>
-                <i class='fa fa-clock-o'></i> 1 hr 20 min
+                <i class='fa fa-check-circle'></i> Available
               </div>
 
               <div class='clearfix'></div>
@@ -234,8 +205,8 @@ function MemberContent() {
           <div class='four recipe-box columns'>
             {/*  Thumbnail */}
             <div class='thumbnail-holder'>
-              <a href='recipe-page-1.html'>
-                <img src='images/recipeThumb-08.jpg' alt='' />
+              <a href='/detail'>
+                <img src={thumb8} alt='' />
                 <div class='hover-cover'></div>
                 <div class='hover-icon'>View Recipe</div>
               </a>
@@ -244,18 +215,11 @@ function MemberContent() {
             {/*  Content */}
             <div class='recipe-box-content'>
               <h3>
-                <a href='recipe-page-1.html'>
-                  Farmhouse Vegetable And Barley Soup
-                </a>
+                <a href='/detail'>Farmhouse Vegetable And Barley Soup</a>
               </h3>
 
-              <div class='rating four-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
-
               <div class='recipe-meta'>
-                <i class='fa fa-clock-o'></i> 1 hr 30 min
+                <i class='fa fa-check-circle'></i> Available
               </div>
 
               <div class='clearfix'></div>
@@ -266,8 +230,8 @@ function MemberContent() {
           <div class='four recipe-box columns'>
             {/*  Thumbnail */}
             <div class='thumbnail-holder'>
-              <a href='recipe-page-1.html'>
-                <img src='images/recipeThumb-09.jpg' alt='' />
+              <a href='/detail'>
+                <img src={thumb9} alt='' />
                 <div class='hover-cover'></div>
                 <div class='hover-icon'>View Recipe</div>
               </a>
@@ -276,16 +240,11 @@ function MemberContent() {
             {/*  Content */}
             <div class='recipe-box-content'>
               <h3>
-                <a href='recipe-page-1.html'>Chunky Beef Stew</a>
+                <a href='/detail'>Chunky Beef Stew</a>
               </h3>
 
-              <div class='rating five-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
-
               <div class='recipe-meta'>
-                <i class='fa fa-clock-o'></i> 2 hr 30 min
+                <i class='fa fa-check-circle'></i> Available
               </div>
 
               <div class='clearfix'></div>
@@ -338,7 +297,7 @@ function MemberContent() {
               <input
                 class='search-field'
                 type='text'
-                placeholder='Search for recipes'
+                placeholder='Search for meals'
                 value=''
               />
             </form>
@@ -349,163 +308,53 @@ function MemberContent() {
         {/*  Author Box */}
         <div class='widget'>
           <div class='author-box'>
-            <span class='title'>Author</span>
+            <span class='title'>Profile</span>
             <span class='name'>
               Sandra <br /> Fortin
             </span>
             <span class='contact'>
               <a href='mailto:sandra@chow.com'>sandra@chow.com</a>
             </span>
-            <img src='images/author-photo.png' alt='' />
-            <p>
-              I'm Sandra and this is where I share my stuff. I am madly in love
-              with food. You will find a balance of healthy recipes, comfort
-              food and indulgent desserts.
-            </p>
+            <img src={author} alt='' />
           </div>
         </div>
 
         {/*  Popular Recipes */}
         <div class='widget'>
-          <h4 class='headline'>Popular Recipes</h4>
+          <h4 class='headline'>Popular Meals</h4>
           <span class='line margin-bottom-30'></span>
           <div class='clearfix'></div>
 
           {/*  Recipe #1 */}
-          <a href='recipe-page-1.html' class='featured-recipe'>
-            <img src='images/featuredRecipe-01.jpg' alt='' />
+          <a href='/detail' class='featured-recipe'>
+            <img src={thumb5} alt='' />
 
             <div class='featured-recipe-content'>
               <h4>Choclate Cake With Green Tea Cream</h4>
-
-              <div class='rating five-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
             </div>
             <div class='post-icon'></div>
           </a>
 
           {/*  Recipe #2 */}
-          <a href='recipe-page-1.html' class='featured-recipe'>
-            <img src='images/featuredRecipe-02.jpg' alt='' />
+          <a href='/detail' class='featured-recipe'>
+            <img src={thumb9} alt='' />
 
             <div class='featured-recipe-content'>
               <h4>Mexican Grilled Corn Recipe</h4>
-
-              <div class='rating five-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
             </div>
             <div class='post-icon'></div>
           </a>
 
           {/*  Recipe #3 */}
-          <a href='recipe-page-1.html' class='featured-recipe'>
+          <a href='/detail' class='featured-recipe'>
             <img src='images/featuredRecipe-03.jpg' alt='' />
 
             <div class='featured-recipe-content'>
               <h4>Pollo Borracho With Homemade Tortillas</h4>
-
-              <div class='rating five-stars'>
-                <div class='star-rating'></div>
-                <div class='star-bg'></div>
-              </div>
             </div>
             <div class='post-icon'></div>
           </a>
 
-          <div class='clearfix'></div>
-        </div>
-
-        {/*  Share */}
-        <div class='widget'>
-          <h4 class='headline'>Share</h4>
-          <span class='line margin-bottom-30'></span>
-          <div class='clearfix'></div>
-
-          <ul class='share-buttons'>
-            <li class='facebook-share'>
-              <a href='#'>
-                <span class='counter'>1,234</span>
-                <span class='counted'>Fans</span>
-                <span class='action-button'>Like</span>
-              </a>
-            </li>
-
-            <li class='twitter-share'>
-              <a href='#'>
-                <span class='counter'>863</span>
-                <span class='counted'>Followers</span>
-                <span class='action-button'>Follow</span>
-              </a>
-            </li>
-
-            <li class='google-plus-share'>
-              <a href='#'>
-                <span class='counter'>902</span>
-                <span class='counted'>Followers</span>
-                <span class='action-button'>Follow</span>
-              </a>
-            </li>
-
-            <li class='behance-share'>
-              <a href='#'>
-                <span class='counter'>902</span>
-                <span class='counted'>Followers</span>
-                <span class='action-button'>Follow</span>
-              </a>
-            </li>
-
-            <li class='instagram-share'>
-              <a href='#'>
-                <span class='counter'>902</span>
-                <span class='counted'>Followers</span>
-                <span class='action-button'>Follow</span>
-              </a>
-            </li>
-
-            <li class='dribbble-share'>
-              <a href='#'>
-                <span class='counter'>902</span>
-                <span class='counted'>Followers</span>
-                <span class='action-button'>Follow</span>
-              </a>
-            </li>
-
-            <li class='linkedin-share'>
-              <a href='#'>
-                <span class='counter'>902</span>
-                <span class='counted'>Followers</span>
-                <span class='action-button'>Follow</span>
-              </a>
-            </li>
-
-            <li class='github-share'>
-              <a href='#'>
-                <span class='counter'>902</span>
-                <span class='counted'>Followers</span>
-                <span class='action-button'>Follow</span>
-              </a>
-            </li>
-
-            <li class='youtube-share'>
-              <a href='#'>
-                <span class='counter'>902</span>
-                <span class='counted'>Followers</span>
-                <span class='action-button'>Follow</span>
-              </a>
-            </li>
-
-            <li class='pinterest-share'>
-              <a href='#'>
-                <span class='counter'>902</span>
-                <span class='counted'>Followers</span>
-                <span class='action-button'>Follow</span>
-              </a>
-            </li>
-          </ul>
           <div class='clearfix'></div>
         </div>
       </div>

@@ -2,9 +2,6 @@ import HeroMember from "../component/HeroMember";
 import MemberContent from "../component/MemberContent";
 
 function MemberDashboard(params) {
-  return (
-    //   <HeroMember></HeroMember>
-    <MemberContent></MemberContent>
-  );
+  return <MemberContent></MemberContent>;
 }
 export default MemberDashboard;
