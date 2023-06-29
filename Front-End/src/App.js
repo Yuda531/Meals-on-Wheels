@@ -8,6 +8,7 @@ import HeroMember from "./component/HeroMember";
 import MemberDashboard from "./pages/MemberDashboard";
 import MemberDetailMeals from "./component/MemberDetailMeals";
 import Footer from "./component/Footer";
+import MyOrder from "./component/MyOrder";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path='/' element={<MemberDashboard />} />
         <Route path='/detail' element={<MemberDetailMeals />} />
+        <Route path='/myorder' element={<MyOrder />} />
       </Routes>
       <Footer></Footer>
     </Router>

@@ -45,48 +45,49 @@ function Sidebar() {
 
         <ul class='categories'>
           <li>
-            <a href='#'>My Order</a>
+            <a href='/MyOrder'>My Order</a>
           </li>
         </ul>
       </div>
 
       {/*  Popular Meals */}
       <div class='widget'>
-        <h4 class='headline'>Popular Meals</h4>
-        <span class='line margin-bottom-30'></span>
-        <div class='clearfix'></div>
+        {window.location.pathname == "/MyOrder" || (
+          <>
+            <h4 class='headline'>Popular Meals</h4>
+            <span class='line margin-bottom-30'></span>
+            <div class='clearfix'></div>
 
-        {/*  Recipe #1 */}
-        <a href='/detail' class='featured-recipe'>
-          <img src={thumb5} alt='' />
+            {/* Recipe #1 */}
+            <a href='/detail' class='featured-recipe'>
+              <img src={thumb5} alt='' />
+              <div class='featured-recipe-content'>
+                <h4>Choclate Cake With Green Tea Cream</h4>
+              </div>
+              <div class='post-icon'></div>
+            </a>
 
-          <div class='featured-recipe-content'>
-            <h4>Choclate Cake With Green Tea Cream</h4>
-          </div>
-          <div class='post-icon'></div>
-        </a>
+            {/* Recipe #2 */}
+            <a href='/detail' class='featured-recipe'>
+              <img src={thumb9} alt='' />
+              <div class='featured-recipe-content'>
+                <h4>Mexican Grilled Corn Recipe</h4>
+              </div>
+              <div class='post-icon'></div>
+            </a>
 
-        {/*  Recipe #2 */}
-        <a href='/detail' class='featured-recipe'>
-          <img src={thumb9} alt='' />
+            {/* Recipe #3 */}
+            <a href='/detail' class='featured-recipe'>
+              <img src='images/featuredRecipe-03.jpg' alt='' />
+              <div class='featured-recipe-content'>
+                <h4>Pollo Borracho With Homemade Tortillas</h4>
+              </div>
+              <div class='post-icon'></div>
+            </a>
 
-          <div class='featured-recipe-content'>
-            <h4>Mexican Grilled Corn Recipe</h4>
-          </div>
-          <div class='post-icon'></div>
-        </a>
-
-        {/*  Recipe #3 */}
-        <a href='/detail' class='featured-recipe'>
-          <img src='images/featuredRecipe-03.jpg' alt='' />
-
-          <div class='featured-recipe-content'>
-            <h4>Pollo Borracho With Homemade Tortillas</h4>
-          </div>
-          <div class='post-icon'></div>
-        </a>
-
-        <div class='clearfix'></div>
+            <div class='clearfix'></div>
+          </>
+        )}
       </div>
     </div>
   );
