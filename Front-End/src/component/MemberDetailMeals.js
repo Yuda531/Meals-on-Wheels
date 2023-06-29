@@ -4,6 +4,7 @@ import thumb2 from "../images/recipeThumb-02.jpg";
 import thumb3 from "../images/recipeThumb-03.jpg";
 import author from "../images/author-photo.png";
 import recipebg from "../images/recipeBackground.jpg";
+import Sidebar from "./Sidebar";
 
 function MemberDetailMeals() {
   return (
@@ -84,68 +85,7 @@ function MemberDetailMeals() {
 
         {/*  Sidebar
 ================================================== */}
-        <div class='four columns'>
-          {/*  Search Form */}
-          <div class='widget search-form'>
-            <nav class='search'>
-              <form action='#' method='get'>
-                <button>
-                  <i class='fa fa-search'></i>
-                </button>
-                <input
-                  class='search-field'
-                  type='text'
-                  placeholder='Search for meals'
-                  value=''
-                />
-              </form>
-            </nav>
-            <div class='clearfix'></div>
-          </div>
-
-          {/*  Author Box */}
-          <div class='widget'>
-            <div class='author-box'>
-              <span class='title'>Profile</span>
-              <span class='name'>
-                Sandra <br /> Fortin
-              </span>
-              <span class='contact'>
-                <a href='mailto:sandra@chow.com'>sandra@chow.com</a>
-              </span>
-              <img src={author} alt='' />
-            </div>
-          </div>
-
-          {/*  Popular Recipes */}
-          <div class='widget'>
-            <h4 class='headline'>Popular Meals</h4>
-            <span class='line margin-bottom-30'></span>
-            <div class='clearfix'></div>
-
-            {/*  Recipe #1 */}
-            <a href='#' class='featured-recipe'>
-              <img src={thumb2} alt='' />
-
-              <div class='featured-recipe-content'>
-                <h4>Choclate Cake With Green Tea Cream</h4>
-              </div>
-              <div class='post-icon'></div>
-            </a>
-
-            {/*  Recipe #2 */}
-            <a href='#' class='featured-recipe'>
-              <img src={thumb3} alt='' />
-
-              <div class='featured-recipe-content'>
-                <h4>Mexican Grilled Corn Recipe</h4>
-              </div>
-              <div class='post-icon'></div>
-            </a>
-
-            <div class='clearfix'></div>
-          </div>
-        </div>
+        <Sidebar></Sidebar>
       </div>
     </div>
   );
