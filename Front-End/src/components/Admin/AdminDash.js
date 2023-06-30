@@ -1,6 +1,6 @@
 // AdminDashboard.js
 import React from "react";
-import "../css/admin/AdminDashboard.css";
+import "../../css/admin/AdminDashboard.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 const AdminDashboard = () => {
@@ -42,7 +42,7 @@ const AdminDashboard = () => {
                 <p className="card-text">{currentDonationAmount}</p>
               </div>
               <div className="card-footer d-flex align-items-center justify-content-between">
-                <a className="small text-white stretched-link" href="/donation">
+                <a className="small text-white stretched-link" href="/admin_donations">
                   View Details
                 </a>
                 <div className="small text-white">
@@ -101,9 +101,9 @@ const AdminDashboard = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-12">
-            <div className="card mb-4">
-              <div className="card-header">
+          <div className="col-lg-12 mt-4">
+            <div className="card mb-4 shadow">
+              <div className="card-header text-center">
                 <i className="fas fa-table me-1"></i>
                 All Request Meals
               </div>

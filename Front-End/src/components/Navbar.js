@@ -40,32 +40,38 @@ const Navbar = () => {
                     aria-labelledby="navbarDropdown"
                   >
                     <li>
-                      <a className="dropdown-item" href="shortcodes.html">
-                      <i className="fa fa-cutlery small text-white me-2"></i>
+                      <a className="dropdown-item" href="/admin_donations">
+                        <i className="fa fa-usd small text-white me-2"></i>
+                        Manage Donations
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="/admin_meals">
+                        <i className="fa fa-cutlery small text-white me-2"></i>
                         Manage Meals
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" href="typography.html">
-                      <i class="fa fa-shopping-cart small text-white me-1"></i>
+                        <i class="fa fa-shopping-cart small text-white me-1"></i>
                         Manage Orders
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" href="shortcodes.html">
-                      <i class="fa fa-user small text-white me-1"></i>
+                        <i class="fa fa-user small text-white me-1"></i>
                         Manage Members
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" href="typography.html">
-                      <i class="fa fa-car small text-white me-1"></i>
+                        <i class="fa fa-car small text-white me-1"></i>
                         Manage Drivers
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" href="shortcodes.html">
-                      <i class="fa fa-users small text-white me-1"></i>
+                        <i class="fa fa-users small text-white me-1"></i>
                         Manage Partners
                       </a>
                     </li>
@@ -88,13 +94,13 @@ const Navbar = () => {
                   >
                     <li>
                       <a className="dropdown-item" href="shortcodes.html">
-                      <i class="fa fa-user-circle-o small text-white me-1"></i>
+                        <i class="fa fa-user-circle-o small text-white me-1"></i>
                         Profile
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" href="typography.html">
-                      <i class="fa fa-sign-out small text-white me-1"></i>
+                        <i class="fa fa-sign-out small text-white me-1"></i>
                         Logout
                       </a>
                     </li>

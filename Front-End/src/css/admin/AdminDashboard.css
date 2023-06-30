@@ -1,32 +1,36 @@
 .adminDashboard {
-    margin: 20px;
-  }
-  
-  .card {
-    height: 100%;
-  }
-  
-  .card-title {
-    font-size: 1.2rem;
-    color: #fff;
-  }
-  
-  .card-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-  }
-  
-  .card-footer {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  .stretched-link {
-    color: #fff;
-    text-decoration: none;
-  }
+  margin: 20px;
+}
 
-  
+body {
+  background-color: #f0f1f9;
+}
+
+.card {
+  height: 100%;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.card-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.card-footer {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.stretched-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+
 
 /* Styling for the table */
 .table {
@@ -45,15 +49,17 @@
 }
 
 .table th {
-  background-color: #f8f9fa; /* Change the background color as desired */
+  background-color: #f8f9fa;
+  /* Change the background color as desired */
   font-weight: 600;
 }
 
 .table tbody tr:nth-child(even) {
-  background-color: #f2f2f2; /* Change the background color as desired */
+  background-color: #f2f2f2;
+  /* Change the background color as desired */
 }
 
 .table tbody tr:hover {
-  background-color: #eaecef; /* Change the background color as desired */
+  background-color: #eaecef;
+  /* Change the background color as desired */
 }
-
