@@ -52,7 +52,7 @@ function Sidebar() {
 
       {/*  Popular Meals */}
       <div class='widget'>
-        {window.location.pathname == "/MyOrder" || (
+        {window.location.pathname !== "/MyOrder" && (
           <>
             <h4 class='headline'>Popular Meals</h4>
             <span class='line margin-bottom-30'></span>
