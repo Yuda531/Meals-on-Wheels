@@ -1,94 +1,90 @@
-// MealsManage.js
-import React from "react";
+import backgroundImage from "../../images/bg/tileable_wood_texture.png";
 import { useEffect } from "react";
 import { useState } from "react";
-import "@fortawesome/fontawesome-free/css/all.css";
-import backgroundImage from "../../images/bg/purty_wood.png";
-import "../../css/admin/AdminMeals.css";
 
-const MealsManage = () => {
-  const requestMeals = [
+const MemberAdmin = () => {
+  const MemberMOW = [
     {
       id: 1,
-      mealsName: "Grilled Chicken Salad",
-      mealsDescription:
-        "A healthy and nutritious salad made with grilled chicken, fresh vegetables, and a light dressing.",
-      minFunds: 10,
+      email: "grascha98@gmail.com",
+      password: "qwerty123",
+      member_name: "Grascha Ajendra",
+      address: "Moskow",
     },
     {
       id: 2,
-      mealsName: "Vegetable Stir-Fry",
-      mealsDescription:
-        "A delicious stir-fry dish packed with colorful vegetables, tofu, and a flavorful sauce.",
-      minFunds: 5,
+      email: "john@example.com",
+      password: "password123",
+      member_name: "John Doe",
+      address: "New York",
     },
     {
       id: 3,
-      mealsName: "Quinoa Bowl",
-      mealsDescription:
-        "A nourishing bowl filled with cooked quinoa, roasted vegetables, and a tangy dressing.",
-      minFunds: 7,
+      email: "emma@example.com",
+      password: "abc123",
+      member_name: "Emma Smith",
+      address: "London",
     },
     {
       id: 4,
-      mealsName: "Baked Salmon with Steamed Broccoli",
-      mealsDescription:
-        "Tender and flaky baked salmon served with steamed broccoli, a perfect combination for a healthy meal.",
-      minFunds: 9,
+      email: "alex@example.com",
+      password: "xyz456",
+      member_name: "Alex Johnson",
+      address: "Paris",
     },
     {
       id: 5,
-      mealsName: "Spaghetti Bolognese",
-      mealsDescription:
-        "Classic Italian pasta dish with hearty meat sauce, served over a bed of spaghetti.",
-      minFunds: 8,
+      email: "sara@example.com",
+      password: "pass123",
+      member_name: "Sara Thompson",
+      address: "Berlin",
     },
     {
       id: 6,
-      mealsName: "Caesar Salad",
-      mealsDescription:
-        "Crisp romaine lettuce tossed with homemade Caesar dressing, croutons, and Parmesan cheese.",
-      minFunds: 6,
+      email: "michael@example.com",
+      password: "mypass",
+      member_name: "Michael Brown",
+      address: "Tokyo",
     },
     {
       id: 7,
-      mealsName: "Beef Tacos",
-      mealsDescription:
-        "Soft corn tortillas filled with seasoned ground beef, topped with salsa, cheese, and fresh cilantro.",
-      minFunds: 7,
+      email: "laura@example.com",
+      password: "laura321",
+      member_name: "Laura Davis",
+      address: "Sydney",
     },
     {
       id: 8,
-      mealsName: "Mushroom Risotto",
-      mealsDescription:
-        "Creamy and flavorful risotto made with Arborio rice and sautéed mushrooms.",
-      minFunds: 9,
+      email: "peter@example.com",
+      password: "peterp",
+      member_name: "Peter Wilson",
+      address: "Toronto",
     },
     {
       id: 9,
-      mealsName: "Honey Garlic Shrimp",
-      mealsDescription:
-        "Tender shrimp cooked in a sweet and savory honey garlic sauce, served with steamed rice.",
-      minFunds: 10,
+      email: "julia@example.com",
+      password: "julia456",
+      member_name: "Julia Clark",
+      address: "Rio de Janeiro",
     },
     {
       id: 10,
-      mealsName: "Chicken Parmesan",
-      mealsDescription:
-        "Breaded chicken cutlets topped with marinara sauce and melted mozzarella cheese, served with spaghetti.",
-      minFunds: 9,
+      email: "kevin@example.com",
+      password: "kevinpass",
+      member_name: "Kevin Martinez",
+      address: "Mexico City",
     },
   ];
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredMeals, setFilteredMeals] = useState(requestMeals);
+  const [filteredMembers, setFilteredMembers] = useState(MemberMOW);
 
   useEffect(() => {
-    const filtered = requestMeals.filter((meals) => {
-      const mealsNameIncludesTerm = meals.mealsName.toLowerCase().includes(searchTerm.toLowerCase());
-      const minFundsIncludesTerm = meals.minFunds.toString().toLowerCase().includes(searchTerm.toLowerCase());
-      return mealsNameIncludesTerm || minFundsIncludesTerm;
-    });
-    setFilteredMeals(filtered);
+    const filtered = MemberMOW.filter(
+      (member) =>
+        member.member_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        member.address.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredMembers(filtered);
   }, [searchTerm]);
   
 
@@ -106,11 +102,11 @@ const MealsManage = () => {
       <div className="container">
         <main className="table">
           <section className="table__header">
-            <h1 className="text-black ps-3 ">All Meals Menu</h1>
+            <h1 className="text-black ps-3 ">List Members</h1>
             <div className="input-group">
               <input
                 type="search"
-                placeholder="Search Meals..."
+                placeholder="Search Member..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -122,28 +118,21 @@ const MealsManage = () => {
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Meals Name</th>
-                  <th>Meals Description</th>
-                  <th>Min. Funds</th>
+                  <th>Members Name</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>Address</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredMeals.map((meal) => (
-                  <tr key={meal.id}>
-                    <td>{meal.id}</td>
-                    <td>
-                      {/* Replace the image source and text with appropriate data */}
-                      <img
-                        src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGVhbHRoeSUyMGZvb2R8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
-                        alt=""
-                      />
-                      {meal.mealsName}
-                    </td>
-                    <td>{meal.mealsDescription}</td>
-                    <td>
-                      <i class="fa fa-usd"></i> {meal.minFunds}
-                    </td>
+                {filteredMembers.map((member) => (
+                  <tr key={member.id}>
+                    <td>{member.id}</td>
+                    <td>{member.member_name}</td>
+                    <td>{member.email}</td>
+                    <td>{member.password}</td>
+                    <td>{member.address}</td>
                     <td>
                       <div className="d-flex justify-content-between">
                         <button
@@ -201,46 +190,60 @@ const MealsManage = () => {
             <form action="/#" method="post">
               <div class="modal-body">
                 <div class="mb-3">
-                  <label for="meals_name" class="form-label">
-                    Meals Name
+                  <label for="member_name" class="form-label">
+                    Members Name
                   </label>{" "}
                   <input
                     type="text"
                     class="form-control"
-                    id="meals_name"
-                    name="meals_name"
-                    value="${meals_name}"
+                    id="member_name"
+                    name="member_name"
+                    value="${member_name}"
                     required
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="meals_desc" class="form-label">
-                    Meals Description
+                  <label for="member_email" class="form-label">
+                    Email
                   </label>{" "}
                   <input
                     type="text"
                     class="form-control"
-                    id="meals_desc"
-                    name="meals_desc"
-                    value="${meals_desc}"
+                    id="member_email"
+                    name="member_email"
+                    value="${member_email}"
                     required
                   />
                 </div>
 
                 <div class="mb-3">
-                  <label for="funds" class="form-label">
-                    Min. Funds ($)
+                  <label for="password" class="form-label">
+                    Password
                   </label>{" "}
                   <input
                     type="text"
                     class="form-control"
-                    id="funds"
-                    name="funds"
-                    value="${funds}"
+                    id="password"
+                    name="password"
+                    value="${password}"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="member_address" class="form-label">
+                    Address
+                  </label>{" "}
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="member_address"
+                    name="member_address"
+                    value="${member_address}"
                     required
                   />
                 </div>
               </div>
+
               <div class="modal-footer">
                 <button
                   type="button"
@@ -370,4 +373,4 @@ const MealsManage = () => {
   );
 };
 
-export default MealsManage;
+export default MemberAdmin;

@@ -1,71 +1,120 @@
-
+import backgroundImage from "../../images/bg/donation1.jpeg";
+import "../../css/admin/AdminMeals.css";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Donate = () => {
+  const donations = [
+    {
+      id: 1,
+      name: "Roger Richard",
+      address: "Los Angeles",
+      amount: 50,
+    },
+    {
+      id: 2,
+      name: "Sarah Moan",
+      address: "Amsterdam",
+      amount: 25,
+    },
+    {
+      id: 3,
+      name: "Harry Scarfield",
+      address: "Edinburgh",
+      amount: 150,
+    },
+    {
+      id: 4,
+      name: "Antonio Gracha",
+      address: "California",
+      amount: 50,
+    },
+    {
+      id: 5,
+      name: "Agung Yuda",
+      address: "Baleendah",
+      amount: 500,
+    },
+    {
+      id: 6,
+      name: "Asep Supriyadi",
+      address: "Pameungpeuk",
+      amount: 250,
+    },
+  ];
 
-    const donations = [
-        {
-            id : 1,
-            name : "Roger Richard",
-            address : "Los Angeles",
-            amount : 50
-        },
-        {
-            id : 2,
-            name : "Sarah Moan",
-            address : "Amsterdam",
-            amount : 25
-        },
-        {
-            id : 3,
-            name : "Harry Scarfield",
-            address : "Edinburgh",
-            amount : 150
-        },
-        {
-            id : 4,
-            name : "Antonio Gracha",
-            address : "California",
-            amount : 50
-        },
-    ];
+  // Calculate the total donation amount
+  const totalDonation = donations.reduce(
+    (accumulator, donate) => accumulator + donate.amount,
+    0
+  );
 
-    return (
-    <div className="container">
-      <h1 className="text-center mt-3 mb-5">Donations</h1>
-      <div className="row">
-        <div className="col-lg-12">
-          <div className="card mb-4">
-            <div className="card-body shadow">
-              <div className="table-responsive">
-                <table
-                  className="table table-bordered"
-                  id="dataTable"
-                  width="100%"
-                  cellspacing="0"
-                >
-                  <thead>
-                    <tr>
-                      <th>No.</th>
-                      <th>Name</th>
-                      <th>Address</th>
-                      <th>Amount ($)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {donations.map((donate, index) => (
-                      <tr key={donate.id}>
-                        <td>{index + 1}</td>
-                        <td>{donate.name}</td>
-                        <td>{donate.address}</td>
-                        <td>{donate.amount}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredDonors, setFilteredDonors] = useState(donations);
+
+  useEffect(() => {
+    const filtered = donations.filter(
+      (donor) =>
+        donor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        donor.address.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredDonors(filtered);
+  }, [searchTerm]);
+
+  return (
+    <div
+      className="backimg"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        padding: "50px",
+      }}
+    >
+      {/* table kedua */}
+      <div className="container">
+        <main className="table">
+          <section className="table__header">
+            <h1 className="text-black ps-3 ">Donations</h1>
+            <div className="input-group">
+            <input
+                type="search"
+                placeholder="Search Donor..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <img src="images/search.png" alt="" />
             </div>
-          </div>
-        </div>
+          </section>
+          <section className="table__body">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Donor Name</th>
+                  <th>Address</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredDonors.map((donate, index) => (
+                  <tr key={donate.id}>
+                    <td>{index + 1}</td>
+                    <td>{donate.name}</td>
+                    <td>{donate.address}</td>
+                    <td><i class="fa fa-usd"></i> {donate.amount}</td>
+                  </tr>
+                ))}
+                {/* Add the row for the total donation */}
+                <tr>
+                  <td colSpan="3" className="text-end">Total Donation:</td>
+                  <td><i class="fa fa-usd"></i> {totalDonation}</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </main>
       </div>
     </div>
   );

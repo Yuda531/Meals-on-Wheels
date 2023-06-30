@@ -11,7 +11,11 @@ const Navbar = () => {
             <div id="logo">
               <h1>
                 <a href="/dashboard">
-                  <img src={logo} alt="Chow" />
+                  <img src={logo} alt="MoW" />
+                  <p className="lead text-success my-auto">
+                    Meals <span className="lead text-dark"> on </span>{" "}
+                    <span className="text-warning">Wheels</span>.
+                  </p>
                 </a>
               </h1>
             </div>
@@ -58,7 +62,7 @@ const Navbar = () => {
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="shortcodes.html">
+                      <a className="dropdown-item" href="/admin_members">
                         <i class="fa fa-user small text-white me-1"></i>
                         Manage Members
                       </a>

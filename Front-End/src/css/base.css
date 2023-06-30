@@ -189,8 +189,8 @@
 
 /* #Links
 ================================================== */
-	a, a:visited { color: #8dc63f; text-decoration: none; outline: 0; -webkit-transition: color 0.2s ease-in-out; -moz-transition: color 0.2s ease-in-out; -o-transition: color 0.2s ease-in-out; -transition: color 0.2s ease-in-out; }
-	a:hover { color: #808080; }
+	a, a:visited { color: #0d9800; text-decoration: none; outline: 0; -webkit-transition: color 0.2s ease-in-out; -moz-transition: color 0.2s ease-in-out; -o-transition: color 0.2s ease-in-out; -transition: color 0.2s ease-in-out; }
+	a:hover { color: #8dc63f; }
 	p a, p a:visited { line-height: inherit; }
 
 
