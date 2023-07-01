@@ -56,7 +56,7 @@ const Navbar = () => {
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="typography.html">
+                      <a className="dropdown-item" href="/admin_orders">
                         <i class="fa fa-shopping-cart small text-white me-1"></i>
                         Manage Orders
                       </a>

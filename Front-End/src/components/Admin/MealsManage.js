@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import backgroundImage from "../../images/bg/purty_wood.png";
-import "../../css/admin/AdminMeals.css";
+import "../../css/admin/AdminDashboard.css";
 
 const MealsManage = () => {
   const requestMeals = [

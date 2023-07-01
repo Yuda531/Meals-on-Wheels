@@ -285,46 +285,47 @@ const MemberAdmin = () => {
             <form action="/#" method="post">
               <div class="modal-body">
                 <div class="mb-3">
-                  <label for="meals_name" class="form-label">
-                    Meals Name
+                  <label for="member_name" class="form-label">
+                    Members Name
                   </label>{" "}
                   <input
                     type="text"
                     class="form-control"
-                    id="meals_name"
-                    name="meals_name"
-                    value="${meals_name}"
+                    id="member_name"
+                    name="member_name"
+                    value="${member_name}"
                     required
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="meals_desc" class="form-label">
-                    Meals Description
+                  <label for="member_email" class="form-label">
+                    Email
                   </label>{" "}
                   <input
                     type="text"
                     class="form-control"
-                    id="meals_desc"
-                    name="meals_desc"
-                    value="${meals_desc}"
+                    id="member_email"
+                    name="member_email"
+                    value="${member_email}"
                     required
                   />
                 </div>
 
                 <div class="mb-3">
-                  <label for="funds" class="form-label">
-                    Min. Funds ($)
+                  <label for="member_address" class="form-label">
+                    Address
                   </label>{" "}
                   <input
                     type="text"
                     class="form-control"
-                    id="funds"
-                    name="funds"
-                    value="${funds}"
+                    id="member_address"
+                    name="member_address"
+                    value="${member_address}"
                     required
                   />
                 </div>
               </div>
+
               <div class="modal-footer">
                 <button
                   type="button"
@@ -348,7 +349,7 @@ const MemberAdmin = () => {
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="deleteMenuLabel">
-                Delete this menu
+                Delete this Member
               </h1>
               <button
                 type="button"

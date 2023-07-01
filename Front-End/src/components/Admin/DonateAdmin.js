@@ -1,5 +1,5 @@
 import backgroundImage from "../../images/bg/donation1.jpeg";
-import "../../css/admin/AdminMeals.css";
+import "../../css/admin/AdminDashboard.css";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -72,7 +72,7 @@ const Donate = () => {
         padding: "50px",
       }}
     >
-      {/* table kedua */}
+      
       <div className="container">
         <main className="table">
           <section className="table__header">
