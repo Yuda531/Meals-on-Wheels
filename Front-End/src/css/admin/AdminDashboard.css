@@ -222,6 +222,16 @@ tbody tr.hide td img {
   color: #0d9800;
 }
 
+.status.available {
+  background-color: #7cee72;
+  color: #0d9800;
+}
+
+.status.busy {
+  background-color: #d893a3;
+  color: #b30021;
+}
+
 
 @media (max-width: 1000px) {
   td:not(:first-of-type) {

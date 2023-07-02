@@ -8,6 +8,8 @@ import ManageMeals from "./pages/Admin/ManageMeals";
 import Donations from "./pages/Admin/Donations";
 import ManageMembers from "./pages/Admin/ManageMembers";
 import MangeOrders from "./pages/Admin/ManageOrders";
+import ManagePartner from "./pages/Admin/ManageParners";
+import ManageDriver from "./pages/Admin/ManageDrivers";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/admin_donations" element={<Donations />} />
           <Route path="/admin_members" element={<ManageMembers />} />
           <Route path="/admin_orders" element={<MangeOrders />} />
+          <Route path="/admin_drivers" element={<ManageDriver />} />
+          <Route path="/admin_partners" element={<ManagePartner />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

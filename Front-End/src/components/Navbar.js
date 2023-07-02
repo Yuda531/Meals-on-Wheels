@@ -68,14 +68,14 @@ const Navbar = () => {
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="typography.html">
+                      <a className="dropdown-item" href="/admin_drivers">
                         <i class="fa fa-car small text-white me-1"></i>
                         Manage Drivers
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="shortcodes.html">
-                        <i class="fa fa-users small text-white me-1"></i>
+                      <a className="dropdown-item" href="/admin_partners">
+                        <i class="fa fa-building small text-white me-1"></i>
                         Manage Partners
                       </a>
                     </li>

@@ -206,7 +206,7 @@ const AdminDashboard = () => {
                 <div className="card-footer d-flex align-items-center justify-content-between">
                   <a
                     className="small text-success stretched-link"
-                    href="/drivers"
+                    href="/admin_drivers"
                   >
                     View Details
                   </a>
@@ -223,13 +223,13 @@ const AdminDashboard = () => {
                     Number of Partners
                   </h5>
                   <p className="card-text text-success">
-                    <i class="fa fa-cutlery"></i> {jumlahPartners}
+                    <i class="fa fa-building"></i> {jumlahPartners}
                   </p>
                 </div>
                 <div className="card-footer d-flex align-items-center justify-content-between">
                   <a
                     className="small text-success stretched-link"
-                    href="/partners"
+                    href="/admin_partners"
                   >
                     View Details
                   </a>
