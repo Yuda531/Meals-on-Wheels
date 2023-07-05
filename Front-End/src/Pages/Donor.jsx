@@ -1,4 +1,5 @@
 import background from '../img/background.jpeg'
+import StickyHeader from '../components/header';
 
 const Donor = () => {
   return (
@@ -113,6 +114,7 @@ const Donor = () => {
         <div className="container">
           <div className="row">
             <div className="col-8 p-5 m-5 bg-white">
+            <StickyHeader activePage={"contact-us"} />
               <h1>
                 <span style={{ color: "red" }}>Indonesia</span> Senior need you
               </h1>
