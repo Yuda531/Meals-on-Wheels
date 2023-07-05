@@ -2,6 +2,8 @@ import "./App.css";
 import "./CSS/style.css";
 import "./CSS/base.css";
 
+import "./CSS/colors/green.css";
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Footer from './components/footer'
@@ -17,6 +19,19 @@ import MyOrder from "./component/MyOrder";
 import MemberDashboard from "./Pages/MemberDashboard";
 import MemberDetailMeals from "./component/MemberDetailMeals";
 
+import NotFound from "./Pages/404NotFound";
+import DashboardAdmin from "./Pages/Admin/DashboardAdmin";
+import ManageMeals from "./Pages/Admin/ManageMeals";
+import Donations from "./Pages/Admin/Donations";
+import ManageMembers from "./Pages/Admin/ManageMembers";
+import MangeOrders from "./Pages/Admin/ManageOrders";
+import ManagePartner from "./Pages/Admin/ManageParners";
+import ManageDriver from "./Pages/Admin/ManageDrivers";
+
+import Partner from './Pages/Partner';
+
+
+
 function App() {
   return (
 
@@ -31,9 +46,24 @@ function App() {
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/dashboard" element={<Dashboard />} /> 
         <Route path="/login" element={<RegisSuccess />} /> 
+
         <Route path='memberdashboard' element={<MemberDashboard />} />
         <Route path='/detail' element={<MemberDetailMeals />} />
         <Route path='/myorder' element={<MyOrder />} />
+
+        <Route path="/dashboarda" element={<DashboardAdmin />} />
+          <Route path="/admin_meals" element={<ManageMeals />} />
+          <Route path="/admin_donations" element={<Donations />} />
+          <Route path="/admin_members" element={<ManageMembers />} />
+          <Route path="/admin_orders" element={<MangeOrders />} />
+          <Route path="/admin_drivers" element={<ManageDriver />} />
+          <Route path="/admin_partners" element={<ManagePartner />} />
+          <Route path="*" element={<NotFound />} />
+
+          <Route path="Partner" element={<Partner />} />
+
+
+
       <Route path='/donor' element={<Donor />} />
       </Routes>
     </Router>
