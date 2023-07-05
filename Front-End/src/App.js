@@ -9,6 +9,7 @@ import MemberDashboard from "./pages/MemberDashboard";
 import MemberDetailMeals from "./component/MemberDetailMeals";
 import Footer from "./component/Footer";
 import MyOrder from "./component/MyOrder";
+import Profile from "./component/Profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/' element={<MemberDashboard />} />
         <Route path='/detail' element={<MemberDetailMeals />} />
         <Route path='/myorder' element={<MyOrder />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
       <Footer></Footer>
     </Router>

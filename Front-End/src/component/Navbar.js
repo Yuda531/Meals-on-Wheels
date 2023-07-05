@@ -30,7 +30,7 @@ const Navbar = () => {
                     </a>
                   </li>
                   <li className='nav-item'>
-                    <a className='nav-link' href='index.html'>
+                    <a className='nav-link' href='/profile'>
                       Profile
                     </a>
                   </li>
@@ -44,7 +44,7 @@ const Navbar = () => {
               {window.location.pathname == "/admin" && (
                 <ul className='nav'>
                   <li className='nav-item'>
-                    <a className='nav-link' href='index.html' id='current'>
+                    <a className='nav-link' href='/' id='current'>
                       Dashboard
                     </a>
                   </li>

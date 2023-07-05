@@ -32,7 +32,7 @@ function MemberContent() {
               <a href='/detail'>
                 <img src={thumb1} alt='' />
                 <div class='hover-cover'></div>
-                <div class='hover-icon'>View Recipe</div>
+                <div class='hover-icon'>View Meals</div>
               </a>
             </div>
 
@@ -40,7 +40,7 @@ function MemberContent() {
             <div class='recipe-box-content'>
               <h3>
                 <a href='/detail'>
-                  Mexican Grilled <br /> Corn Recipe
+                  Mexican Grilled <br /> Corn
                 </a>
               </h3>
 
@@ -59,7 +59,7 @@ function MemberContent() {
               <a href='/detail'>
                 <img src={thumb2} alt='' />
                 <div class='hover-cover'></div>
-                <div class='hover-icon'>View Recipe</div>
+                <div class='hover-icon'>View Meals</div>
               </a>
             </div>
 
@@ -84,7 +84,7 @@ function MemberContent() {
               <a href='/detail'>
                 <img src={thumb3} alt='' />
                 <div class='hover-cover'></div>
-                <div class='hover-icon'>View Recipe</div>
+                <div class='hover-icon'>View Meals</div>
               </a>
             </div>
 
@@ -109,7 +109,7 @@ function MemberContent() {
               <a href='/detail'>
                 <img src={thumb4} alt='' />
                 <div class='hover-cover'></div>
-                <div class='hover-icon'>View Recipe</div>
+                <div class='hover-icon'>View Meals</div>
               </a>
             </div>
 
@@ -134,7 +134,7 @@ function MemberContent() {
               <a href='/detail'>
                 <img src={thumb5} alt='' />
                 <div class='hover-cover'></div>
-                <div class='hover-icon'>View Recipe</div>
+                <div class='hover-icon'>View Meals</div>
               </a>
             </div>
 
@@ -159,7 +159,7 @@ function MemberContent() {
               <a href='/detail'>
                 <img src={thumb6} alt='' />
                 <div class='hover-cover'></div>
-                <div class='hover-icon'>View Recipe</div>
+                <div class='hover-icon'>View Meals</div>
               </a>
             </div>
 
@@ -184,7 +184,7 @@ function MemberContent() {
               <a href='/detail'>
                 <img src={thumb7} alt='' />
                 <div class='hover-cover'></div>
-                <div class='hover-icon'>View Recipe</div>
+                <div class='hover-icon'>View Meals</div>
               </a>
             </div>
 
@@ -209,7 +209,7 @@ function MemberContent() {
               <a href='/detail'>
                 <img src={thumb8} alt='' />
                 <div class='hover-cover'></div>
-                <div class='hover-icon'>View Recipe</div>
+                <div class='hover-icon'>View Meals</div>
               </a>
             </div>
 
@@ -234,7 +234,7 @@ function MemberContent() {
               <a href='/detail'>
                 <img src={thumb9} alt='' />
                 <div class='hover-cover'></div>
-                <div class='hover-icon'>View Recipe</div>
+                <div class='hover-icon'>View Meals</div>
               </a>
             </div>
 
@@ -253,36 +253,6 @@ function MemberContent() {
           </div>
         </div>
         <div class='clearfix'></div>
-
-        {/*  Pagination */}
-        <div class='pagination-container masonry'>
-          <nav class='pagination'>
-            <ul>
-              <li>
-                <a href='#' class='current-page'>
-                  1
-                </a>
-              </li>
-              <li>
-                <a href='#'>2</a>
-              </li>
-              <li>
-                <a href='#'>3</a>
-              </li>
-            </ul>
-          </nav>
-
-          <nav class='pagination-next-prev'>
-            <ul>
-              <li>
-                <a href='#' class='prev'></a>
-              </li>
-              <li>
-                <a href='#' class='next'></a>
-              </li>
-            </ul>
-          </nav>
-        </div>
       </div>
 
       {/*  Sidebar

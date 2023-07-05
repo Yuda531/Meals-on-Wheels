@@ -8,7 +8,7 @@ function MyOrder() {
     <div class='container'>
       <div class='twelve columns '>
         {/*  Headline */}
-        <h3 class='headline'>Latest Recipes</h3>
+        <h3 class='headline'>Order Status</h3>
         <span class='line rb margin-bottom-35'></span>
         <div class='clearfix'></div>
 
@@ -21,14 +21,14 @@ function MyOrder() {
               <a href='/about'>
                 <img src={thumb1} alt='' />
                 <div class='hover-cover'></div>
-                <div class='hover-icon'>View Recipe</div>
+                <div class='hover-icon'>View Meals</div>
               </a>
             </div>
 
             {/*  Content */}
             <div class='recipe-box-content'>
               <h3>
-                <a href='/about'>Mexican Grilled Corn Recipe</a>
+                <a href='/about'>Mexican Grilled Corn </a>
               </h3>
 
               <p>
@@ -55,7 +55,7 @@ function MyOrder() {
               <a href='/about'>
                 <img src={thumb2} alt='' />
                 <div class='hover-cover'></div>
-                <div class='hover-icon'>View Recipe</div>
+                <div class='hover-icon'>View Meals</div>
               </a>
             </div>
 
@@ -84,35 +84,6 @@ function MyOrder() {
         </div>
 
         <div class='clearfix'></div>
-        {/*  Pagination */}
-        <div class='pagination-container masonry'>
-          <nav class='pagination'>
-            <ul>
-              <li>
-                <a href='#' class='current-page'>
-                  1
-                </a>
-              </li>
-              <li>
-                <a href='#'>2</a>
-              </li>
-              <li>
-                <a href='#'>3</a>
-              </li>
-            </ul>
-          </nav>
-
-          <nav class='pagination-next-prev'>
-            <ul>
-              <li>
-                <a href='#' class='prev'></a>
-              </li>
-              <li>
-                <a href='#' class='next'></a>
-              </li>
-            </ul>
-          </nav>
-        </div>
       </div>
       <Sidebar></Sidebar>
     </div>
