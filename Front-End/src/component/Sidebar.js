@@ -25,7 +25,7 @@ function Sidebar() {
 
       {/*  Author Box */}
       <div class='widget'>
-        <a href='/profile'>
+        <a href='/Dashboard'>
           <div class='author-box'>
             <span class='title'>Profile</span>
             <span class='name'>

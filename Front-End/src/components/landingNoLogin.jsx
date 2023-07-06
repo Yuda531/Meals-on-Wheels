@@ -4,12 +4,24 @@ import healthy from "../img/healthy.png"
 import afford from '../img/afford.png'
 import foods from '../img/food.png'
 import foodBg from '../img/foodBg.jpg'
-import React from "react";
+import React, { useEffect, useState } from 'react';
+
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import ButtonAndForm from "./btnAndForm"
 
 function LandingNoLogin(){
-
+    let User = sessionStorage.getItem("user");
+    User = JSON.parse(User);
+  
+    const [userEmail, setUserEmail] = useState(null);
+  
+    useEffect(() => {
+      const user = sessionStorage.getItem("user");
+      if (user) {
+        const parsedUser = JSON.parse(user);
+        setUserEmail(parsedUser.email);
+      }
+    }, []);
     
     return(
         <div className="body custom-overflow" style={{padding:"0"}}>
@@ -26,8 +38,27 @@ function LandingNoLogin(){
                                   <br />  On <span className="fw-bold text-warning">Wheels!</span></h4>
                             </div>
 
-                            
+                            {!User && (
                                 <ButtonAndForm />
+                            )}
+                            {User && (
+                                <div className="col-6 p-4 text-white aboutt">
+                                    <h1 className="display-5 text-white">
+                                    <span className="text-warning">Welcome</span> to <span className="text-success">MOW</span>!
+                                    </h1>
+                                    <h1 style={{'fontSize':"30px"}} className="lead">
+                                    {userEmail ? userEmail : "Guest"}
+                                    </h1>
+                                    <br />
+                                    <hr className="border-white" />
+                                    <br />
+                                    <div className="d-flex justify-content-center">
+                                        
+                                    <Button href="/dashboard" variant="success" className="col-12 mx-auto">Go to dashboard</Button>
+                                    </div>
+                                </div>
+                                
+                            )}
                             
                         </div>
                         
@@ -88,7 +119,7 @@ function LandingNoLogin(){
                         <div className="d-flex col-12  my-auto">
                             <div style={{paddingLeft:"10%",paddingRight:"5%"}} className="col-9 my-auto">
                                 {/* <img style={{borderRadius:"23% 40% 22% 60%"}} src={deliver} className="col-10" alt="" /> */}
-                                <h1 style={{fontSize:"75px"}} className="text-white fw-bold col-12 my-auto">Fast <span className=" text-success"> and </span>
+                                <h1 style={{fontSize:"95px"}} className="text-white fw-bold col-12 my-auto">Fast <span className=" text-success"> and </span>
                                     <span className="text-warning">Satisfying.</span>
                                 </h1>
                                 <h4 className="text-white lead col-6 my-4">Guaranteed <span className="text-warning fw-bold">Satisfaction</span>, On-<span className="fw-bold text-success">time</span> delivery,
