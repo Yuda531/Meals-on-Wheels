@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import logo from "../images/logo.png";
+import { Nav, NavDropdown, Modal, Container, Form, Button } from 'react-bootstrap';
 import "@fortawesome/fontawesome-free/css/all.css";
 
 const Navbar = () => {
+  const [showModal, setShowModal] = useState(false);
+  const handleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const logout = () => {
+    sessionStorage.clear();
+    window.localStorage.clear();
+    alert("Logout Successful");
+    window.location.href = "/";
+  };
+
+  let User = sessionStorage.getItem("user");
+  User = JSON.parse(User);
+
+  const [userEmail, setUserEmail] = useState(null);
+
+  useEffect(() => {
+    const user = sessionStorage.getItem("user");
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      setUserEmail(parsedUser.email);
+    }
+  }, []);
+
   return (
     <header id="header">
       <div className="container">
@@ -10,7 +36,7 @@ const Navbar = () => {
           <div className="col-3">
             <div id="logo">
               <h1>
-                <a href="/dashboard">
+                <a href="/admin_dashboard">
                   <img src={logo} alt="MoW" />
                   <p className="lead text-success my-auto">
                     Meals <span className="lead text-dark"> on </span>{" "}
@@ -97,13 +123,11 @@ const Navbar = () => {
                     aria-labelledby="navbarDropdown"
                   >
                     <li>
-                      <a className="dropdown-item" href="shortcodes.html">
-                        <i class="fa fa-user-circle-o small text-white me-1"></i>
-                        Profile
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="typography.html">
+                      <a
+                        className="dropdown-item"
+                        onClick={handleModal}
+                        href="#"
+                      >
                         <i class="fa fa-sign-out small text-white me-1"></i>
                         Logout
                       </a>
@@ -112,6 +136,23 @@ const Navbar = () => {
                 </li>
               </ul>
             </nav>
+            {/* Modal */}
+            <Modal show={showModal} onHide={handleModal}>
+              <Modal.Header closeButton>
+                <Modal.Title>Sign Out Confirmation</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <p>Are you sure you want to sign out?</p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleModal}>
+                  Cancel
+                </Button>
+                <Button variant="outline-danger" onClick={() => logout()}>
+                  Sign Out
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </div>
         </div>
       </div>

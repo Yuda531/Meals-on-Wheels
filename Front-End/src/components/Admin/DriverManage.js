@@ -1,5 +1,6 @@
 import { useState } from "react";
 import backgroundImage from "../../images/bg/tileable_wood_texture.png";
+import NavbarAdmin from "../Navbar";
 
 const DriverManage = () => {
   const [activeTab, setActiveTab] = useState("driver");
@@ -43,7 +44,9 @@ const DriverManage = () => {
     useState(driverRequest);
 
   return (
-    <div
+    <>
+      <NavbarAdmin />
+      <div
       className="backimg"
       style={{
         backgroundImage: `url(${backgroundImage})`,
@@ -198,6 +201,7 @@ const DriverManage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const LoginOrRegis = () => {
   const [name, setUserName] = useState('');
@@ -9,21 +10,16 @@ const LoginOrRegis = () => {
   const [loginName, setLoginName] = useState('');
   const [loginPassword, setPasswordLogin] = useState('');
   const [loginRole, setRole] = useState('');
-
-
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [validated, setValidated] = useState(false);
   const [showReplacement, setShowReplacement] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
-
   // LOGIN
-
   const handleLoginFormSubmit = async (e) => {
-    e.preventDefault(); // Prevent form submission
-      
-    // Create an object with the form data
+    e.preventDefault();
+  
     const user = {
       email: loginName,
       password: loginPassword,
@@ -31,29 +27,31 @@ const LoginOrRegis = () => {
     };
   
     try {
-      // Make the POST request using Axios to send user credentials to the server
-     axios.post('http://localhost:8080/auth/login', user).then((response)=>{
-      console.log(response.data)
-      sessionStorage.setItem("user", JSON.stringify(response.data))
-      window.location.href = "/dashboard"
-      alert("Login success")
-     });
-  
-      // Check if the server response contains a success message or token
-      
+      const response = await axios.post('http://localhost:8080/auth/login', user);
+      sessionStorage.setItem('user', JSON.stringify(response.data));
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful',
+        showConfirmButton: true
+      }).then(() => {
+        window.location.href = '/dashboard';
+      });
     } catch (error) {
-      alert("Invalid credentials");
+      Swal.fire({
+        icon: 'error',
+        title: 'Credentials Incorrect',
+        text: 'Please Try Again!',
+        showConfirmButton: true
+      });
       console.error(error);
-      // Handle error during login
     }
   
     setEmail('');
     setPassword('');
-    setRole(loginRole)
-    };
+    setRole(loginRole);
+  };
 
-
-    // REGIS
+  // REGIS
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -66,18 +64,27 @@ const LoginOrRegis = () => {
       name: name,
       email: email,
       role: loginRole.toUpperCase(),
-      password: password,
+      password: password
     };
 
     axios
       .post('http://localhost:8080/user/register', user)
       .then((response) => {
-        alert('Registration Successful');
-        window.location.href = '/login';
+        Swal.fire({
+          icon: 'success',
+          title: 'Registration Successful',
+          showConfirmButton: true
+        }).then(() => {
+          window.location.href = '/login';
+        });
         console.log(response.data);
       })
       .catch((error) => {
-        alert('Error Occurred');
+        Swal.fire({
+          icon: 'error',
+          title: 'Email already registered in system',
+          showConfirmButton: true
+        });
         console.error(error);
       });
   };
@@ -94,6 +101,7 @@ const LoginOrRegis = () => {
     setShowForm(false);
     setShowReplacement(false);
   };
+
 
   return (
     <div className="col-6">
@@ -144,7 +152,7 @@ const LoginOrRegis = () => {
                 <option value="Partner">Partner</option>
                 <option value="Member">Member</option>
                 <option value="Caregiver">Caregiver</option>
-                <option value="Donour">Donour</option>
+                <option value="Donor">Donor</option>
                 <option value="Volunteer">Volunteer</option>
               </select>
               <label htmlFor="roleId">Which role do you want to be?</label>
@@ -223,12 +231,6 @@ const LoginOrRegis = () => {
                 required
               />
               <label htmlFor="password">Password</label>
-            </div>
-            <div className="form-group form-check">
-              <input type="checkbox" className="form-check-input" id="remember" />
-              <label className="form-check-label text-white" htmlFor="remember">
-                Remember me
-              </label>
             </div>
             <p className="lead text-white mt-3">
               Don't have an account? Click{' '}

@@ -1,6 +1,7 @@
 import backgroundImage from "../../images/bg/retina_wood.png";
 import { useState } from "react";
 import { useEffect } from "react";
+import NavbarAdmin from "../Navbar";
 
 const OrderManage = () => {
   const Orders = [
@@ -85,7 +86,9 @@ const OrderManage = () => {
   };
 
   return (
-    <div
+    <>
+      <NavbarAdmin />
+      <div
       className="backimg"
       style={{
         backgroundImage: `url(${backgroundImage})`,
@@ -272,6 +275,7 @@ const OrderManage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

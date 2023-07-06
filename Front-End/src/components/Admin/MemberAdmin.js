@@ -1,6 +1,7 @@
 import backgroundImage from "../../images/bg/tileable_wood_texture.png";
 import { useEffect } from "react";
 import { useState } from "react";
+import NavbarAdmin from "../Navbar";
 
 const MemberAdmin = () => {
   const MemberMOW = [
@@ -89,7 +90,9 @@ const MemberAdmin = () => {
   
 
   return (
-    <div
+    <>
+      <NavbarAdmin />
+      <div
       className="backimg"
       style={{
         backgroundImage: `url(${backgroundImage})`,
@@ -371,6 +374,7 @@ const MemberAdmin = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

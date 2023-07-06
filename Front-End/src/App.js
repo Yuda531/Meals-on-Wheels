@@ -51,7 +51,7 @@ function App() {
         <Route path='/detail' element={<MemberDetailMeals />} />
         <Route path='/myorder' element={<MyOrder />} />
 
-        <Route path="/dashboarda" element={<DashboardAdmin />} />
+        <Route path="/admin_dashboard" element={<DashboardAdmin />} />
           <Route path="/admin_meals" element={<ManageMeals />} />
           <Route path="/admin_donations" element={<Donations />} />
           <Route path="/admin_members" element={<ManageMembers />} />

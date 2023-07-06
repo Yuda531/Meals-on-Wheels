@@ -1,5 +1,6 @@
 import { useState } from "react";
 import backgroundImage from "../../images/bg/tileable_wood_texture.png";
+import NavbarAdmin from "../Navbar";
 
 const PartnerManage = () => {
   const [activeTab, setActiveTab] = useState("Partner");
@@ -45,7 +46,9 @@ const PartnerManage = () => {
     useState(PartnerRequest);
 
   return (
-    <div
+    <>
+      <NavbarAdmin />
+      <div
       className="backimg"
       style={{
         backgroundImage: `url(${backgroundImage})`,
@@ -194,6 +197,7 @@ const PartnerManage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import DashboardAdmin from "./Admin/DashboardAdmin";
 import Partner from "./Partner";
 import MemberDashboard from "./MemberDashboard";
 import Donor from "./Donor";
+import CaregiverDashboard from "./dashboard-caregiver";
 
 
 function Dashboard() {
@@ -28,7 +29,7 @@ function Dashboard() {
       DashboardComponent = Partner;
       break;
     case "CAREGIVER":
-    //   DashboardComponent = CaregiverDashboard;
+      DashboardComponent = CaregiverDashboard;
       break;
     case "MEMBER":
       DashboardComponent = MemberDashboard;

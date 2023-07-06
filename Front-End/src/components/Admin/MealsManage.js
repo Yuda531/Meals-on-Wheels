@@ -5,6 +5,7 @@ import { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import backgroundImage from "../../images/bg/purty_wood.png";
 import "../../CSS/admin/AdminDashboard.css";
+import NavbarAdmin from "../Navbar";
 
 const MealsManage = () => {
   const requestMeals = [
@@ -93,7 +94,9 @@ const MealsManage = () => {
   
 
   return (
-    <div
+    <>
+      <NavbarAdmin />
+      <div
       className="backimg"
       style={{
         backgroundImage: `url(${backgroundImage})`,
@@ -367,6 +370,7 @@ const MealsManage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

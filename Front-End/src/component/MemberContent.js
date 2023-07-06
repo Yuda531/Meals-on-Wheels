@@ -15,7 +15,7 @@ import Sidebar from "./Sidebar";
 
 function MemberContent() {
   return (
-    <div class='container acumalaka'>
+    <div class='container acumalaka' style={{marginTop: '100px'}}>
       {/*  Masonry */}
       <div class='twelve columns'>
         {/*  Headline */}

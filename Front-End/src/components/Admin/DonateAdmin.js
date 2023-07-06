@@ -2,6 +2,7 @@ import backgroundImage from "../../images/bg/donation1.jpeg";
 import "../../CSS/admin/AdminDashboard.css";
 import { useState } from "react";
 import { useEffect } from "react";
+import NavbarAdmin from "../Navbar";
 
 const Donate = () => {
   const donations = [
@@ -62,61 +63,69 @@ const Donate = () => {
   }, [searchTerm]);
 
   return (
-    <div
-      className="backimg"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        minHeight: "100vh",
-        padding: "50px",
-      }}
-    >
-      
-      <div className="container">
-        <main className="table">
-          <section className="table__header">
-            <h1 className="text-black ps-3 ">Donations</h1>
-            <div className="input-group">
-            <input
-                type="search"
-                placeholder="Search Donor..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <img src="images/search.png" alt="" />
-            </div>
-          </section>
-          <section className="table__body">
-            <table>
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Donor Name</th>
-                  <th>Address</th>
-                  <th>Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredDonors.map((donate, index) => (
-                  <tr key={donate.id}>
-                    <td>{index + 1}</td>
-                    <td>{donate.name}</td>
-                    <td>{donate.address}</td>
-                    <td><i class="fa fa-usd"></i> {donate.amount}</td>
+    <>
+      <NavbarAdmin />
+      <div
+        className="backimg"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          minHeight: "100vh",
+          padding: "50px",
+        }}
+      >
+        <div className="container">
+          <main className="table">
+            <section className="table__header">
+              <h1 className="text-black ps-3 ">Donations</h1>
+              <div className="input-group">
+                <input
+                  type="search"
+                  placeholder="Search Donor..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <img src="images/search.png" alt="" />
+              </div>
+            </section>
+            <section className="table__body">
+              <table>
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Donor Name</th>
+                    <th>Address</th>
+                    <th>Amount</th>
                   </tr>
-                ))}
-                {/* Add the row for the total donation */}
-                <tr>
-                  <td colSpan="3" className="text-end">Total Donation:</td>
-                  <td><i class="fa fa-usd"></i> {totalDonation}</td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-        </main>
+                </thead>
+                <tbody>
+                  {filteredDonors.map((donate, index) => (
+                    <tr key={donate.id}>
+                      <td>{index + 1}</td>
+                      <td>{donate.name}</td>
+                      <td>{donate.address}</td>
+                      <td>
+                        <i class="fa fa-usd"></i> {donate.amount}
+                      </td>
+                    </tr>
+                  ))}
+                  {/* Add the row for the total donation */}
+                  <tr>
+                    <td colSpan="3" className="text-end">
+                      Total Donation:
+                    </td>
+                    <td>
+                      <i class="fa fa-usd"></i> {totalDonation}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </main>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
