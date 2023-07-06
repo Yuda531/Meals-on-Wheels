@@ -10,6 +10,7 @@ function SignInOnly(){
   const [loginName, setLoginName] = useState('');
   const [loginRole, setRole] = useState('');
   const [loginPassword, setPasswordLogin] = useState('');
+  const [isActive, setActive] = useState('');
   // const [showReplacement, setShowReplacement] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
@@ -17,25 +18,33 @@ function SignInOnly(){
 
   const handleLoginFormSubmit = async (e) => {
     e.preventDefault(); // Prevent form submission
-      
+    
     // Create an object with the form data
     const user = {
       email: loginName,
       password: loginPassword,
-      role: loginRole
+      role: loginRole,
+      isActive: isActive
     };
   
     try {
+      // Check if user isActive is true
+      if (!user.isActive) {
+        alert("User is inactive. Cannot login.");
+        return;
+      }
+  
       // Make the POST request using Axios to send user credentials to the server
-     axios.post('http://localhost:8080/auth/login', user).then((response)=>{
-      console.log(response.data)
-      sessionStorage.setItem("user", JSON.stringify(response.data))
-      window.location.href = "/dashboard"
-      alert("Login success")
-     });
+      axios.post('http://localhost:8080/auth/login', user)
+        .then((response) => {
+          console.log(response.data);
+          sessionStorage.setItem("user", JSON.stringify(response.data));
+          window.location.href = "/dashboard";
+          alert("Login success");
+        });
   
       // Check if the server response contains a success message or token
-      
+  
     } catch (error) {
       alert("Invalid credentials");
       console.error(error);
@@ -44,8 +53,10 @@ function SignInOnly(){
   
     setEmail('');
     setPassword('');
-    setRole(loginRole)
-    };
+    setRole(loginRole);
+    setActive(isActive);
+  };
+  
   
   
     
