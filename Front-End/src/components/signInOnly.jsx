@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { logRoles } from '@testing-library/react';
+import Swal from 'sweetalert2';
 
 function SignInOnly(){
 
@@ -16,9 +17,8 @@ function SignInOnly(){
   const [validated, setValidated] = useState(false);
 
   const handleLoginFormSubmit = async (e) => {
-    e.preventDefault(); // Prevent form submission
-      
-    // Create an object with the form data
+    e.preventDefault();
+  
     const user = {
       email: loginName,
       password: loginPassword,
@@ -26,27 +26,29 @@ function SignInOnly(){
     };
   
     try {
-      // Make the POST request using Axios to send user credentials to the server
-     axios.post('http://localhost:8080/auth/login', user).then((response)=>{
-      console.log(response.data)
-      sessionStorage.setItem("user", JSON.stringify(response.data))
-      window.location.href = "/dashboard"
-      alert("Login success")
-     });
-  
-      // Check if the server response contains a success message or token
-      
+      const response = await axios.post('http://localhost:8080/auth/login', user);
+      sessionStorage.setItem('user', JSON.stringify(response.data));
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful',
+        showConfirmButton: true
+      }).then(() => {
+        window.location.href = '/dashboard';
+      });
     } catch (error) {
-      alert("Invalid credentials");
+      Swal.fire({
+        icon: 'error',
+        title: 'Credentials Incorrect',
+        text: 'Please Try Again!',
+        showConfirmButton: true
+      });
       console.error(error);
-      // Handle error during login
     }
   
     setEmail('');
     setPassword('');
-    setRole(loginRole)
-    };
-  
+    setRole(loginRole);
+  };
   
     
     return(
@@ -77,10 +79,6 @@ function SignInOnly(){
                   <input type="password" className="form-control" id="password" placeholder="Password" value={loginPassword}
                   onChange={(e) => setPasswordLogin(e.target.value)} />
                   <label htmlFor="password">Password</label>
-                </div>
-                <div className="form-group form-check">
-                  <input type="checkbox" className="form-check-input" id="remember" />
-                  <label className="form-check-label text-white" htmlFor="remember">Remember me</label>
                 </div>
                 <p className="lead text-white mt-3">Don't have an account? Click <span><a className='text-warning' href='/getStarted'>here to Sign-Up</a></span></p>
 

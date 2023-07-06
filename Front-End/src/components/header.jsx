@@ -5,11 +5,13 @@ import img from '../img/mowlogonew.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faGoogle, faInstagram, faLinkedin, faGithub, faGem, faUser } from '@fortawesome/free-brands-svg-icons';
 import { faHome, faEnvelope, faPhone, faPrint, faPerson, faUserMd, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 import LogoutButton from './LogoutButton';
 import NavbarAdmin from './Navbar'; 
 
 const StickyHeader = ({ activePage }) => {
   const [showModal, setShowModal] = useState(false);
+
   const handleModal = () => {
     setShowModal(!showModal);
   };
@@ -17,8 +19,14 @@ const StickyHeader = ({ activePage }) => {
   const logout = () => {
     sessionStorage.clear();
     window.localStorage.clear();
-    alert('Logout Successful');
-    window.location.href = "/";
+    Swal.fire({
+      icon: 'success',
+      title: 'Logout Successful',
+      showConfirmButton: false,
+      timer: 1500
+    }).then(() => {
+      window.location.href = "/";
+    });
   };
 
   let User = sessionStorage.getItem("user");
@@ -33,6 +41,7 @@ const StickyHeader = ({ activePage }) => {
       setUserEmail(parsedUser.email);
     }
   }, []);
+
 
   return (
     <header className="fixed-top">
