@@ -41,7 +41,7 @@ const StickyHeader = ( {activePage} ) => {
             <NavLink exact to="/" className={`nav-link ${activePage === 'home' ? 'active' : ''}`}>Home</NavLink>
 
             {!User && (
-            <NavLink to="/getStarted" className={`nav-link ${activePage === 'getStarted' ? 'active' : ''}`}>Get Started</NavLink>
+            <NavLink to="/getStarted" className={`nav-link ${activePage === 'getStarted' ? 'active' : ''}`}>SignUp</NavLink>
               )}
 
             <NavLink to="/about-us" className={`nav-link ${activePage === 'about-us' ? 'active' : ''}`}>About</NavLink>

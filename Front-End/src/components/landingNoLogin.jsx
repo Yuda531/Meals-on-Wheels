@@ -88,7 +88,7 @@ function LandingNoLogin(){
                         <div className="d-flex col-12  my-auto">
                             <div style={{paddingLeft:"10%",paddingRight:"5%"}} className="col-9 my-auto">
                                 {/* <img style={{borderRadius:"23% 40% 22% 60%"}} src={deliver} className="col-10" alt="" /> */}
-                                <h1 style={{fontSize:"95px"}} className="text-white fw-bold col-12 my-auto">Fast <span className=" text-success"> and </span>
+                                <h1 style={{fontSize:"75px"}} className="text-white fw-bold col-12 my-auto">Fast <span className=" text-success"> and </span>
                                     <span className="text-warning">Satisfying.</span>
                                 </h1>
                                 <h4 className="text-white lead col-6 my-4">Guaranteed <span className="text-warning fw-bold">Satisfaction</span>, On-<span className="fw-bold text-success">time</span> delivery,

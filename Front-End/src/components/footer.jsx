@@ -7,7 +7,7 @@ function Footer() {
 
         <div style={{backgroundColor:"white", padding: "60px"}} className="col-12 d-flex">
             <div className="col-3">
-                <img src={logo} className='col-1 mx-auto' alt="" /><span><h5 className="fw-bold">MoW</h5></span>
+                <img src={logo} className='col-1' alt="" /><span><h5 className="fw-bold">MoW</h5></span>
                 <small className="mt-1">
                 Jl. Soekarno Hatta No.378, Kb. Lega, Kec. Bojongloa Kidul, Kota Bandung, Jawa Barat 40235
                 </small>
