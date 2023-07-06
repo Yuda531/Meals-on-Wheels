@@ -17,6 +17,9 @@ const LoginOrRegis = () => {
   const [showReplacement, setShowReplacement] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
+
+  // LOGIN
+
   const handleLoginFormSubmit = async (e) => {
     e.preventDefault(); // Prevent form submission
       
@@ -49,6 +52,8 @@ const LoginOrRegis = () => {
     setRole(loginRole)
     };
 
+
+    // REGIS
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -92,6 +97,9 @@ const LoginOrRegis = () => {
 
   return (
     <div className="col-6">
+
+
+
       {!showReplacement ? (
         <div id="regisForm">
           <h1 className="display-6 text-white">Sign Up</h1>
@@ -186,7 +194,8 @@ const LoginOrRegis = () => {
             <br />
           </form>
         </div>
-      ) : (
+        // REPLACE
+      ) : (  
         <div id="loginForm">
           <h1 className="display-6 text-white">Sign In</h1>
           <hr className="border-white" />
