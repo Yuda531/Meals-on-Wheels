@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navbar, Nav, NavDropdown, Container, Form, Button } from 'react-bootstrap';
+import { Navbar, Nav,NavDropdown, Modal, Container, Form, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import img from '../img/mowlogonew.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,21 @@ import LogoutButton from './LogoutButton';
 
 
 const StickyHeader = ( {activePage} ) => {
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const logout = () => {
+    
+    sessionStorage.clear();
+    window.localStorage.clear();
+    alert('Logout Successfull')
+    window.location.href = "/";
+  ;
+};
 
   let User = sessionStorage.getItem("user");
   User = JSON.parse(User);
@@ -52,7 +67,10 @@ const StickyHeader = ( {activePage} ) => {
             <NavLink to="/dashboard" className={`nav-link ${activePage === 'dashboard' ? 'active' : ''}`}>Dashboard</NavLink>
               )}
               {User && (   
-            <NavLink to="/" className={`nav-link ${activePage === '' ? 'active' : ''}`} ><LogoutButton/></NavLink>
+            <NavDropdown className='my-auto' title="Account" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="/dashboard">My Profile</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => logout()} href="#">Sign Out</NavDropdown.Item>
+            </NavDropdown>
               )}
 
           </Nav>
@@ -70,6 +88,24 @@ const StickyHeader = ( {activePage} ) => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+
+    {/* Modal */}
+    <Modal show={showModal} onHide={handleModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Sign Out Confirmation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Are you sure you want to sign out?</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModal}>
+            Cancel
+          </Button>
+          <Button variant="outline-danger" onClick={logout}>
+            Sign Out
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </header>
   );
 };

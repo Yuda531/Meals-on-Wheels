@@ -2,6 +2,8 @@ import { Navbar, Nav, NavDropdown, Container, Form, Button } from 'react-bootstr
 import { NavLink } from 'react-router-dom';
 
 function LogoutButton(props) {
+
+  
   const logout = () => {
     
       sessionStorage.clear();
@@ -11,8 +13,19 @@ function LogoutButton(props) {
     ;
   };
 
+  
+
   return(
-    <Nav.Item onClick={() => logout()}>Sign Out</Nav.Item>
+
+
+    <NavDropdown className='my-auto' title="Account" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="/dashboard">My Profile</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => logout()} href="#">Sign Out</NavDropdown.Item>
+            </NavDropdown>
+
+
+
+
 
   ) 
 }
