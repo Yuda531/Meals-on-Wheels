@@ -40,11 +40,11 @@ const StickyHeader = ( {activePage} ) => {
 
   return (
     <header className="fixed-top">
-      <Navbar className='navbar-custom' collapseOnSelect expand="lg" bg="light" variant="light">
-      <Container>
-        <Navbar.Brand className='col-3' href="/">
+      <Navbar className='navbar-custom ' collapseOnSelect expand="lg" bg="light" variant="light">
+      <Container className='col-12 d-flex'>
+        <Navbar.Brand className='col-4 me-5' href="/">
           
-          <div className="d-flex">
+          <div className="d-flex justify-content-center">
           <img style={{ height: "50px", width: "65px", marginRight: "10px" }} src={img} alt="logo" />
           <p className="lead text-success my-auto">Meals <span className="lead text-dark"> on </span> <span className="text-warning">Wheels</span>.</p>
            
@@ -53,7 +53,8 @@ const StickyHeader = ( {activePage} ) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="col-6 d-flex justify-content-center">
+          <Nav className="col-8 d-flex ms-5 justify-content-center">
+            
             <NavLink exact to="/" className={`nav-link ${activePage === 'home' ? 'active' : ''}`}>Home</NavLink>
 
             {!User && (
@@ -72,19 +73,12 @@ const StickyHeader = ( {activePage} ) => {
               <NavDropdown.Item onClick={handleModal} href="#">Sign Out</NavDropdown.Item>
             </NavDropdown>
               )}
+          
 
           </Nav>
 
           
-          <Form className="d-flex col-4 ms-5">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
+          
         </Navbar.Collapse>
       </Container>
     </Navbar>

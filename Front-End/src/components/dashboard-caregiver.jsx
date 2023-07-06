@@ -1,7 +1,7 @@
 import React from 'react';
 import richie from "../img/richiedriver.png";
 import { CircleFill } from 'react-bootstrap-icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
@@ -11,13 +11,26 @@ function CaregiverDashboard() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  let User = sessionStorage.getItem("user");
+    User = JSON.parse(User);
+  
+    const [userEmail, setUserEmail] = useState(null);
+  
+    useEffect(() => {
+      const user = sessionStorage.getItem("user");
+      if (user) {
+        const parsedUser = JSON.parse(user);
+        setUserEmail(parsedUser.email);
+      }
+    }, []);
+
   return (
     
 
     <div className="body">
       <div className="backblur">
         <h1 className="display-5 text-white">
-          Welcome, Driver!
+          Welcome, {userEmail ? userEmail : "Driver"}!
         </h1>
         <hr className="border-white" />
         <div className="col-12 d-flex">

@@ -43,8 +43,8 @@ function LandingNoLogin(){
                             )}
                             {User && (
                                 <div className="col-6 p-4 text-white aboutt">
-                                    <h1 className="display-1 text-warning">
-                                    Welcome!
+                                    <h1 className="display-5 text-white">
+                                    <span className="text-warning">Welcome</span> to <span className="text-success">MOW</span>!
                                     </h1>
                                     <h1 style={{'fontSize':"30px"}} className="lead">
                                     {userEmail ? userEmail : "Guest"}
