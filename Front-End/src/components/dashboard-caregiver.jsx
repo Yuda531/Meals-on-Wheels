@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function ProfileComp() {
+function CaregiverDashboard() {
     const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -292,4 +292,4 @@ function ProfileComp() {
   );
 }
 
-export default ProfileComp;
+export default CaregiverDashboard;

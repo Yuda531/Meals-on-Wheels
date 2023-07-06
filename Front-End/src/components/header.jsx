@@ -5,6 +5,7 @@ import img from '../img/mowlogonew.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faGoogle, faInstagram, faLinkedin, faGithub, faGem, faUser } from '@fortawesome/free-brands-svg-icons';
 import { faHome, faEnvelope, faPhone, faPrint, faPerson, faUserMd, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import LogoutButton from './LogoutButton';
 
 
 const StickyHeader = ( {activePage} ) => {
@@ -37,7 +38,7 @@ const StickyHeader = ( {activePage} ) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="col-6 mx-auto">
+          <Nav className="col-6 d-flex justify-content-center">
             <NavLink exact to="/" className={`nav-link ${activePage === 'home' ? 'active' : ''}`}>Home</NavLink>
 
             {!User && (
@@ -47,14 +48,17 @@ const StickyHeader = ( {activePage} ) => {
             <NavLink to="/about-us" className={`nav-link ${activePage === 'about-us' ? 'active' : ''}`}>About</NavLink>
             <NavLink to="/contact-us" className={`nav-link ${activePage === 'contact' ? 'active' : ''}`}>Contact</NavLink>
 
-            {/* {User && (    */}
+            {User && (   
             <NavLink to="/dashboard" className={`nav-link ${activePage === 'dashboard' ? 'active' : ''}`}>Dashboard</NavLink>
-              {/* )} */}
+              )}
+              {User && (   
+            <NavLink to="/" className={`nav-link ${activePage === '' ? 'active' : ''}`} ><LogoutButton/></NavLink>
+              )}
 
           </Nav>
 
           
-          <Form className="d-flex col-4">
+          <Form className="d-flex col-4 ms-5">
             <Form.Control
               type="search"
               placeholder="Search"
