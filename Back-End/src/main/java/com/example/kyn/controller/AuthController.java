@@ -38,10 +38,6 @@ public class AuthController {
         } else {
             User userFromDb = findByEmail.get();
 
-            if (userFromDb.isFb_login()) {
-                CustomErrorResponse error = new CustomErrorResponse("please login using facebook email");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-            }
 
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             if (!passwordEncoder.matches(user.getPassword(), userFromDb.getPassword())) {
@@ -52,7 +48,7 @@ public class AuthController {
 
 
             String generatedToken = jwtUtil.generateToken(userFromDb.getEmail());
-            SuccessLoginResponse tokenResponse = new SuccessLoginResponse(generatedToken, userFromDb.getName(), userFromDb.getEmail(), userFromDb.getRole());
+            SuccessLoginResponse tokenResponse = new SuccessLoginResponse(generatedToken, userFromDb.getName(), userFromDb.getEmail(), userFromDb.getRole(), userFromDb.getActive());
 
             return ResponseEntity.ok(tokenResponse);
         }

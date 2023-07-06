@@ -24,25 +24,37 @@ public class User {
     @Column()
     private String password;
 
-    @Column()
-    private boolean fb_login;
 
+
+    @Column
+    private boolean isActive;
 
     public User() {
         // Default constructor
     }
 
-    public User(String name, String email, String password, boolean fb_login, String role) {
+    public User(String name, String email, String password, boolean isActive, String role) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.fb_login = fb_login;
         this.role = role;
+        this.isActive = isActive;
 
     }
 
 
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        this.isActive = active;
+    }
+
+    public boolean getActive(){
+        return isActive;
+    }
 
     public String getRole() {
         return role;
@@ -81,12 +93,6 @@ public class User {
         return password;
     }
 
-    public boolean isFb_login() {
-        return fb_login;
-    }
 
-    public void setFb_login(boolean fb_login) {
-        this.fb_login = fb_login;
-    }
 }
 

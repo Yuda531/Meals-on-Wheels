@@ -75,6 +75,8 @@ public class UserService {
             User user = optionalUser.get();
             user.setName(updatedUser.getName());
             user.setEmail(updatedUser.getEmail());
+            user.setActive(updatedUser.getActive());
+            user.setRole(updatedUser.getRole());
             return userRepository.save(user);
         } else {
             return null;

@@ -5,12 +5,14 @@ public class SuccessLoginResponse {
     private String name;
     private String email;
     private String role;
+    private Boolean isActive;
 
-    public SuccessLoginResponse(String token, String name, String email, String role) {
+    public SuccessLoginResponse(String token, String name, String email, String role, boolean isActive) {
         this.token = token;
         this.name = name;
         this.email = email;
         this.role = role;
+        this.isActive = isActive;
     }
 
     public String getToken() {
@@ -28,4 +30,9 @@ public class SuccessLoginResponse {
     public String getRole() {
         return role;
     }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
 }

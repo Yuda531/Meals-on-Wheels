@@ -6,6 +6,8 @@ public class UserLoginRequestBody {
 
     private String role;
 
+    private Boolean isActive;
+
     public String getEmail() {
         return email;
     }
@@ -29,4 +31,14 @@ public class UserLoginRequestBody {
     public void setRole(String role) {
         this.role = role;
     }
+
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
 }

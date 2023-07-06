@@ -18,7 +18,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/auth/login",
                         "/auth/whoAmI",
                         "/user/register",
-                        "/user/login/facebook"
+                        "/user/order"
                         );
     }
 }
