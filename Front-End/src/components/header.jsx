@@ -69,7 +69,7 @@ const StickyHeader = ( {activePage} ) => {
               {User && (   
             <NavDropdown className='my-auto' title="Account" id="collasible-nav-dropdown">
               <NavDropdown.Item href="/dashboard">My Profile</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => logout()} href="#">Sign Out</NavDropdown.Item>
+              <NavDropdown.Item onClick={handleModal} href="#">Sign Out</NavDropdown.Item>
             </NavDropdown>
               )}
 
@@ -101,7 +101,7 @@ const StickyHeader = ( {activePage} ) => {
           <Button variant="secondary" onClick={handleModal}>
             Cancel
           </Button>
-          <Button variant="outline-danger" onClick={logout}>
+          <Button variant="outline-danger" onClick={() => logout()}>
             Sign Out
           </Button>
         </Modal.Footer>
