@@ -53,7 +53,7 @@ const StickyHeader = ( {activePage} ) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="col-8 d-flex ms-5 justify-content-center">
+          <Nav className="col-7 d-flex mx-auto justify-content-center">
             
             <NavLink exact to="/" className={`nav-link ${activePage === 'home' ? 'active' : ''}`}>Home</NavLink>
 
