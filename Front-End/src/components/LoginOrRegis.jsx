@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import React, { useState } from "react";
+import { Col, Form, Button } from "react-bootstrap";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const LoginOrRegis = () => {
-  const [name, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginName, setLoginName] = useState('');
-  const [loginPassword, setPasswordLogin] = useState('');
-  const [loginRole, setRole] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginName, setLoginName] = useState("");
+  const [loginPassword, setPasswordLogin] = useState("");
+  const [loginRole, setRole] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [validated, setValidated] = useState(false);
   const [showReplacement, setShowReplacement] = useState(false);
@@ -19,35 +19,38 @@ const LoginOrRegis = () => {
   // LOGIN
   const handleLoginFormSubmit = async (e) => {
     e.preventDefault();
-  
+
     const user = {
       email: loginName,
       password: loginPassword,
-      role: loginRole
+      role: loginRole,
     };
-  
+
     try {
-      const response = await axios.post('http://localhost:8080/auth/login', user);
-      sessionStorage.setItem('user', JSON.stringify(response.data));
+      const response = await axios.post(
+        "http://localhost:8080/auth/login",
+        user
+      );
+      sessionStorage.setItem("user", JSON.stringify(response.data));
       Swal.fire({
-        icon: 'success',
-        title: 'Login Successful',
-        showConfirmButton: true
+        icon: "success",
+        title: "Login Successful",
+        showConfirmButton: true,
       }).then(() => {
-        window.location.href = '/dashboard';
+        window.location.href = "/dashboard";
       });
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Credentials Incorrect',
-        text: 'Please Try Again!',
-        showConfirmButton: true
+        icon: "error",
+        title: "Credentials Incorrect",
+        text: "Please Try Again!",
+        showConfirmButton: true,
       });
       console.error(error);
     }
-  
-    setEmail('');
-    setPassword('');
+
+    setEmail("");
+    setPassword("");
     setRole(loginRole);
   };
 
@@ -64,26 +67,26 @@ const LoginOrRegis = () => {
       name: name,
       email: email,
       role: loginRole.toUpperCase(),
-      password: password
+      password: password,
     };
 
     axios
-      .post('http://localhost:8080/user/register', user)
+      .post("http://localhost:8080/user/register", user)
       .then((response) => {
         Swal.fire({
-          icon: 'success',
-          title: 'Registration Successful',
-          showConfirmButton: true
+          icon: "success",
+          title: "Registration Successful",
+          showConfirmButton: true,
         }).then(() => {
-          window.location.href = '/login';
+          window.location.href = "/login";
         });
         console.log(response.data);
       })
       .catch((error) => {
         Swal.fire({
-          icon: 'error',
-          title: 'Email already registered in system',
-          showConfirmButton: true
+          icon: "error",
+          title: "Email already registered in system",
+          showConfirmButton: true,
         });
         console.error(error);
       });
@@ -102,46 +105,37 @@ const LoginOrRegis = () => {
     setShowReplacement(false);
   };
 
-
   return (
-    <div className="col-6">
-
-
-
+    <Col xs={12} md={6} lg={6}>
       {!showReplacement ? (
         <div id="regisForm">
           <h1 className="display-6 text-white">Sign Up</h1>
           <hr className="border-white" />
-          <form className="col-12" onSubmit={handleSubmit}>
-            <div className="form-floating mb-3">
-              <input
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
                 type="text"
-                className="form-control"
-                id="name"
                 placeholder="Name"
                 value={name}
                 onChange={(e) => setUserName(e.target.value)}
                 required
               />
-              <label htmlFor="name">Name</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
                 type="email"
-                className="form-control"
-                id="email"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <label htmlFor="email">Email address</label>
-            </div>
-            <div className="form-floating mb-3">
-              <select
-                placeholder="Select a Role."
-                id="roleId"
-                className="form-control"
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="roleId">
+              <Form.Label>Which role do you want to be?</Form.Label>
+              <Form.Control
+                as="select"
                 value={loginRole}
                 onChange={(e) => setRole(e.target.value)}
                 required
@@ -154,100 +148,87 @@ const LoginOrRegis = () => {
                 <option value="Caregiver">Caregiver</option>
                 <option value="Donor">Donor</option>
                 <option value="Volunteer">Volunteer</option>
-              </select>
-              <label htmlFor="roleId">Which role do you want to be?</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
+              </Form.Control>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
                 type="password"
-                className="form-control"
-                id="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <label htmlFor="password">Password</label>
-            </div>
-            <div className="form-floating mb-3">
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="Cfpassword">
+              <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
-                className="form-control"
-                id="Cfpassword"
-                value={confirmPassword}
                 placeholder="Confirm Password"
+                value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
                 isInvalid={passwordError}
               />
-              <Form.Label htmlFor="Cfpassword">Confirm Password</Form.Label>
               {passwordError && (
                 <Form.Control.Feedback type="invalid">
                   Passwords do not match
                 </Form.Control.Feedback>
               )}
-            </div>
-
+            </Form.Group>
             <p className="lead text-white">
-              Already have an account? Click{' '}
+              Already have an account? Click{" "}
               <span>
                 <a className="text-warning" onClick={handleClick}>
                   here to Sign-In
                 </a>
               </span>
             </p>
-            <button type="submit" className="btn btn-outline-warning col-6 my-3">
+            <Button type="submit" className="btn btn-outline-warning col-6 my-3">
               Register
-            </button>
-            <br />
-          </form>
+            </Button>
+          </Form>
         </div>
-        // REPLACE
-      ) : (  
+      ) : (
         <div id="loginForm">
           <h1 className="display-6 text-white">Sign In</h1>
           <hr className="border-white" />
-          <form onSubmit={handleLoginFormSubmit} className="col-12">
-            <div className="form-floating mb-3">
-              <input
+          <Form onSubmit={handleLoginFormSubmit}>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
                 type="email"
-                className="form-control"
-                id="email"
                 placeholder="Email address"
                 value={loginName}
                 onChange={(e) => setLoginName(e.target.value)}
                 required
               />
-              <label htmlFor="email">Email address</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
                 type="password"
-                className="form-control"
-                id="password"
                 placeholder="Password"
                 value={loginPassword}
                 onChange={(e) => setPasswordLogin(e.target.value)}
                 required
               />
-              <label htmlFor="password">Password</label>
-            </div>
+            </Form.Group>
             <p className="lead text-white mt-3">
-              Don't have an account? Click{' '}
+              Don't have an account? Click{" "}
               <span>
                 <a className="text-warning" onClick={handleBack}>
                   here to Sign-Up
                 </a>
               </span>
             </p>
-
-            <button type="submit" className="btn btn-outline-warning col-6 my-3">
+            <Button type="submit" className="btn btn-outline-warning col-6 my-3">
               Login
-            </button>
-          </form>
+            </Button>
+          </Form>
         </div>
       )}
-    </div>
+    </Col>
   );
 };
 
