@@ -146,7 +146,11 @@ function LandingNoLogin() {
                 <span className='fw-bold text-success'>time</span> delivery, and{" "}
                 <span className='fw-bold text-success'>Healthy</span>
               </h4>
+<<<<<<< HEAD
               <button className='btn btn-success col-6 my-3'>Order Now</button>
+=======
+              <a href="/login" className="btn btn-success col-6 my-3">Order Now</a>
+>>>>>>> 048065486d413a1052a831505ecd8a6f87179de3
             </div>
             <div className='col-3'>
               <img src={foods} className='col-12 mx-auto' alt='' />
