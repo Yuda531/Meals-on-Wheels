@@ -102,8 +102,6 @@ const Donor = () => {
     //   </div>
     // </div>
 
-
-
     /////
 
     <div className="d-flex align-items-center justify-content-center mt-4" style={{ backgroundImage: `url(${background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>

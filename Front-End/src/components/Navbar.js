@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from "../images/logo.png";
 import { Nav, NavDropdown, Modal, Container, Form, Button } from 'react-bootstrap';
 import "@fortawesome/fontawesome-free/css/all.css";
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -12,8 +13,14 @@ const Navbar = () => {
   const logout = () => {
     sessionStorage.clear();
     window.localStorage.clear();
-    alert("Logout Successful");
-    window.location.href = "/";
+    Swal.fire({
+      icon: 'success',
+      title: 'Logout Successful',
+      showConfirmButton: false,
+      timer: 1500
+    }).then(() => {
+      window.location.href = "/";
+    });
   };
 
   let User = sessionStorage.getItem("user");
@@ -38,15 +45,11 @@ const Navbar = () => {
               <h1>
                 <a href="/admin_dashboard">
                   <img src={logo} alt="MoW" />
-                  <p className="lead text-success my-auto">
-                    Meals <span className="lead text-dark"> on </span>{" "}
-                    <span className="text-warning">Wheels</span>.
-                  </p>
                 </a>
               </h1>
             </div>
           </div>
-          <div className="col-9">
+          <div className="col-9 mt-3">
             <nav id="navigation" className="menu">
               <ul className="nav">
                 <li className="nav-item">
