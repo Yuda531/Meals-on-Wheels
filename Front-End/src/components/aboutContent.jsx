@@ -19,7 +19,10 @@ function AboutContent() {
       <div className='backblur'>
         <div className='col-12 d-flex flex-row my-wrap'>
           <div className='col-6 me-3 '>
-            <h1 style={{ fontSize: "80px" }} className='display-4 text-white'>
+            <h1
+              style={{ fontSize: "80px" }}
+              className='display-4 text-white title-landing'
+            >
               About <span className='text-warning '> Us</span>
             </h1>
 
@@ -92,7 +95,7 @@ function AboutContent() {
           <div className='col-6 aboutt'>
             <h1
               style={{ fontSize: "80px" }}
-              className='display-2 ms-4 text-white'
+              className='display-2 ms-4 text-white title-landing'
             >
               Our<span className='text-warning'> Team</span>
             </h1>
