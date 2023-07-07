@@ -106,36 +106,41 @@ const LoginOrRegis = () => {
   };
 
   return (
-    <Col xs={12} md={6} lg={6}>
+    <div className="col-6">
       {!showReplacement ? (
         <div id="regisForm">
           <h1 className="display-6 text-white">Sign Up</h1>
           <hr className="border-white" />
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
+          <form className="col-12" onSubmit={handleSubmit}>
+            <div className="form-floating mb-3">
+              <input
                 type="text"
+                className="form-control"
+                id="name"
                 placeholder="Name"
                 value={name}
                 onChange={(e) => setUserName(e.target.value)}
                 required
               />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
+              <label htmlFor="name">Name</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
                 type="email"
+                className="form-control"
+                id="email"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="roleId">
-              <Form.Label>Which role do you want to be?</Form.Label>
-              <Form.Control
-                as="select"
+              <label htmlFor="email">Email address</label>
+            </div>
+            <div className="form-floating mb-3">
+              <select
+                placeholder="Select a Role."
+                id="roleId"
+                className="form-control"
                 value={loginRole}
                 onChange={(e) => setRole(e.target.value)}
                 required
@@ -148,34 +153,40 @@ const LoginOrRegis = () => {
                 <option value="Caregiver">Caregiver</option>
                 <option value="Donor">Donor</option>
                 <option value="Volunteer">Volunteer</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
+              </select>
+              <label htmlFor="roleId">Which role do you want to be?</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
                 type="password"
+                className="form-control"
+                id="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="Cfpassword">
-              <Form.Label>Confirm Password</Form.Label>
+              <label htmlFor="password">Password</label>
+            </div>
+            <div className="form-floating mb-3">
               <Form.Control
                 type="password"
-                placeholder="Confirm Password"
+                className="form-control"
+                id="Cfpassword"
                 value={confirmPassword}
+                placeholder="Confirm Password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
                 isInvalid={passwordError}
               />
+              <Form.Label htmlFor="Cfpassword">Confirm Password</Form.Label>
               {passwordError && (
                 <Form.Control.Feedback type="invalid">
                   Passwords do not match
                 </Form.Control.Feedback>
               )}
-            </Form.Group>
+            </div>
+
             <p className="lead text-white">
               Already have an account? Click{" "}
               <span>
@@ -184,36 +195,45 @@ const LoginOrRegis = () => {
                 </a>
               </span>
             </p>
-            <Button type="submit" className="btn btn-outline-warning col-6 my-3">
+            <button
+              type="submit"
+              className="btn btn-outline-warning col-6 my-3"
+            >
               Register
-            </Button>
-          </Form>
+            </button>
+            <br />
+          </form>
         </div>
       ) : (
+        // REPLACE
         <div id="loginForm">
           <h1 className="display-6 text-white">Sign In</h1>
           <hr className="border-white" />
-          <Form onSubmit={handleLoginFormSubmit}>
-            <Form.Group className="mb-3" controlId="email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
+          <form onSubmit={handleLoginFormSubmit} className="col-12">
+            <div className="form-floating mb-3">
+              <input
                 type="email"
+                className="form-control"
+                id="email"
                 placeholder="Email address"
                 value={loginName}
                 onChange={(e) => setLoginName(e.target.value)}
                 required
               />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
+              <label htmlFor="email">Email address</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
                 type="password"
+                className="form-control"
+                id="password"
                 placeholder="Password"
                 value={loginPassword}
                 onChange={(e) => setPasswordLogin(e.target.value)}
                 required
               />
-            </Form.Group>
+              <label htmlFor="password">Password</label>
+            </div>
             <p className="lead text-white mt-3">
               Don't have an account? Click{" "}
               <span>
@@ -222,13 +242,18 @@ const LoginOrRegis = () => {
                 </a>
               </span>
             </p>
-            <Button type="submit" className="btn btn-outline-warning col-6 my-3">
+
+            <button
+              type="submit"
+              className="btn btn-outline-warning col-6 my-3"
+            >
               Login
-            </Button>
-          </Form>
+            </button>
+          </form>
         </div>
       )}
-    </Col>
+    </div>
+
   );
 };
 
