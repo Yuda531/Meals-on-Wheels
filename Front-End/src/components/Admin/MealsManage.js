@@ -16,6 +16,8 @@ const MealsManage = () => {
     meals_description: "",
     stock: 0,
   });
+  const [selectedMeal, setSelectedMeal] = useState(null);
+
 
   useEffect(() => {
     axios
@@ -106,6 +108,7 @@ const MealsManage = () => {
   };
 
   const handleEditMeal = (meal) => {
+    setSelectedMeal(meal); // Set selectedMeal dengan data meals yang dipilih
     axios
       .put(`http://localhost:8080/meals/edit-meals/${meal.meals_id}`, formData)
       .then((response) => {
@@ -224,6 +227,7 @@ const MealsManage = () => {
                             className="btn btn-primary rounded-2 ms-2"
                             data-bs-toggle="modal"
                             data-bs-target="#editMenu"
+                            onClick={() => handleEditMeal(meal)}
                           >
                             <i className="fas fa-edit fa-sm"></i>
                           </button>
