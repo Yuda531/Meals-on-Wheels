@@ -58,19 +58,24 @@ const Donor = () => {
     >
       <div className="container mt-5 text-center">
         <div className="row justify-content-center">
-          <div className="col-md-8 p-5 mt-5 bg-white">
+          <div
+            className="col-md-8 p-5 mt-5"
+            style={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}
+          >
             <StickyHeader activePage={"contact-us"} />
             <h1>
-              <span style={{ color: "red" }}>Indonesia</span> Senior need you
+              <span style={{ color: "red" }}>Indonesia</span>{" "}
+              <span className="text-white">Senior need you</span>
             </h1>
-            <h3>
-            Your gift will help us support the local programs that keep seniors safe and living independently nationwide.
+            <h3 className="text-white">
+              Your gift will help us support the local programs that keep
+              seniors safe and living independently nationwide.
             </h3>
           </div>
         </div>
         <div className="row justify-content-center">
-          <div className="col-md-8 p-5 mt-3 bg-white text-center d-flex flex-column">
-            <h1>Donate Now</h1>
+          <div className="col-md-8 p-5 mt-3 text-center d-flex flex-column" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}>
+            <h1 className="text-white">Donate Now</h1>
             <div className="form-group mt-4">
               <form onSubmit={handleDonation}>
                 <input
@@ -105,8 +110,9 @@ const Donor = () => {
                     onClick={() => setDonationAmount(10)}
                   />
                   <label
-                    className="btn btn-outline-primary"
+                    className="btn btn-primary"
                     htmlFor="btnradio1"
+                    style={{ margin: "0 5px" }}
                   >
                     $10
                   </label>
@@ -119,8 +125,9 @@ const Donor = () => {
                     onClick={() => setDonationAmount(15)}
                   />
                   <label
-                    className="btn btn-outline-primary"
+                    className="btn btn-primary"
                     htmlFor="btnradio2"
+                    style={{ margin: "0 5px" }}
                   >
                     $15
                   </label>
@@ -133,8 +140,9 @@ const Donor = () => {
                     onClick={() => setDonationAmount(20)}
                   />
                   <label
-                    className="btn btn-outline-primary"
+                    className="btn btn-primary"
                     htmlFor="btnradio3"
+                    style={{ margin: "0 5px" }}
                   >
                     $20
                   </label>
@@ -153,8 +161,9 @@ const Donor = () => {
                     onClick={() => setDonationAmount(25)}
                   />
                   <label
-                    className="btn btn-outline-primary"
+                    className="btn btn-primary"
                     htmlFor="btnradio4"
+                    style={{ margin: "0 5px" }}
                   >
                     $25
                   </label>
@@ -167,8 +176,9 @@ const Donor = () => {
                     onClick={() => setDonationAmount(50)}
                   />
                   <label
-                    className="btn btn-outline-primary"
+                    className="btn btn-primary"
                     htmlFor="btnradio5"
+                    style={{ margin: "0 5px" }}
                   >
                     $50
                   </label>
@@ -181,8 +191,9 @@ const Donor = () => {
                     onClick={() => setDonationAmount(100)}
                   />
                   <label
-                    className="btn btn-outline-primary"
+                    className="btn btn-primary"
                     htmlFor="btnradio6"
+                    style={{ margin: "0 5px" }}
                   >
                     $100
                   </label>
