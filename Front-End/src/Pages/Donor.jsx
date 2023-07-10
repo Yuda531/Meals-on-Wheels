@@ -25,7 +25,7 @@ const Donor = () => {
         console.log("Donation successful:", response.data);
         // Show the success alert using SweetAlert2
         Swal.fire({
-          title: "Thank you for donating to MoW!",
+          title: "Success",
           icon: "success",
           confirmButtonText: "OK",
         }).then((result) => {
