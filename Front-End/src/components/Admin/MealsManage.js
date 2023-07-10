@@ -18,7 +18,6 @@ const MealsManage = () => {
   });
   const [selectedMeal, setSelectedMeal] = useState(null);
 
-
   useEffect(() => {
     axios
       .get("http://localhost:8080/meals/all-meals")
@@ -47,55 +46,60 @@ const MealsManage = () => {
   }, [searchTerm, meals]);
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission
+    e.preventDefault();
 
-    axios
-      .post("http://localhost:8080/meals/add-meals", formData)
-      .then((response) => {
-        // Tindakan yang dilakukan setelah penambahan berhasil
-        console.log("Menu berhasil ditambahkan");
-        // Show SweetAlert2 success notification
-        Swal.fire("Meals Successfully Added", "", "success");
-        // Reset form dan refresh data
-        setFormData({
-          meals_name: "",
-          meals_description: "",
-          stock: 0,
-        });
-        axios
-          .get("/meals/all-meals")
-          .then((response) => {
-            setMeals(response.data);
-            setFilteredMeals(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
+    if (selectedMeal) {
+      axios
+        .put(
+          `http://localhost:8080/meals/edit-meals/${selectedMeal.meals_id}`,
+          formData
+        )
+        .then((response) => {
+          console.log("Menu berhasil diedit");
+          Swal.fire("Data has been changed", "", "success").then(() => {
+            setFormData({
+              meals_name: "",
+              meals_description: "",
+              stock: 0,
+            });
+            setSelectedMeal(null); // Clear selected meal
+            axios
+              .get("http://localhost:8080/meals/all-meals")
+              .then((response) => {
+                setMeals(response.data);
+                setFilteredMeals(response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      handleAddMeal();
+    }
   };
 
   const handleAddMeal = () => {
     axios
       .post("http://localhost:8080/meals/add-meals", formData)
       .then((response) => {
-        // Tindakan yang dilakukan setelah penambahan berhasil
         console.log("Menu berhasil ditambahkan");
-        // Show SweetAlert2 success notification
         Swal.fire("Success Add Menu", "", "success").then(() => {
-          // Reset form dan refresh data
           setFormData({
             meals_name: "",
             meals_description: "",
             stock: 0,
           });
           axios
-            .get("/meals/all-meals")
+            .get("http://localhost:8080/meals/all-meals")
             .then((response) => {
               setMeals(response.data);
               setFilteredMeals(response.data);
+              // Refresh the page after adding the meal
+              window.location.href = "/admin_meals";
             })
             .catch((error) => {
               console.log(error);
@@ -108,31 +112,13 @@ const MealsManage = () => {
   };
 
   const handleEditMeal = (meal) => {
-    setSelectedMeal(meal); // Set selectedMeal dengan data meals yang dipilih
-    axios
-      .put(`http://localhost:8080/meals/edit-meals/${meal.meals_id}`, formData)
-      .then((response) => {
-        // Tindakan yang dilakukan setelah pengeditan berhasil
-        console.log("Menu berhasil diedit");
-        // Reset form dan refresh data
-        setFormData({
-          meals_name: meal.meals_name,
-          meals_description: meal.meals_description,
-          stock: meal.stock,
-        });
-        axios
-          .get("/meals/all-meals")
-          .then((response) => {
-            setMeals(response.data);
-            setFilteredMeals(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    setSelectedMeal(meal);
+
+    setFormData({
+      meals_name: meal.meals_name,
+      meals_description: meal.meals_description,
+      stock: meal.stock,
+    });
   };
 
   const handleDeleteMeal = (mealsId) => {
@@ -193,7 +179,6 @@ const MealsManage = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <img src="images/search.png" alt="" />
               </div>
             </section>
             <section className="table__body">
@@ -351,7 +336,7 @@ const MealsManage = () => {
                   aria-label="Close"
                 ></button>
               </div>
-              <form onSubmit={() => handleEditMeal(meals)}>
+              <form onSubmit={handleSubmit}>
                 <div className="modal-body">
                   <div className="mb-3">
                     <label htmlFor="meals_name" className="form-label">
