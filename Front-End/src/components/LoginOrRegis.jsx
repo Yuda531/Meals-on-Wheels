@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
 
 const LoginOrRegis = () => {
+
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    const user = sessionStorage.getItem("user");
+    if (user) {
+      const { role } = JSON.parse(user);
+      setUserRole(role);
+    }
+  }, []);
+
+
   const [name, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginName, setLoginName] = useState('');
   const [loginPassword, setPasswordLogin] = useState('');
-  const [loginRole, setRole] = useState('');
+  const [roleId, setRoleId] = useState('');
   const [isActive, setActive] = useState('');
-
-
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [validated, setValidated] = useState(false);
   const [showReplacement, setShowReplacement] = useState(false);
   const [showForm, setShowForm] = useState(false);
-
 
   // LOGIN
 
@@ -28,20 +37,20 @@ const LoginOrRegis = () => {
     const user = {
       email: loginName,
       password: loginPassword,
-      role: loginRole,
+      role: roleId,
       isActive: isActive
     };
   
     try {
-      // Check if user isActive is true
-      if (!user.isActive) {
-        alert("User is inactive. Cannot login.");
-        return;
-      }
+    
   
       // Make the POST request using Axios to send user credentials to the server
       axios.post('http://localhost:8080/auth/login', user)
         .then((response) => {
+          if (user.isActive === false) {
+            alert("User is inactive. Cannot login.");
+            return;
+          } else 
           console.log(response.data);
           sessionStorage.setItem("user", JSON.stringify(response.data));
           window.location.href = "/dashboard";
@@ -58,38 +67,72 @@ const LoginOrRegis = () => {
   
     setEmail('');
     setPassword('');
-    setRole(loginRole);
+    setRoleId(roleId);
     setActive(isActive);
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // REGIS
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (password !== confirmPassword) {
-      setPasswordError(true);
-      return;
-    }
-
-    const user = {
-      name: name,
-      email: email,
-      role: loginRole.toUpperCase(),
-      password: password,
+    const handleSubmit = (e) => {
+      e.preventDefault();
+    
+      if (password !== confirmPassword) {
+        setPasswordError(true);
+        return;
+      }
+    
+      const user = {
+        name: name,
+        email: email,
+        roleId: roleId, // Updated to use roleId state
+        password: password,
+      };
+    
+      axios
+        .post('http://localhost:8080/user/register', user)
+        .then((response) => {
+          alert('Registration Successful');
+          window.location.href = '/login';
+          console.log(response.data);
+        })
+        .catch((error) => {
+          alert('Error Occurred');
+          console.error(error);
+        });
     };
-
-    axios
-      .post('http://localhost:8080/user/register', user)
-      .then((response) => {
-        alert('Registration Successful');
-        window.location.href = '/login';
-        console.log(response.data);
-      })
-      .catch((error) => {
-        alert('Error Occurred');
-        console.error(error);
-      });
-  };
+    
 
   const handleClick = () => {
     if (!showReplacement) {
@@ -143,18 +186,18 @@ const LoginOrRegis = () => {
                 placeholder="Select a Role."
                 id="roleId"
                 className="form-control"
-                value={loginRole}
-                onChange={(e) => setRole(e.target.value)}
+                value={roleId}
+                onChange={(e) => setRoleId(Number(e.target.value))}
                 required
               >
                 <option value="" disabled>
                   Select a Role
                 </option>
-                <option value="Partner">Partner</option>
-                <option value="Member">Member</option>
-                <option value="Caregiver">Caregiver</option>
-                <option value="Donour">Donour</option>
-                <option value="Volunteer">Volunteer</option>
+                <option value="2">Member</option>
+                <option value="3">Caregiver</option>
+                <option value="4">Partner</option>
+                <option value="5">Donour</option>
+                <option value="6">Volunteer</option>
               </select>
               <label htmlFor="roleId">Which role do you want to be?</label>
             </div>

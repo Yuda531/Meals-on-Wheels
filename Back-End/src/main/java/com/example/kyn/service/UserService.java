@@ -1,5 +1,6 @@
 package com.example.kyn.service;
 import com.example.kyn.model.User;
+import com.example.kyn.repository.RoleRepository;
 import com.example.kyn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,11 +17,14 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -33,25 +37,19 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
-        // Set the role based on the selected value
-        String selectedRole = user.getRole();
-        switch (selectedRole) {
-            case Role.PARTNER:
-            case Role.CAREGIVER:
-            case Role.MEMBER:
-            case Role.DONOR:
-            case Role.VOLUNTEER:
-                user.setRole(selectedRole);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid role selection");
-        }
-
-
+        // Set the role based on the roleId
 
         System.out.println("User added successfully");
         return userRepository.save(user);
     }
+
+    public Role findRoleById(Long roleId){
+        return roleRepository.findById(roleId).get();
+    }
+
+
+
+
 
 
 
@@ -61,27 +59,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
-    }
 
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public User updateUser(Long id, User updatedUser) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            user.setName(updatedUser.getName());
-            user.setEmail(updatedUser.getEmail());
-            user.setActive(updatedUser.getActive());
-            user.setRole(updatedUser.getRole());
-            return userRepository.save(user);
-        } else {
-            return null;
-        }
-    }
+
 }
 
 

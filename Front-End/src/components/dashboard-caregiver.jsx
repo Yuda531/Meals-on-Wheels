@@ -34,7 +34,7 @@ function CaregiverDashboard() {
         </h1>
         <hr className="border-white" />
         <div className="col-12 d-flex">
-          <div className="col-5 profileCard">
+          <div className="col-3 profileCard">
             <div className="col-12">
               <div className="col-6 mx-auto ">
                 <img style={{borderRadius:"50%"}} src={richie} className="col-12" alt="" />
@@ -49,25 +49,22 @@ function CaregiverDashboard() {
                   F-7011-KON
                 </small>
                 <br />
-                <small className="lead"><CircleFill color="green" /> Active</small>
-                <small className="lead d-none"><CircleFill color="red" /> Not Active</small>
-                <small className="lead d-none"><CircleFill color="yellow" /> Busy</small>
+                
                 <hr className="border-white" />
                 
                 <small className="lead">
-                  Joined since 2011
+                {userEmail ? userEmail : "Driver"}
                 </small>
                 <br />
                 <br />
                 
-                <button className="btn btn-success col-12 mb-3">Edit Profile</button> <br />
-                <button onClick={handleShow} className="btn btn-outline-warning col-12 mb-3">Set Status</button>
+               
                 
                 
               </div>
             </div>
           </div>
-          <div className="col-7 px-4 aboutt">
+          <div className="col-9 px-4 aboutt">
           <div className="orderTable text-white">
             <small className="display-6 m-4">New Orders</small>
             
@@ -122,6 +119,15 @@ function CaregiverDashboard() {
                             </div>
                             <hr className="border-light" />
                         </div>
+                        
+                        {/* My coding skills covers almost all required technical skills in order to make a functional website and application,
+                        front end development, back-end programming , and database management
+
+                        i know programming languages like html, javascript, css, jquery, sql, java, frameworks like bootstrap. reactJs. 
+                        spring framework, spring boot, and Content management system like liferay. 
+
+                        Last but not least, i have an eye for design. i always create unique and user friendly interface making users easily interact with my websites
+                        */}
 
                         <div className="anOrder">
                             <div className="d-flex col-12 mb-3">

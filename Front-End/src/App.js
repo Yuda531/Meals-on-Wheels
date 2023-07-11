@@ -9,6 +9,7 @@ import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Dashboard from './pages/Dashboard';
 import RegisSuccess from './pages/RegisSuccess';
+import VolunteerSelection from './pages/VolunteerSelection';
 
 function App() {
   
@@ -22,6 +23,8 @@ function App() {
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/dashboard" element={<Dashboard />} /> 
         <Route path="/login" element={<RegisSuccess />} /> 
+        <Route path="/volunteerSelection" element={<VolunteerSelection />} /> 
+
 
 
       </Routes>

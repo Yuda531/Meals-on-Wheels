@@ -29,19 +29,19 @@ function SignInOnly(){
   
     try {
       // Check if user isActive is true
-      if (!user.isActive) {
-        alert("User is inactive. Cannot login.");
-        return;
-      }
+
   
-      // Make the POST request using Axios to send user credentials to the server
       axios.post('http://localhost:8080/auth/login', user)
-        .then((response) => {
-          console.log(response.data);
-          sessionStorage.setItem("user", JSON.stringify(response.data));
-          window.location.href = "/dashboard";
-          alert("Login success");
-        });
+      .then((response) => {
+        if (user.isActive === false) {
+          alert("User is inactive. Cannot login.");
+          return;
+        } else 
+        console.log(response.data);
+        sessionStorage.setItem("user", JSON.stringify(response.data));
+        window.location.href = "/dashboard";
+        alert("Login success");
+      });
   
       // Check if the server response contains a success message or token
   

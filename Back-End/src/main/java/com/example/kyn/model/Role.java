@@ -1,11 +1,38 @@
 package com.example.kyn.model;
 
-public class Role {
-    public static final String ADMIN = "ADMIN";
-    public static final String PARTNER = "PARTNER";
-    public static final String CAREGIVER = "CAREGIVER";
-    public static final String MEMBER = "MEMBER";
-    public static final String DONOR = "DONOR";
-    public static final String VOLUNTEER = "VOLUNTEER";
-}
+import javax.persistence.*;
 
+@Entity
+@Table(name = "roles")
+public class Role {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long roleId;
+    @Column()
+    private String roleName;
+
+    public Role() {
+    }
+
+    public Role(Long roleId, String roleName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+}

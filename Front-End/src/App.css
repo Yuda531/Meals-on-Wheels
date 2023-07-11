@@ -102,6 +102,20 @@ body{
   transition: background-color 0.5s, color 0.5s;
 }
 
+.whyUs2{
+  background-color: white;
+
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.whyUs2:hover{
+  background-color: #c1c1c134;
+  color: white;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+
+
 .whyUss{
   background-image: url('../src/img/foodBg.jpg');
   background-size: 100%;

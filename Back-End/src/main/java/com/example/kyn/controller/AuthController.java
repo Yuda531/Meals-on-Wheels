@@ -1,9 +1,9 @@
 package com.example.kyn.controller;
-import com.example.kyn.interceptor.InvalidPasswordException;
-import com.example.kyn.model.CustomErrorResponse;
-import com.example.kyn.model.SuccessLoginResponse;
+import com.example.kyn.exception.InvalidPasswordException;
+import com.example.kyn.response.CustomErrorResponse;
+import com.example.kyn.response.SuccessLoginResponse;
 import com.example.kyn.model.User;
-import com.example.kyn.model.UserLoginRequestBody;
+import com.example.kyn.request.UserLoginRequestBody;
 import com.example.kyn.repository.UserRepository;
 import com.example.kyn.service.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class AuthController {
 
 
             String generatedToken = jwtUtil.generateToken(userFromDb.getEmail());
-            SuccessLoginResponse tokenResponse = new SuccessLoginResponse(generatedToken, userFromDb.getName(), userFromDb.getEmail(), userFromDb.getRole(), userFromDb.getActive());
+            SuccessLoginResponse tokenResponse = new SuccessLoginResponse(generatedToken, userFromDb.getName(), userFromDb.getEmail(), userFromDb.getRoleId(), userFromDb.isActive(), userFromDb.getUserId());
 
             return ResponseEntity.ok(tokenResponse);
         }
@@ -58,7 +58,7 @@ public class AuthController {
 
     @GetMapping("/needAuth")
     public String needAuth() {
-        return "Hello Wah";
+        return "Hello P";
     }
 
     @GetMapping("/createToken")
