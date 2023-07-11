@@ -1,63 +1,38 @@
+import axios from "axios";
 import backgroundImage from "../../images/bg/donation1.jpeg";
 import "../../CSS/admin/AdminDashboard.css";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import NavbarAdmin from "../Navbar";
 
 const Donate = () => {
-  const donations = [
-    {
-      id: 1,
-      name: "Roger Richard",
-      address: "Los Angeles",
-      amount: 50,
-    },
-    {
-      id: 2,
-      name: "Sarah Moan",
-      address: "Amsterdam",
-      amount: 25,
-    },
-    {
-      id: 3,
-      name: "Harry Scarfield",
-      address: "Edinburgh",
-      amount: 150,
-    },
-    {
-      id: 4,
-      name: "Antonio Gracha",
-      address: "California",
-      amount: 50,
-    },
-    {
-      id: 5,
-      name: "Agung Yuda",
-      address: "Baleendah",
-      amount: 500,
-    },
-    {
-      id: 6,
-      name: "Asep Supriyadi",
-      address: "Pameungpeuk",
-      amount: 250,
-    },
-  ];
-
-  // Calculate the total donation amount
-  const totalDonation = donations.reduce(
-    (accumulator, donate) => accumulator + donate.amount,
-    0
-  );
-
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredDonors, setFilteredDonors] = useState(donations);
+  const [filteredDonors, setFilteredDonors] = useState([]);
+  const [totalDonation, setTotalDonation] = useState(0);
 
   useEffect(() => {
-    const filtered = donations.filter(
+    // Fetch donations from the backend API
+    axios.get("http://localhost:8080/donation/all-donate")
+      .then(response => {
+        const donations = response.data;
+        setFilteredDonors(donations);
+        
+        // Calculate the total donation amount
+        const totalAmount = donations.reduce(
+          (accumulator, donate) => accumulator + donate.donate_amount,
+          0
+        );
+        setTotalDonation(totalAmount);
+      })
+      .catch(error => {
+        console.error("Error fetching donations:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const filtered = filteredDonors.filter(
       (donor) =>
-        donor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        donor.address.toLowerCase().includes(searchTerm.toLowerCase())
+        donor.donor_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        donor.donor_address.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredDonors(filtered);
   }, [searchTerm]);
@@ -101,12 +76,12 @@ const Donate = () => {
                 </thead>
                 <tbody>
                   {filteredDonors.map((donate, index) => (
-                    <tr key={donate.id}>
+                    <tr key={donate.donate_id}>
                       <td>{index + 1}</td>
-                      <td>{donate.name}</td>
-                      <td>{donate.address}</td>
+                      <td>{donate.donor_name}</td>
+                      <td>{donate.donor_address}</td>
                       <td>
-                        <i class="fa fa-usd"></i> {donate.amount}
+                        <i className="fa fa-usd"></i> {donate.donate_amount}
                       </td>
                     </tr>
                   ))}
@@ -116,7 +91,7 @@ const Donate = () => {
                       Total Donation:
                     </td>
                     <td>
-                      <i class="fa fa-usd"></i> {totalDonation}
+                      <i className="fa fa-usd"></i> {totalDonation}
                     </td>
                   </tr>
                 </tbody>
