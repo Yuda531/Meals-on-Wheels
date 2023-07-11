@@ -1,3 +1,8 @@
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import Sidebar from "./Sidebar";
+
 import thumb1 from "../images/recipeThumb-01.jpg";
 import thumb2 from "../images/recipeThumb-02.jpg";
 import thumb3 from "../images/recipeThumb-03.jpg";
@@ -7,252 +12,72 @@ import thumb6 from "../images/recipeThumb-06.jpg";
 import thumb7 from "../images/recipeThumb-07.jpg";
 import thumb8 from "../images/recipeThumb-08.jpg";
 import thumb9 from "../images/recipeThumb-09.jpg";
-import author from "../images/author-photo.png";
-
-import React from "react";
-import { NavLink } from "react-router-dom";
-import Sidebar from "./Sidebar";
 
 function MemberContent() {
+  const [meals, setMeals] = useState([]);
+
+  useEffect(() => {
+    // Make an API call to fetch the meals data from the backend
+    axios
+      .get("http://localhost:8080/meals/all-meals")
+      .then((response) => {
+        setMeals(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const thumbImages = [
+    thumb1,
+    thumb2,
+    thumb3,
+    thumb4,
+    thumb5,
+    thumb6,
+    thumb7,
+    thumb8,
+    thumb9
+  ];
+
   return (
-    <div class='container acumalaka' style={{marginTop: '100px'}}>
+    <div className="container acumalaka" style={{ marginTop: "100px" }}>
       {/*  Masonry */}
-      <div class='twelve columns'>
+      <div className="twelve columns">
         {/*  Headline */}
-        <h3 class='headline'>Meals Menu</h3>
-        <span class='line rb margin-bottom-35'></span>
-        <div class='clearfix'></div>
+        <h3 className="headline">Meals Menu</h3>
+        <span className="line rb margin-bottom-35"></span>
+        <div className="clearfix"></div>
 
         {/*  Isotope */}
-        <div class='isotope'>
-          {/*  Recipe #1 */}
-          <div class='four recipe-box columns'>
-            {/*  Thumbnail */}
-            <div class='thumbnail-holder'>
-              <a href='/detail'>
-                <img src={thumb1} alt='' />
-                <div class='hover-cover'></div>
-                <div class='hover-icon'>View Meals</div>
-              </a>
-            </div>
-
-            {/*  Content */}
-            <div class='recipe-box-content'>
-              <h3>
-                <a href='/detail'>
-                  Mexican Grilled <br /> Corn
+        <div className="isotope">
+          {meals.map((meal, index) => (
+            <div className="four recipe-box columns" key={meal.meals_id}>
+              {/*  Thumbnail */}
+              <div className="thumbnail-holder">
+                <a href="/detail">
+                  <img src={thumbImages[index % thumbImages.length]} alt="" />
+                  <div className="hover-cover"></div>
+                  <div className="hover-icon">View Meals</div>
                 </a>
-              </h3>
-
-              <div class='recipe-meta'>
-                <i class='fa fa-check-circle'></i> Available
               </div>
 
-              <div class='clearfix'></div>
-            </div>
-          </div>
+              {/*  Content */}
+              <div className="recipe-box-content">
+                <h3>
+                  <a href="/detail">{meal.meals_name}</a>
+                </h3>
 
-          {/*  Recipe #2 */}
-          <div class='four recipe-box columns'>
-            {/*  Thumbnail */}
-            <div class='thumbnail-holder'>
-              <a href='/detail'>
-                <img src={thumb2} alt='' />
-                <div class='hover-cover'></div>
-                <div class='hover-icon'>View Meals</div>
-              </a>
-            </div>
+                <div className="recipe-meta">
+                  <i className="fa fa-check-circle"></i> Available
+                </div>
 
-            {/*  Content */}
-            <div class='recipe-box-content'>
-              <h3>
-                <a href='/detail'>Choclate Cake With Green Tea Cream</a>
-              </h3>
-
-              <div class='recipe-meta'>
-                <i class='fa fa-check-circle'></i> Available
+                <div className="clearfix"></div>
               </div>
-
-              <div class='clearfix'></div>
             </div>
-          </div>
-
-          {/*  Recipe #3 */}
-          <div class='four recipe-box columns'>
-            {/*  Thumbnail */}
-            <div class='thumbnail-holder'>
-              <a href='/detail'>
-                <img src={thumb3} alt='' />
-                <div class='hover-cover'></div>
-                <div class='hover-icon'>View Meals</div>
-              </a>
-            </div>
-
-            {/*  Content */}
-            <div class='recipe-box-content'>
-              <h3>
-                <a href='/detail'>Thai Yellow Curry Chicken</a>
-              </h3>
-
-              <div class='recipe-meta'>
-                <i class='fa fa-check-circle'></i> Available
-              </div>
-
-              <div class='clearfix'></div>
-            </div>
-          </div>
-
-          {/*  Recipe #4 */}
-          <div class='four recipe-box columns'>
-            {/*  Thumbnail */}
-            <div class='thumbnail-holder'>
-              <a href='/detail'>
-                <img src={thumb4} alt='' />
-                <div class='hover-cover'></div>
-                <div class='hover-icon'>View Meals</div>
-              </a>
-            </div>
-
-            {/*  Content */}
-            <div class='recipe-box-content'>
-              <h3>
-                <a href='/detail'>Avocado Melon Salad With Lime Vinaigrette</a>
-              </h3>
-
-              <div class='recipe-meta'>
-                <i class='fa fa-check-circle'></i> Available
-              </div>
-
-              <div class='clearfix'></div>
-            </div>
-          </div>
-
-          {/*  Recipe #5 */}
-          <div class='four recipe-box columns'>
-            {/*  Thumbnail */}
-            <div class='thumbnail-holder'>
-              <a href='/detail'>
-                <img src={thumb5} alt='' />
-                <div class='hover-cover'></div>
-                <div class='hover-icon'>View Meals</div>
-              </a>
-            </div>
-
-            {/*  Content */}
-            <div class='recipe-box-content'>
-              <h3>
-                <a href='/detail'>Pollo Borracho With Homemade Tortillas</a>
-              </h3>
-
-              <div class='recipe-meta'>
-                <i class='fa fa-check-circle'></i> Available
-              </div>
-
-              <div class='clearfix'></div>
-            </div>
-          </div>
-
-          {/*  Recipe #6 */}
-          <div class='four recipe-box columns'>
-            {/*  Thumbnail */}
-            <div class='thumbnail-holder'>
-              <a href='/detail'>
-                <img src={thumb6} alt='' />
-                <div class='hover-cover'></div>
-                <div class='hover-icon'>View Meals</div>
-              </a>
-            </div>
-
-            {/*  Content */}
-            <div class='recipe-box-content'>
-              <h3>
-                <a href='/detail'>Sweet Chilli and Lime Chicken Wings</a>
-              </h3>
-
-              <div class='recipe-meta'>
-                <i class='fa fa-check-circle'></i> Available
-              </div>
-
-              <div class='clearfix'></div>
-            </div>
-          </div>
-
-          {/*  Recipe #7 */}
-          <div class='four recipe-box columns'>
-            {/*  Thumbnail */}
-            <div class='thumbnail-holder'>
-              <a href='/detail'>
-                <img src={thumb7} alt='' />
-                <div class='hover-cover'></div>
-                <div class='hover-icon'>View Meals</div>
-              </a>
-            </div>
-
-            {/*  Content */}
-            <div class='recipe-box-content'>
-              <h3>
-                <a href='/detail'>Roast Chicken With Lemon Gravy</a>
-              </h3>
-
-              <div class='recipe-meta'>
-                <i class='fa fa-check-circle'></i> Available
-              </div>
-
-              <div class='clearfix'></div>
-            </div>
-          </div>
-
-          {/*  Recipe #8 */}
-          <div class='four recipe-box columns'>
-            {/*  Thumbnail */}
-            <div class='thumbnail-holder'>
-              <a href='/detail'>
-                <img src={thumb8} alt='' />
-                <div class='hover-cover'></div>
-                <div class='hover-icon'>View Meals</div>
-              </a>
-            </div>
-
-            {/*  Content */}
-            <div class='recipe-box-content'>
-              <h3>
-                <a href='/detail'>Farmhouse Vegetable And Barley Soup</a>
-              </h3>
-
-              <div class='recipe-meta'>
-                <i class='fa fa-check-circle'></i> Available
-              </div>
-
-              <div class='clearfix'></div>
-            </div>
-          </div>
-
-          {/*  Recipe #9 */}
-          <div class='four recipe-box columns'>
-            {/*  Thumbnail */}
-            <div class='thumbnail-holder'>
-              <a href='/detail'>
-                <img src={thumb9} alt='' />
-                <div class='hover-cover'></div>
-                <div class='hover-icon'>View Meals</div>
-              </a>
-            </div>
-
-            {/*  Content */}
-            <div class='recipe-box-content'>
-              <h3>
-                <a href='/detail'>Chunky Beef Stew</a>
-              </h3>
-
-              <div class='recipe-meta'>
-                <i class='fa fa-check-circle'></i> Available
-              </div>
-
-              <div class='clearfix'></div>
-            </div>
-          </div>
+          ))}
         </div>
-        <div class='clearfix'></div>
+        <div className="clearfix"></div>
       </div>
 
       {/*  Sidebar
@@ -261,4 +86,5 @@ function MemberContent() {
     </div>
   );
 }
+
 export default MemberContent;
