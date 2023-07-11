@@ -1,97 +1,84 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import author from "../images/author-photo.png";
 import thumb5 from "../images/recipeThumb-05.jpg";
 import thumb9 from "../images/recipeThumb-09.jpg";
 
 function Sidebar() {
+  const [meals, setMeals] = useState([]);
+
+  useEffect(() => {
+    fetchMealsData();
+  }, []);
+
+  const fetchMealsData = async () => {
+    try {
+      const token = localStorage.getItem("token"); // Retrieve the token from storage
+
+      const response = await axios.get("http://localhost:8080/meals/all-meals", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the request headers
+        },
+      });
+
+      setMeals(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div class='four columns'>
-      {/*  Search Form */}
-      <div class='widget search-form'>
-        <nav class='search'>
-          <form action='#' method='get'>
+    <div className="four columns">
+      {/* Search Form */}
+      <div className="widget search-form">
+        <nav className="search">
+          <form action="#" method="get">
             <button>
-              <i class='fa fa-search'></i>
+              <i className="fa fa-search"></i>
             </button>
             <input
-              class='search-field'
-              type='text'
-              placeholder='Search for meals'
-              value=''
+              className="search-field"
+              type="text"
+              placeholder="Search for meals"
+              value=""
             />
           </form>
         </nav>
-        <div class='clearfix'></div>
+        <div className="clearfix"></div>
       </div>
 
-      {/*  Author Box */}
-      <div class='widget'>
-        <a href='/Dashboard'>
-          <div class='author-box'>
-            <span class='title'>Profile</span>
-            <span class='name'>
+      {/* Author Box */}
+      <div className="widget">
+        <a href="/Dashboard">
+          <div className="author-box">
+            <span className="title">Profile</span>
+            <span className="name">
               Sasha <br /> Maria
             </span>
-            <span class='contact'>
-              <a href='mailto:sasha@gmail.com'>sasha@gmail.com</a>
+            <span className="contact">
+              <a href="mailto:sasha@gmail.com">sasha@gmail.com</a>
             </span>
-            <img src={author} alt='' />
+            <img src={author} alt="" />
           </div>
         </a>
       </div>
 
       {/* Status Order */}
-      <div class='widget'>
-        <h4 class='headline'>Order Status</h4>
-        <span class='line margin-bottom-20'></span>
-        <div class='clearfix'></div>
+      <div className="widget">
+        <h4 className="headline">Order Status</h4>
+        <span className="line margin-bottom-20"></span>
+        <div className="clearfix"></div>
 
-        <ul class='categories'>
+        <ul className="categories">
           <li>
-            <a href='/MyOrder'>My Order</a>
+            <a href="/MyOrder">My Order</a>
           </li>
         </ul>
       </div>
 
-      {/*  Popular Meals */}
-      <div class='widget'>
-        {window.location.pathname !== "/MyOrder" && (
-          <>
-            <h4 class='headline'>Popular Meals</h4>
-            <span class='line margin-bottom-30'></span>
-            <div class='clearfix'></div>
-
-            {/* Recipe #1 */}
-            <a href='/detail' class='featured-recipe'>
-              <img src={thumb5} alt='' />
-              <div class='featured-recipe-content'>
-                <h4>Choclate Cake With Green Tea Cream</h4>
-              </div>
-              <div class='post-icon'></div>
-            </a>
-
-            {/* Recipe #2 */}
-            <a href='/detail' class='featured-recipe'>
-              <img src={thumb9} alt='' />
-              <div class='featured-recipe-content'>
-                <h4>Mexican Grilled Corn Recipe</h4>
-              </div>
-              <div class='post-icon'></div>
-            </a>
-
-            {/* Recipe #3 */}
-            <a href='/detail' class='featured-recipe'>
-              <img src='images/featuredRecipe-03.jpg' alt='' />
-              <div class='featured-recipe-content'>
-                <h4>Pollo Borracho With Homemade Tortillas</h4>
-              </div>
-              <div class='post-icon'></div>
-            </a>
-
-            <div class='clearfix'></div>
-          </>
-        )}
-      </div>
+      
     </div>
   );
 }
+
 export default Sidebar;
