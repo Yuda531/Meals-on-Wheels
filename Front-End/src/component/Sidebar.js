@@ -29,10 +29,10 @@ function Sidebar() {
           <div class='author-box'>
             <span class='title'>Profile</span>
             <span class='name'>
-              Sandra <br /> Fortin
+              Sasha <br /> Maria
             </span>
             <span class='contact'>
-              <a href='mailto:sandra@chow.com'>sandra@chow.com</a>
+              <a href='mailto:sasha@gmail.com'>sasha@gmail.com</a>
             </span>
             <img src={author} alt='' />
           </div>
