@@ -24,6 +24,8 @@ const LoginOrRegis = () => {
   const [driverName, setDriverName] = useState('');
   const [driverPlate, setDriverPlate] = useState('');
   const [isLicensed, setLicensed] = useState('');
+  const [licenseNumber, setLicenseNumber] = useState('');
+
   const [isActive, setActive] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
@@ -101,7 +103,8 @@ const LoginOrRegis = () => {
         const caregiverData = {
           driverName: driverName,
           driverPlate: driverPlate,
-          isLicensed: isLicensed === "1" // Set isLicensed to true if selected option is "Yes"
+          isLicensed: isLicensed,
+          licenseNumber: licenseNumber
         };
     
         data = {
@@ -260,36 +263,19 @@ const LoginOrRegis = () => {
               <label htmlFor="name">Driver Username</label>
             </div>
 
-            <div className="form-floating col-6 px-1 mb-3">
-            <select
-              placeholder="Select a Role."
-              id="roleId"
-              className="form-control"
-              value={isLicensed}
-              onChange={(e) => setLicensed(e.target.value)}
-              required
-            >
-              <option value="" disabled>
-                Select an option
-              </option>
-              <option value="1">Yes</option>
-              <option value="0">No</option>
-            </select>
-
-              <label htmlFor="roleId">Are you licensed??</label>
+            <div className="form-floating  col-6 px-1 mb-3">
+              <input
+                type="text"
+                className="form-control"
+                id="license"
+                placeholder="Name"
+                value={licenseNumber}
+                onChange={(e) => setLicenseNumber(e.target.value)}
+                required
+              />
+              <label htmlFor="name">License Number</label>
             </div>
-            {/* <div className="form-group form-check">
-              <p className="lead text-white">Are you licensed?</p>
-              <div className="px-4">
-              <input value={isLicensed} type="checkbox" className="form-check-input" id="remember" />
-              <label className="form-check-label text-white" htmlFor="remember">
-                Yes, I am
-              </label>
-             
-              
-              </div>
-              
-            </div> */}
+
 
               </div>
 
