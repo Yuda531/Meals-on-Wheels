@@ -41,16 +41,23 @@ public class UserController {
             newUser.setRoleId(role);
 
             if (roleId == 2 || roleId == 5) {
-                newUser.setActive(false);
+                newUser.setActive(true);
             }
             if (roleId == 3 && registerRequest.getCaregiver() == null){
                 throw new IllegalArgumentException("Role details not provided");
-//                newUser.setActive(false);
+//
 
             }
             userService.saveUser(newUser);
 
             if(roleId == 3){
+                newUser.setActive(false);
+//                boolean isLicensed = registerRequest.getCaregiver().isLicensed();
+                if(registerRequest.getCaregiver().getLicenseNumber() == null){
+                    registerRequest.getCaregiver().setLicensed(false);
+                } else {
+                    registerRequest.getCaregiver().setLicensed(true);
+                }
                 registerRequest.getCaregiver().setUserId(newUser);
                 caregiverService.save(registerRequest.getCaregiver());
             }

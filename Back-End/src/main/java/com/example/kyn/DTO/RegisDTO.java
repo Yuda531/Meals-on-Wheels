@@ -8,4 +8,5 @@ public class RegisDTO {
     private UserDTO userDTO;
     private Caregiver caregiver;
 
+
 }

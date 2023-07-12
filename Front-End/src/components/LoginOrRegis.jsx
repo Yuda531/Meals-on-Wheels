@@ -85,12 +85,6 @@ const LoginOrRegis = () => {
         setPasswordError(true);
         return;
       }
-
-      if(isLicensed === null){
-        setLicensed(false);
-      } else {
-        setLicensed(true)
-      }
     
       const user = {
         name: name,
@@ -107,7 +101,7 @@ const LoginOrRegis = () => {
         const caregiverData = {
           driverName: driverName,
           driverPlate: driverPlate,
-          isLicensed: isLicensed
+          isLicensed: isLicensed === "1" // Set isLicensed to true if selected option is "Yes"
         };
     
         data = {
@@ -127,8 +121,8 @@ const LoginOrRegis = () => {
           alert('Error Occurred');
           console.error(error);
         });
-
     };
+    
     
     
 
@@ -265,7 +259,26 @@ const LoginOrRegis = () => {
               />
               <label htmlFor="name">Driver Username</label>
             </div>
-            <div className="form-group form-check">
+
+            <div className="form-floating col-6 px-1 mb-3">
+            <select
+              placeholder="Select a Role."
+              id="roleId"
+              className="form-control"
+              value={isLicensed}
+              onChange={(e) => setLicensed(e.target.value)}
+              required
+            >
+              <option value="" disabled>
+                Select an option
+              </option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+
+              <label htmlFor="roleId">Are you licensed??</label>
+            </div>
+            {/* <div className="form-group form-check">
               <p className="lead text-white">Are you licensed?</p>
               <div className="px-4">
               <input value={isLicensed} type="checkbox" className="form-check-input" id="remember" />
@@ -276,7 +289,7 @@ const LoginOrRegis = () => {
               
               </div>
               
-            </div>
+            </div> */}
 
               </div>
 

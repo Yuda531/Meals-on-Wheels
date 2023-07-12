@@ -25,6 +25,8 @@ public class Caregiver {
     @Column()
     private String driverPlate;
 
+    @Column(nullable = true)
+    private String licenseNumber;
 
     @Column()
     private boolean isLicensed;
