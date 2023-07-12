@@ -21,6 +21,9 @@ const LoginOrRegis = () => {
   const [loginName, setLoginName] = useState('');
   const [loginPassword, setPasswordLogin] = useState('');
   const [roleId, setRoleId] = useState('');
+  const [driverName, setDriverName] = useState('');
+  const [driverPlate, setDriverPlate] = useState('');
+  const [isLicensed, setLicensed] = useState('');
   const [isActive, setActive] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
@@ -74,36 +77,6 @@ const LoginOrRegis = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // REGIS
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -112,16 +85,39 @@ const LoginOrRegis = () => {
         setPasswordError(true);
         return;
       }
+
+      if(isLicensed === null){
+        setLicensed(false);
+      } else {
+        setLicensed(true)
+      }
     
       const user = {
         name: name,
         email: email,
-        roleId: roleId, // Updated to use roleId state
         password: password,
+        roleId: roleId
       };
     
+      let data = {
+        userDTO: user
+      };
+    
+      if (roleId === 3) {
+        const caregiverData = {
+          driverName: driverName,
+          driverPlate: driverPlate,
+          isLicensed: isLicensed
+        };
+    
+        data = {
+          ...data,
+          caregiver: caregiverData
+        };
+      }
+    
       axios
-        .post('http://localhost:8080/user/register', user)
+        .post('http://localhost:8080/user/register', data)
         .then((response) => {
           alert('Registration Successful');
           window.location.href = '/login';
@@ -131,7 +127,9 @@ const LoginOrRegis = () => {
           alert('Error Occurred');
           console.error(error);
         });
+
     };
+    
     
 
   const handleClick = () => {
@@ -147,8 +145,12 @@ const LoginOrRegis = () => {
     setShowReplacement(false);
   };
 
+
+
+
+
   return (
-    <div className="col-6">
+    <div style={{maxHeight:"560px", overflow:"auto"}} className="col-9 teams">
 
 
 
@@ -157,7 +159,10 @@ const LoginOrRegis = () => {
           <h1 className="display-6 text-white">Sign Up</h1>
           <hr className="border-white" />
           <form className="col-12" onSubmit={handleSubmit}>
-            <div className="form-floating mb-3">
+
+            <div className="d-flex col-12">
+              <div className="col-6 px-1 mx-auto">
+              <div className="form-floating col-12 mb-3">
               <input
                 type="text"
                 className="form-control"
@@ -169,7 +174,7 @@ const LoginOrRegis = () => {
               />
               <label htmlFor="name">Name</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="form-floating col-12 mb-3">
               <input
                 type="email"
                 className="form-control"
@@ -181,7 +186,7 @@ const LoginOrRegis = () => {
               />
               <label htmlFor="email">Email address</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="form-floating col-12 mb-3">
               <select
                 placeholder="Select a Role."
                 id="roleId"
@@ -201,7 +206,10 @@ const LoginOrRegis = () => {
               </select>
               <label htmlFor="roleId">Which role do you want to be?</label>
             </div>
-            <div className="form-floating mb-3">
+              </div>
+
+              <div className="col-6 px-1 mx-auto">
+              <div className="form-floating col-12 mb-3">
               <input
                 type="password"
                 className="form-control"
@@ -213,7 +221,7 @@ const LoginOrRegis = () => {
               />
               <label htmlFor="password">Password</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="form-floating col-12 mb-3">
               <Form.Control
                 type="password"
                 className="form-control"
@@ -231,7 +239,64 @@ const LoginOrRegis = () => {
                 </Form.Control.Feedback>
               )}
             </div>
+              </div>
+            </div>
 
+            
+
+            {roleId === 3 && (
+
+            <div id="details">
+              <p className="display-6 mt-5 text-white">
+              Detail Information
+              </p>
+
+          <hr className="border-white" />
+              <div className="d-flex col-12">
+              <div className="form-floating col-6 px-1 mb-3">
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                placeholder="Driver Username"
+                value={driverName}
+                onChange={(e) => setDriverName(e.target.value)}
+                required
+              />
+              <label htmlFor="name">Driver Username</label>
+            </div>
+            <div className="form-group form-check">
+              <p className="lead text-white">Are you licensed?</p>
+              <div className="px-4">
+              <input value={isLicensed} type="checkbox" className="form-check-input" id="remember" />
+              <label className="form-check-label text-white" htmlFor="remember">
+                Yes, I am
+              </label>
+             
+              
+              </div>
+              
+            </div>
+
+              </div>
+
+            <div className="form-floating col-6 px-1 mb-3">
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                placeholder="Driver Username"
+                value={driverPlate}
+                onChange={(e) => setDriverPlate(e.target.value)}
+                required
+              />
+              <label htmlFor="name">Police Number</label>
+            </div>
+            </div>
+            
+
+            )}
+<br />
             <p className="lead text-white">
               Already have an account? Click{' '}
               <span>
