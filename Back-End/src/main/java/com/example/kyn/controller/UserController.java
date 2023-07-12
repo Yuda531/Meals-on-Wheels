@@ -53,7 +53,7 @@ public class UserController {
             if(roleId == 3){
                 newUser.setActive(false);
 //                boolean isLicensed = registerRequest.getCaregiver().isLicensed();
-                if(registerRequest.getCaregiver().getLicenseNumber() == null){
+                if(registerRequest.getCaregiver().getLicenseNumber() == ""){
                     registerRequest.getCaregiver().setLicensed(false);
                 } else {
                     registerRequest.getCaregiver().setLicensed(true);
