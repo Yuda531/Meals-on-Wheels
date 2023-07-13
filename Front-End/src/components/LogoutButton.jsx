@@ -1,18 +1,35 @@
+import { icon } from '@fortawesome/fontawesome-svg-core';
 import { Navbar, Nav, NavDropdown, Container, Form, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function LogoutButton(props) {
 
   
   const logout = () => {
-    
-      sessionStorage.clear();
-      window.localStorage.clear();
-      alert('Logout Successfull')
-      window.location.href = "/";
-    ;
+    Swal.fire({
+      title: 'Sign Out?',
+      text: "All sessions will be cleared!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sign Out'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        sessionStorage.clear();
+        window.localStorage.clear();
+        Swal.fire(
+          'Logged out!',
+          'Your session has been cleared.',
+          'success'
+        ).then(() => {
+          window.location.href = '/';
+        });;
+      }
+    });
   };
-
+  
   
 
   return(

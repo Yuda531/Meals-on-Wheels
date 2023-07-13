@@ -257,9 +257,17 @@ ul {
 
 .profileCard {
   padding: 50px 10px 10px 10px;
-  margin: 0px 50px 50px 0px;
   /* border: 1px solid #ccc; */
-  border-radius: 110px 19px 19px 110px;
+  border-radius: 20px;
+  background-color: #4e4e4e6b;
+
+
+}
+
+.profileCard2 {
+  padding: 50px 10px 10px 10px;
+  /* border: 1px solid #ccc; */
+  border-radius: 20px;
   background-color: #4e4e4e6b;
 
 

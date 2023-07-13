@@ -4,67 +4,78 @@ import { CircleFill } from 'react-bootstrap-icons';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Swal from 'sweetalert2'
 
 function CaregiverDashboard() {
     const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  let User = sessionStorage.getItem("user");
-    User = JSON.parse(User);
-  
-    const [userEmail, setUserEmail] = useState(null);
-  
-    useEffect(() => {
-      const user = sessionStorage.getItem("user");
-      if (user) {
-        const parsedUser = JSON.parse(user);
-        setUserEmail(parsedUser.email);
-      }
-    }, []);
+  const [userEmail, setUserEmail] = useState(null);
+  const [driverName, setDriverName] = useState(null);
+  const [driverPlate, setDriverPlate] = useState(null);
+  const [driverLicense, setDriverLicense] = useState(false);
+
+  useEffect(() => {
+    const user = sessionStorage.getItem('user');
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      setUserEmail(parsedUser.caregiver?.userId?.name || '');
+      setDriverName(parsedUser.caregiver?.driverName || '');
+      setDriverPlate(parsedUser.caregiver?.driverPlate || '');
+      setDriverLicense(parsedUser.caregiver?.licensed || false);
+    }
+  }, []);
 
   return (
     
 
     <div className="body">
       <div className="backblur">
-        <h1 className="display-5 text-white">
-          Welcome, {userEmail ? userEmail : "Driver"}!
-        </h1>
-        <hr className="border-white" />
+
         <div className="col-12 d-flex">
-          <div className="col-3 profileCard">
-            <div className="col-12">
+
+
+
+<div className='col-4'>
+
+            <div className="col-12 profileCard">
               <div className="col-6 mx-auto ">
                 <img style={{borderRadius:"50%"}} src={richie} className="col-12" alt="" />
               </div>
-              <div className="col-6 profileCardData mx-auto text-center text-white">
+              <div className="col-10 profileCardData mx-auto my-5 text-center text-white">
+
+                
                 <small className="display-6">
-                  Rafael Richie
+                {userEmail ? userEmail : 'Driver'}
+
                 </small>
-                <br />
-                <br />
-                <small className="lead text-white fw-bold">
-                  F-7011-KON
-                </small>
+                
+                
                 <br />
                 
                 <hr className="border-white" />
                 
                 <small className="lead">
-                {userEmail ? userEmail : "Driver"}
+                {driverName}
                 </small>
-                <br />
-                <br />
-                
-               
-                
-                
               </div>
             </div>
-          </div>
-          <div className="col-9 px-4 aboutt">
+         
+         <br />
+
+          <div className="col-12 px-5 py-5 profileCard2 text-white text-center">
+            <p className="lead fw-bold">Police Number</p>
+            <small className="display-6">
+            {driverPlate}
+            </small>
+            <hr className='border-white'/>
+            <p className="lead">{driverLicense ? 'Licensed Driver' : 'Not Licensed'}</p>
+            </div>
+
+</div>
+          
+          <div className="col-8 ms-5 px-4 aboutt">
           <div className="orderTable text-white">
             <small className="display-6 m-4">New Orders</small>
             
@@ -79,7 +90,7 @@ function CaregiverDashboard() {
                             </div>
                             <hr className="border-white" />
                         </thead>
-                        <div style={{maxHeight:"147px", overflow:"auto"}} className="orders teams">
+                        <div style={{maxHeight:"300px", overflow:"auto"}} className="orders teams">
                         
                         <div className="anOrder">
                             <div className="d-flex col-12 mb-3">
@@ -205,7 +216,7 @@ function CaregiverDashboard() {
                             </div>
                             <hr className="border-white" />
                         </thead>
-                        <div style={{maxHeight:"147px", overflow:"auto"}} className="orders teams">
+                        <div style={{maxHeight:"300px", overflow:"auto"}} className="orders teams">
                         
                         
 

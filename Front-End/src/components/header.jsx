@@ -16,14 +16,7 @@ const StickyHeader = ( {activePage} ) => {
     setShowModal(!showModal);
   };
 
-  const logout = () => {
-    
-    sessionStorage.clear();
-    window.localStorage.clear();
-    alert('Logout Successfull')
-    window.location.href = "/";
-  ;
-};
+
 
   let User = sessionStorage.getItem("user");
   User = JSON.parse(User);
@@ -68,10 +61,7 @@ const StickyHeader = ( {activePage} ) => {
             <NavLink to="/dashboard" className={`nav-link ${activePage === 'dashboard' ? 'active' : ''}`}>Dashboard</NavLink>
               )}
               {User && (   
-            <NavDropdown className='my-auto' title="Account" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="/dashboard">My Profile</NavDropdown.Item>
-              <NavDropdown.Item onClick={handleModal} href="#">Sign Out</NavDropdown.Item>
-            </NavDropdown>
+            <LogoutButton />
               )}
 
               
@@ -84,22 +74,7 @@ const StickyHeader = ( {activePage} ) => {
     </Navbar>
 
     {/* Modal */}
-    <Modal show={showModal} onHide={handleModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Sign Out Confirmation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Are you sure you want to sign out?</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleModal}>
-            Cancel
-          </Button>
-          <Button variant="outline-danger" onClick={() => logout()}>
-            Sign Out
-          </Button>
-        </Modal.Footer>
-      </Modal>
+
     </header>
   );
 };

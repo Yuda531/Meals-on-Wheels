@@ -19,7 +19,7 @@ function LandingNoLogin(){
       const user = sessionStorage.getItem("user");
       if (user) {
         const parsedUser = JSON.parse(user);
-        setUserEmail(parsedUser.email);
+        setUserEmail(parsedUser.name);
       }
     }, []);
     
@@ -43,8 +43,8 @@ function LandingNoLogin(){
                             )}
                             {User && (
                                 <div className="col-6 p-4 text-white aboutt">
-                                    <h1 className="display-5 text-white">
-                                    <span className="text-warning">Welcome</span> to <span className="text-success">MOW</span>!
+                                    <h1 className="display-1 text-white">
+                                    Welcome,
                                     </h1>
                                     <h1 style={{'fontSize':"30px"}} className="lead">
                                     {userEmail ? userEmail : "Guest"}

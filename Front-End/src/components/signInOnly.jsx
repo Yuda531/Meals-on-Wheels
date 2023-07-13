@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 import { logRoles } from '@testing-library/react';
 
 function SignInOnly(){
@@ -10,7 +11,7 @@ function SignInOnly(){
   const [loginName, setLoginName] = useState('');
   const [loginRole, setRole] = useState('');
   const [loginPassword, setPasswordLogin] = useState('');
-  const [isActive, setActive] = useState('');
+  const [active, setActive] = useState('');
   // const [showReplacement, setShowReplacement] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
@@ -23,39 +24,69 @@ function SignInOnly(){
     const user = {
       email: loginName,
       password: loginPassword,
-      role: loginRole,
-      isActive: isActive
+      roleId: loginRole,
+      active : active
     };
   
-    try {
+    
       // Check if user isActive is true
-
+      
   
       axios.post('http://localhost:8080/auth/login', user)
-      .then((response) => {
-        if (user.isActive === false) {
-          alert("User is inactive. Cannot login.");
-          return;
-        } else 
-        console.log(response.data);
-        sessionStorage.setItem("user", JSON.stringify(response.data));
-        window.location.href = "/dashboard";
-        alert("Login success");
-      });
-  
-      // Check if the server response contains a success message or token
-  
-    } catch (error) {
-      alert("Invalid credentials");
-      console.error(error);
-      // Handle error during login
-    }
+        .then((response) => {
+          console.log(response.data);
+          sessionStorage.setItem("user", JSON.stringify(response.data));
+          Swal.fire({
+            icon: 'success',
+            title: 'Login success!',
+            footer: '',
+            confirmButtonColor: '#127d3f',
+            confirmButtonText: 'Go to homepage',
+            preConfirm: () => {
+              return new Promise((resolve) => {
+                window.location.href = '/';
+                resolve();
+              });
+            },
+          });
+        }).catch((error)=>{
+          console.log(error.response.data.message);
+          if (error.response.status === 401 && error.response.data.message === "Inactive user") {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops... Sorry',
+              text: 'Your Account is not activated yet, please wait or contact admin for activation.',
+              footer: '<a href="/contact-us">Contact us</a>'
+            })
+          } 
+          if (error.response.data.message === "Invalid password.") {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops... Sorry',
+              text: 'Incorrect password. Check your credentials',
+              footer: '<a href="/contact-us">Contact us</a>'
+            })
+            
+          }
+          if (error.response.data.message === "Email not found.") {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops... Sorry',
+              text: "We couldn't find your email. Please register if your email is not registered.",
+              footer: '<a href="/getStarted">Register</a>'
+            })
+          }
+          
+        })
+        // error.response.status === 401 && 
+    
   
     setEmail('');
     setPassword('');
     setRole(loginRole);
-    setActive(isActive);
+    setActive(active)
   };
+  
   
   
   

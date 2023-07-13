@@ -8,36 +8,49 @@ import DonorDashboard from "../components/dashboard-donor";
 import VolunteerDashboard from "../components/dashboard-volunteer";
 
 function Dashboard() {
-  const [userRole, setUserRole] = useState(null);
+  const [userRoleId, setUserRoleId] = useState("");
+
+  // const roleDashboard
 
   useEffect(() => {
-    const user = sessionStorage.getItem("user");
-    if (user) {
-      const { role } = JSON.parse(user);
-      setUserRole(role);
-    }
+    const fetchUserRole = async () => {
+      try {
+        const user = sessionStorage.getItem("user");
+        console.log("User object:", user); // Check the user object in the console
+        if (user) {
+          const { roleId } = JSON.parse(user).roleId; // Access roleId property from the nested object
+          console.log("User roleId:", roleId); // Check the roleId in the console
+          setUserRoleId(roleId);
+        }
+      } catch (error) {
+        console.error('Error fetching user role:', error);
+      }
+    };
+  
+    fetchUserRole();
   }, []);
-
+  
+  
   let DashboardComponent;
 
   // Determine the appropriate dashboard component based on the user's role
-  switch (userRole) {
-    case "ADMIN":
+  switch (userRoleId) {
+    case 1:
       DashboardComponent = AdminDashboard;
       break;
-    case "PARTNER":
+    case 4:
       DashboardComponent = PartnerDashboard;
       break;
-    case "CAREGIVER":
+    case 3:
       DashboardComponent = CaregiverDashboard;
       break;
-    case "MEMBER":
+    case 2:
       DashboardComponent = MemberDashboard;
       break;
-    case "DONOR":
+    case 5:
       DashboardComponent = DonorDashboard;
       break;
-    case "VOLUNTEER":
+    case 6:
       DashboardComponent = VolunteerDashboard;
       break;
     default:
