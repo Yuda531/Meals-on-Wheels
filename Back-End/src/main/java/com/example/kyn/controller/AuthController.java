@@ -1,5 +1,6 @@
 package com.example.kyn.controller;
 import com.example.kyn.exception.InvalidPasswordException;
+import com.example.kyn.exception.UserNotActiveException;
 import com.example.kyn.response.CustomErrorResponse;
 import com.example.kyn.response.SuccessLoginResponse;
 import com.example.kyn.model.User;
@@ -32,23 +33,30 @@ public class AuthController {
         Optional<User> findByEmail = userRepository.findByEmail(user.getEmail());
 
 
+
         if (!findByEmail.isPresent()) {
-            CustomErrorResponse error = new CustomErrorResponse("Email not found");
+            CustomErrorResponse error = new CustomErrorResponse("Email not found.");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         } else {
             User userFromDb = findByEmail.get();
 
-
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             if (!passwordEncoder.matches(user.getPassword(), userFromDb.getPassword())) {
-                CustomErrorResponse error = new CustomErrorResponse("email and password don't match");
-                throw new InvalidPasswordException("Email and password don't match");
+                CustomErrorResponse error = new CustomErrorResponse("Invalid password.");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+            }
+
+            boolean isActive = userFromDb.isActive();
+            if (!isActive){
+                CustomErrorResponse error = new CustomErrorResponse("Inactive user");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
             }
 
 
 
             String generatedToken = jwtUtil.generateToken(userFromDb.getEmail());
-            SuccessLoginResponse tokenResponse = new SuccessLoginResponse(generatedToken, userFromDb.getName(), userFromDb.getEmail(), userFromDb.getRoleId(), userFromDb.isActive(), userFromDb.getUserId());
+            SuccessLoginResponse tokenResponse = new SuccessLoginResponse(generatedToken, userFromDb.getName(), userFromDb.getEmail(), userFromDb.getRoleId(), userFromDb.isActive(), userFromDb.getUserId(),
+                    userFromDb.getCaregiver());
 
             return ResponseEntity.ok(tokenResponse);
         }
