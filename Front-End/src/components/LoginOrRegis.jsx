@@ -147,7 +147,7 @@ const LoginOrRegis = () => {
 
 
   return (
-    <div style={{maxHeight:"560px", overflow:"auto"}} className="col-9 teams">
+    <div style={{maxHeight:"560px", overflow:"auto"}} className="col-7 teams">
 
 
 
