@@ -11,7 +11,7 @@ const Donate = () => {
 
   useEffect(() => {
     // Fetch donations from the backend API
-    axios.get("http://localhost:8080/donation/all-donate")
+    axios.get("http://localhost:8080/admin/all-donate")
       .then(response => {
         const donations = response.data;
         setFilteredDonors(donations);

@@ -20,7 +20,7 @@ const MealsManage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/meals/all-meals")
+      .get("http://localhost:8080/admin/all-meals")
       .then((response) => {
         console.log(response.data); // Tampilkan data yang diterima ke konsol
         setMeals(response.data);
@@ -51,7 +51,7 @@ const MealsManage = () => {
     if (selectedMeal) {
       axios
         .put(
-          `http://localhost:8080/meals/edit-meals/${selectedMeal.meals_id}`,
+          `http://localhost:8080/admin/edit-meals/${selectedMeal.meals_id}`,
           formData
         )
         .then((response) => {
@@ -64,7 +64,7 @@ const MealsManage = () => {
             });
             setSelectedMeal(null); // Clear selected meal
             axios
-              .get("http://localhost:8080/meals/all-meals")
+              .get("http://localhost:8080/admin/all-meals")
               .then((response) => {
                 setMeals(response.data);
                 setFilteredMeals(response.data);
@@ -84,7 +84,7 @@ const MealsManage = () => {
 
   const handleAddMeal = () => {
     axios
-      .post("http://localhost:8080/meals/add-meals", formData)
+      .post("http://localhost:8080/admin/add-meals", formData)
       .then((response) => {
         console.log("Menu berhasil ditambahkan");
         Swal.fire("Success Add Menu", "", "success").then(() => {
@@ -94,7 +94,7 @@ const MealsManage = () => {
             stock: 0,
           });
           axios
-            .get("http://localhost:8080/meals/all-meals")
+            .get("http://localhost:8080/admin/all-meals")
             .then((response) => {
               setMeals(response.data);
               setFilteredMeals(response.data);
@@ -123,7 +123,7 @@ const MealsManage = () => {
 
   const handleDeleteMeal = (mealsId) => {
     axios
-      .delete(`http://localhost:8080/meals/delete-meals?mealsId=${mealsId}`)
+      .delete(`http://localhost:8080/admin/delete-meals?mealsId=${mealsId}`)
       .then((response) => {
         // Tindakan yang dilakukan setelah penghapusan berhasil
         console.log("Menu berhasil dihapus");
@@ -134,7 +134,7 @@ const MealsManage = () => {
         });
         // Refresh data (optional)
         axios
-          .get("/meals/all-meals")
+          .get("/admin/all-meals")
           .then((response) => {
             setMeals(response.data);
             setFilteredMeals(response.data);
