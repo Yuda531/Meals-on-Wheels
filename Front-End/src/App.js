@@ -28,6 +28,8 @@ import MangeOrders from "./Pages/Admin/ManageOrders";
 import ManagePartner from "./Pages/Admin/ManageParners";
 import ManageDriver from "./Pages/Admin/ManageDrivers";
 
+import VolunteerSelection from "./Pages/VolunteerSelection";
+
 import Partner from './Pages/Partner';
 
 
@@ -61,6 +63,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
 
           <Route path="Partner" element={<Partner />} />
+          <Route path="/volunteerSelection" element={<VolunteerSelection />} /> 
 
 
 

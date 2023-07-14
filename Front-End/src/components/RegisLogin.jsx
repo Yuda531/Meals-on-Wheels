@@ -5,8 +5,8 @@ function RegisLogin(){
         <div className="body custom-overflow">
             <div className="backblur">
                 <div className="col-12 d-flex p-5">
-                    <div className="col-5 my-auto">
-                        <h1 className="display-1 fw-bold text-white">
+                    <div className="col-3 my-auto">
+                        <h1 className="display-4 fw-bold text-white">
                             <span className="text-warning">Sign-In </span>
                                 or <span className="text-success">Sign-Up</span>
                         </h1>
@@ -18,7 +18,7 @@ function RegisLogin(){
                         <span className="text-success"> Meals</span> on <span className="text-warning">Wheels</span>.
                         </p>
                     </div>
-                    <div className="aboutt mx-4 col-1"></div>
+                    <div className="aboutt ms-4 col-1"></div>
 
                     <LoginOrRegis />
                 </div>

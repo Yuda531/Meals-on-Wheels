@@ -18,42 +18,80 @@ const ButtonAndForm = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState(false);
     const [validated, setValidated] = useState(false);
+  const [active, setActive] = useState('');
 
-    // LOGIN
-  const handleLoginFormSubmit = async (e) => {
-    e.preventDefault();
-  
-    const user = {
-      email: loginName,
-      password: loginPassword,
-      role: loginRole
+
+    const handleLoginFormSubmit = async (e) => {
+      e.preventDefault(); // Prevent form submission
+      
+      // Create an object with the form data
+      const user = {
+        email: loginName,
+        password: loginPassword,
+        roleId: loginRole,
+        active : active
+      };
+    
+      
+        // Check if user isActive is true
+        
+    
+        axios.post('http://localhost:8080/auth/login', user)
+          .then((response) => {
+            console.log(response.data);
+            sessionStorage.setItem("user", JSON.stringify(response.data));
+            Swal.fire({
+              icon: 'success',
+              title: 'Login success!',
+              footer: '',
+              confirmButtonColor: '#127d3f',
+              confirmButtonText: 'Go to homepage',
+              preConfirm: () => {
+                return new Promise((resolve) => {
+                  window.location.href = '/';
+                  resolve();
+                });
+              },
+            });
+            
+            
+          }).catch((error)=>{
+            console.log(error.response.data.message);
+            if (error.response.status === 401 && error.response.data.message === "Inactive user") {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops... Sorry',
+                text: 'Your Account is not activated yet, please wait or contact admin for activation.',
+                footer: '<a href="/contact-us">Contact us</a>'
+              })
+            } 
+            if (error.response.data.message === "Invalid password.") {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops... Sorry',
+                text: 'Incorrect password. Check your credentials',
+                footer: '<a href="/contact-us">Contact us</a>'
+              })
+              
+            }
+            if (error.response.data.message === "Email not found.") {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops... Sorry',
+                text: "We couldn't find your email. Please register if your email is not registered.",
+                footer: '<a href="/getStarted">Register</a>'
+              })
+            }
+            
+          })
+          // error.response.status === 401 && 
+      
+    
+      setEmail('');
+      setPassword('');
+      setRole(loginRole);
+      setActive(active)
     };
-  
-    try {
-      const response = await axios.post('http://localhost:8080/auth/login', user);
-      sessionStorage.setItem('user', JSON.stringify(response.data));
-      Swal.fire({
-        icon: 'success',
-        title: 'Login Successful',
-        showConfirmButton: true
-      }).then(() => {
-        window.location.href = '/dashboard';
-      });
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Credentials Incorrect',
-        text: 'Please Try Again!',
-        showConfirmButton: true
-      });
-      console.error(error);
-    }
-  
-    setEmail('');
-    setPassword('');
-    setRole(loginRole);
-  };
-
   
     const handleClick = () => {
       if (!showReplacement) {
@@ -92,6 +130,10 @@ const ButtonAndForm = () => {
                   <input type="password" className="form-control" id="password" placeholder="Password" value={loginPassword}
                   onChange={(e) => setPasswordLogin(e.target.value)} />
                   <label htmlFor="password">Password</label>
+                </div>
+                <div className="form-group form-check">
+                  <input type="checkbox" className="form-check-input" id="remember" />
+                  <label className="form-check-label text-white" htmlFor="remember">Remember me</label>
                 </div>
               <p className="lead text-white mt-3">Don't have an account? Click <span><a className='text-info' href='getStarted'>here to Sign-Up</a></span></p>
 
