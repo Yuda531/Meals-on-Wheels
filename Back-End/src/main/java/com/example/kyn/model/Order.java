@@ -1,7 +1,14 @@
 package com.example.kyn.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -15,7 +22,6 @@ public class Order {
 
     @Column()
     private String orderLocation;
-
 
     @Column()
     private String orderDestination;
@@ -32,96 +38,11 @@ public class Order {
     @Column()
     private boolean isApproved;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId")
     @Column()
-    private String orderMaker;
+    private User orderMaker;
 
-    public Order() {
-    }
-
-    public Order(Long orderId, String orderName, String orderLocation, double orderDistance, String orderDescription, boolean moreThanTenKm, boolean isApproved, String orderMaker, String orderDestination) {
-        this.orderId = orderId;
-        this.orderName = orderName;
-        this.orderLocation = orderLocation;
-        this.orderDistance = orderDistance;
-        this.orderDescription = orderDescription;
-        this.moreThanTenKm = moreThanTenKm;
-        this.isApproved = isApproved;
-        this.orderMaker = orderMaker;
-        this.orderDestination = orderDestination;
-    }
-
-    public String getOrderDestination() {
-        return orderDestination;
-    }
-
-    public void setOrderDestination(String orderDestination) {
-        this.orderDestination = orderDestination;
-    }
-
-
-    public String getOrderMaker() {
-        return orderMaker;
-    }
-
-    public void setOrderMaker(String orderMaker) {
-        this.orderMaker = orderMaker;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getOrderName() {
-        return orderName;
-    }
-
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
-    }
-
-    public String getOrderLocation() {
-        return orderLocation;
-    }
-
-    public void setOrderLocation(String orderLocation) {
-        this.orderLocation = orderLocation;
-    }
-
-    public double getOrderDistance() {
-        return orderDistance;
-    }
-
-    public void setOrderDistance(double orderDistance) {
-        this.orderDistance = orderDistance;
-    }
-
-    public String getOrderDescription() {
-        return orderDescription;
-    }
-
-    public void setOrderDescription(String orderDescription) {
-        this.orderDescription = orderDescription;
-    }
-
-    public boolean isMoreThanTenKm() {
-        return moreThanTenKm;
-    }
-
-    public void setMoreThanTenKm(boolean moreThanTenKm) {
-        this.moreThanTenKm = moreThanTenKm;
-    }
-
-    public boolean isApproved() {
-        return isApproved;
-    }
-
-    public void setApproved(boolean approved) {
-        isApproved = approved;
-    }
 
 
 

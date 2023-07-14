@@ -40,5 +40,9 @@ public class User {
     @OneToOne(mappedBy = "userId")
     private Caregiver caregiver;
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "userId")
+    private Partner partner;
+
 
 }
