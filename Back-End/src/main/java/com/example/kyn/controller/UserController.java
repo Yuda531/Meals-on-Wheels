@@ -6,6 +6,7 @@ import com.example.kyn.model.User;
 import com.example.kyn.response.ResponseData;
 import com.example.kyn.service.CaregiverService;
 import com.example.kyn.service.JwtUtil;
+import com.example.kyn.service.PartnerService;
 import com.example.kyn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,9 @@ public class UserController {
 
     @Autowired
     private CaregiverService caregiverService;
+
+    @Autowired
+    private PartnerService partnerService;
 
 
 
@@ -60,6 +64,17 @@ public class UserController {
                 }
                 registerRequest.getCaregiver().setUserId(newUser);
                 caregiverService.save(registerRequest.getCaregiver());
+            }
+            if(roleId == 4){
+
+//                METODE KHUSUS LAIN UNTUK ROLE PARTNER
+
+
+
+
+                newUser.setActive(false);
+                registerRequest.getPartner().setUserId(newUser);
+                partnerService.savePartner(registerRequest.getPartner());
             }
             responseData.setPayLoad(registerRequest);
         } else {

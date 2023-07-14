@@ -40,8 +40,7 @@ public class Order {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
-    @Column()
-    private User orderMaker;
+    private User userId;
 
 
 

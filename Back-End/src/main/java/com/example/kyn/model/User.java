@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 
@@ -43,6 +44,10 @@ public class User {
     @JsonIgnore
     @OneToOne(mappedBy = "userId")
     private Partner partner;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "userId")
+    private Order order;
 
 
 }
