@@ -5,7 +5,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import backgroundImage from "../../images/bg/purty_wood.png";
 import "../../CSS/admin/AdminDashboard.css";
 import Swal from "sweetalert2";
-import NavbarAdmin from "../Navbar";
+import NavbarAdmin from "../NavbarAdmin";
 
 const MealsManage = () => {
   const [searchTerm, setSearchTerm] = useState("");

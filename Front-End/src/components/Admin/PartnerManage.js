@@ -1,6 +1,6 @@
 import { useState } from "react";
 import backgroundImage from "../../images/bg/tileable_wood_texture.png";
-import NavbarAdmin from "../Navbar";
+import NavbarAdmin from "../NavbarAdmin";
 
 const PartnerManage = () => {
   const [activeTab, setActiveTab] = useState("Partner");

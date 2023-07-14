@@ -1,7 +1,7 @@
 import backgroundImage from "../../images/bg/tileable_wood_texture.png";
 import { useEffect } from "react";
 import { useState } from "react";
-import NavbarAdmin from "../Navbar";
+import NavbarAdmin from "../NavbarAdmin";
 
 const MemberAdmin = () => {
   const MemberMOW = [

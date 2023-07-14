@@ -1,7 +1,7 @@
 import backgroundImage from "../../images/bg/retina_wood.png";
 import { useState } from "react";
 import { useEffect } from "react";
-import NavbarAdmin from "../Navbar";
+import NavbarAdmin from "../NavbarAdmin";
 
 const OrderManage = () => {
   const Orders = [

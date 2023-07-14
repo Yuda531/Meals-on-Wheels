@@ -148,7 +148,7 @@ const AdminDashboard = () => {
         padding: "50px",
       }}
     >
-      <div className="container" style={{marginTop: "90px"}}>
+      <div className="container">
         <div className="adminDashboard">
           <div className="row">
             <div className="col-lg-3 col-md-6">

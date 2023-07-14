@@ -2,7 +2,7 @@ import axios from "axios";
 import backgroundImage from "../../images/bg/donation1.jpeg";
 import "../../CSS/admin/AdminDashboard.css";
 import { useState, useEffect } from "react";
-import NavbarAdmin from "../Navbar";
+import NavbarAdmin from "../NavbarAdmin";
 
 const Donate = () => {
   const [searchTerm, setSearchTerm] = useState("");
