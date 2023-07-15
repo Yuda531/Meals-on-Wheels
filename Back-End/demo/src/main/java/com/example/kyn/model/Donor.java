@@ -15,8 +15,6 @@ public class Donor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long donorId;
 
-    private String address;
-
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private User userId;

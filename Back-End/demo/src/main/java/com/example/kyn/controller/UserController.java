@@ -4,10 +4,7 @@ import com.example.kyn.DTO.UserDTO;
 import com.example.kyn.model.Role;
 import com.example.kyn.model.User;
 import com.example.kyn.response.ResponseData;
-import com.example.kyn.service.CaregiverService;
-import com.example.kyn.service.JwtUtil;
-import com.example.kyn.service.PartnerService;
-import com.example.kyn.service.UserService;
+import com.example.kyn.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +22,9 @@ public class UserController {
 
     @Autowired
     private PartnerService partnerService;
+
+    @Autowired
+    private DonorService donorService;
 
 
 
@@ -77,7 +77,7 @@ public class UserController {
             }
             if(roleId == 5){
                 registerRequest.getDonor().setUserId(newUser);
-
+                donorService.saveDonor(registerRequest.getDonor());
             }
             responseData.setPayLoad(registerRequest);
         } else {

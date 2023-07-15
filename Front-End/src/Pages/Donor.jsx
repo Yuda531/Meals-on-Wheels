@@ -20,7 +20,7 @@ const Donor = () => {
     };
 
     axios
-      .post("http://localhost:8080/donation/add-donate", donateData)
+      .post("http://localhost:8080/admin/add-donate", donateData)
       .then((response) => {
         console.log("Donation successful:", response.data);
         // Show the success alert using SweetAlert2
@@ -31,7 +31,7 @@ const Donor = () => {
         }).then((result) => {
           // Refresh the page
           if (result.isConfirmed) {
-            window.location.reload();
+            window.location.href = '/dashboard';
           }
         });
       })

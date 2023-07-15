@@ -142,6 +142,15 @@ const LoginOrRegis = () => {
           ...data,
           caregiver: caregiverData
         };
+      }else if (roleId === 5) {
+        const donorData = {
+          // ... data yang dibutuhkan untuk registrasi Donor
+        };
+      
+        data = {
+          ...data,
+          donor: donorData,
+        };
       }
     
       axios
@@ -229,7 +238,7 @@ const LoginOrRegis = () => {
                 <option value="2">Member</option>
                 <option value="3">Caregiver</option>
                 <option value="4">Partner</option>
-                <option value="5">Donour</option>
+                <option value="5">Donor</option>
                 <option value="6">Volunteer</option>
               </select>
               <label htmlFor="roleId">Which role do you want to be?</label>

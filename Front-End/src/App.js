@@ -31,6 +31,7 @@ import ManageDriver from "./Pages/Admin/ManageDrivers";
 import VolunteerSelection from "./Pages/VolunteerSelection";
 
 import Partner from './Pages/Partner';
+import ThankyouDonor from "./Pages/ThankyouDonor";
 
 
 
@@ -48,6 +49,7 @@ function App() {
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/dashboard" element={<Dashboard />} /> 
         <Route path="/login" element={<RegisSuccess />} /> 
+        <Route path="/thanksdonor" element={<ThankyouDonor />} /> 
 
         <Route path='memberdashboard' element={<MemberDashboard />} />
         <Route path='/detail' element={<MemberDetailMeals />} />
