@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import verified from "../img/verified.jpg";
 import background from "../img/background.jpeg";
+import StickyHeader from "../components/header";
+import StickyFooter from "../components/footer";
 
 const ThankyouDonor = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,14 +41,15 @@ const ThankyouDonor = () => {
   }, [searchTerm]);
 
   return (
-    <div style={{ height: "80vh", backgroundImage: `url(${background})` }}>
+    <div style={{ minHeight: "100vh", backgroundImage: `url(${background})` }}>
+      <StickyHeader />
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <div className="p-5 text-center">
+            <div className="p-5 m-5 text-center">
               <h1>Thank you for Donating</h1>
               <div
-              className="mt-3"
+                className="mt-3"
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -58,7 +61,7 @@ const ThankyouDonor = () => {
             </div>
           </div>
           <div className="col-12">
-            <div className="d-flex justify-content-center mt-5">
+            <div className="d-flex justify-content-center mt-5 ">
               <table className="table">
                 <thead>
                   <tr>
@@ -94,6 +97,7 @@ const ThankyouDonor = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };
