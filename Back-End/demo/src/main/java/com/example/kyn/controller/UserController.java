@@ -52,6 +52,9 @@ public class UserController {
 //
 
             }
+            if (roleId == 5 && registerRequest.getDonor() == null){
+                throw new IllegalArgumentException("Role details not provided");
+            }
             userService.saveUser(newUser);
 
             if(roleId == 3){
@@ -68,11 +71,13 @@ public class UserController {
             if(roleId == 4){
 
 //                METODE KHUSUS LAIN UNTUK ROLE PARTNER
-
-
                 newUser.setActive(false);
                 registerRequest.getPartner().setUserId(newUser);
                 partnerService.savePartner(registerRequest.getPartner());
+            }
+            if(roleId == 5){
+                registerRequest.getDonor().setUserId(newUser);
+
             }
             responseData.setPayLoad(registerRequest);
         } else {
