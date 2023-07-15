@@ -31,7 +31,7 @@ const Donor = () => {
         }).then((result) => {
           // Refresh the page
           if (result.isConfirmed) {
-            window.location.href = '/dashboard';
+            window.location.href = '/thanksdonor';
           }
         });
       })
