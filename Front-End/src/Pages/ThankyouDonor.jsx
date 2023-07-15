@@ -39,49 +39,60 @@ const ThankyouDonor = () => {
   }, [searchTerm]);
 
   return (
-    <div
-      className="container"
-      style={{ height: "80vh", backgroundImage: `url(${background})` }}
-    >
-      <div className="p-5 text-center">
-        <h1>Thank you for Donating</h1>
-        <span>
-          <img style={{ width: "150px" }} src={verified} alt="Verified" />
-        </span>
-      </div>
-
-      <div className="d-flex justify-content-center mt-5">
-        <table>
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Donor Name</th>
-              <th>Address</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredDonors.map((donate, index) => (
-              <tr key={donate.donate_id}>
-                <td>{index + 1}</td>
-                <td>{donate.donor_name}</td>
-                <td>{donate.donor_address}</td>
-                <td>
-                  <i className="fa fa-usd"></i> {donate.donate_amount}
-                </td>
-              </tr>
-            ))}
-            {/* Add the row for the total donation */}
-            <tr>
-              <td colSpan="3" className="text-end">
-                Total Donation:
-              </td>
-              <td>
-                <i className="fa fa-usd"></i> {totalDonation}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div style={{ height: "80vh", backgroundImage: `url(${background})` }}>
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <div className="p-5 text-center">
+              <h1>Thank you for Donating</h1>
+              <div
+              className="mt-3"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <img style={{ width: "150px" }} src={verified} alt="Verified" />
+              </div>
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="d-flex justify-content-center mt-5">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Donor Name</th>
+                    <th>Address</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredDonors.map((donate, index) => (
+                    <tr key={donate.donate_id}>
+                      <td>{index + 1}</td>
+                      <td>{donate.donor_name}</td>
+                      <td>{donate.donor_address}</td>
+                      <td>
+                        <i className="fa fa-usd"></i> {donate.donate_amount}
+                      </td>
+                    </tr>
+                  ))}
+                  {/* Add the row for the total donation */}
+                  <tr>
+                    <td colSpan="3" className="text-end">
+                      Total Donation:
+                    </td>
+                    <td>
+                      <i className="fa fa-usd"></i> {totalDonation}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
