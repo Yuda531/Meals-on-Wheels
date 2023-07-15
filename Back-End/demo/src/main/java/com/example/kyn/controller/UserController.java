@@ -70,8 +70,6 @@ public class UserController {
 //                METODE KHUSUS LAIN UNTUK ROLE PARTNER
 
 
-
-
                 newUser.setActive(false);
                 registerRequest.getPartner().setUserId(newUser);
                 partnerService.savePartner(registerRequest.getPartner());
