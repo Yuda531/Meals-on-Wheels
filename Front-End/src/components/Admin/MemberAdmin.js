@@ -2,6 +2,7 @@ import backgroundImage from "../../images/bg/tileable_wood_texture.png";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 import NavbarAdmin from "../NavbarAdmin";
 
 const MemberAdmin = () => {
@@ -25,10 +26,39 @@ const MemberAdmin = () => {
     fetchMembers();
   }, []);
 
+  const handleDeleteMember = (memberId) => {
+    axios
+      .delete(`http://localhost:8080/admin/delete-members?memberId=${memberId}`)
+      .then((response) => {
+        // Tindakan yang dilakukan setelah penghapusan berhasil
+        console.log("Member berhasil dihapus");
+        // Show SweetAlert2 success notification
+        Swal.fire("Delete Member Success", "", "success").then(() => {
+          // Navigate to /admin_meals
+          window.location.href = "/admin_members";
+        });
+        // Refresh data (optional)
+        axios
+          .get("/admin/all-members")
+          .then((response) => {
+            setMembers(response.data);
+            setFilteredMembers(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     const filtered = members.filter((member) => {
-      const memberName = member.member_name ? member.member_name.toLowerCase() : '';
-      const memberAge = member.age ? member.age.toString() : '';
+      const memberName = member.member_name
+        ? member.member_name.toLowerCase()
+        : "";
+      const memberAge = member.age ? member.age.toString() : "";
       return (
         memberName.includes(searchTerm.toLowerCase()) ||
         memberAge.includes(searchTerm.toLowerCase())
@@ -77,7 +107,6 @@ const MemberAdmin = () => {
                 </thead>
                 <tbody>
                   {filteredMembers.map((member, index) => (
-                 
                     <tr key={member.id}>
                       <td>{index + 1}</td>
                       <td>{member.userId.name}</td>
@@ -87,8 +116,7 @@ const MemberAdmin = () => {
                         <div className="d-flex justify-content-between">
                           <button
                             className="btn btn-danger rounded-2 ms-2"
-                            data-bs-toggle="modal"
-                            data-bs-target="#deleteMenu"
+                            onClick={() => handleDeleteMember(member.id)}
                           >
                             <i className="fas fa-trash fa-sm"></i>
                           </button>
@@ -100,211 +128,6 @@ const MemberAdmin = () => {
               </table>
             </section>
           </main>
-        </div>
-
-        {/* <!-- add Modal --> */}
-        <div
-          class="modal fade"
-          id="addMenu"
-          tabindex="-1"
-          aria-labelledby="addMenuLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="addMenuLabel">
-                  Add Menu
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <form action="/#" method="post">
-                <div class="modal-body">
-                  <div class="mb-3">
-                    <label for="member_name" class="form-label">
-                      Members Name
-                    </label>{" "}
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="member_name"
-                      name="member_name"
-                      value="${member_name}"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="member_email" class="form-label">
-                      Email
-                    </label>{" "}
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="member_email"
-                      name="member_email"
-                      value="${member_email}"
-                      required
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="password" class="form-label">
-                      Password
-                    </label>{" "}
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="password"
-                      name="password"
-                      value="${password}"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="member_address" class="form-label">
-                      Address
-                    </label>{" "}
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="member_address"
-                      name="member_address"
-                      value="${member_address}"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="submit" class="btn btn-primary">
-                    Save changes
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        {/* <!-- edit Modal --> */}
-        <div
-          class="modal fade"
-          id="editMenu"
-          tabindex="-1"
-          aria-labelledby="editMenuLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="editMenuLabel">
-                  Edit Menu
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <form action="/#" method="post">
-                <div class="modal-body">
-                  <div class="mb-3">
-                    <label for="member_name" class="form-label">
-                      Members Name
-                    </label>{" "}
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="member_name"
-                      name="member_name"
-                      value="${member_name}"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="member_email" class="form-label">
-                      Email
-                    </label>{" "}
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="member_email"
-                      name="member_email"
-                      value="${member_email}"
-                      required
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="member_address" class="form-label">
-                      Address
-                    </label>{" "}
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="member_address"
-                      name="member_address"
-                      value="${member_address}"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="submit" class="btn btn-primary">
-                    Save changes
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        {/* <!-- delete confirmation --> */}
-        <div class="modal fade" id="deleteMenu">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteMenuLabel">
-                  Delete this Member
-                </h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">You want to really delete this menu</div>
-              <div class="modal-footer">
-                <a
-                  href="delete/${user.getUserId()}"
-                  class="btn btn-outline-danger"
-                >
-                  Delete
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </>

@@ -134,7 +134,7 @@ const MealsManage = () => {
         });
         // Refresh data (optional)
         axios
-          .get("/meals/all-meals")
+          .get("/admin/all-meals")
           .then((response) => {
             setMeals(response.data);
             setFilteredMeals(response.data);
