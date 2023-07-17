@@ -180,6 +180,13 @@ const MealsManage = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
+              <button
+              className="btn btn-lg btn-secondary rounded-3 px-2 py-1"
+              data-bs-toggle="modal"
+              data-bs-target="#addMenu"
+            >
+              <i className="fa fa-plus" aria-hidden="true"></i>
+            </button>
             </section>
             <section className="table__body">
               <table>
