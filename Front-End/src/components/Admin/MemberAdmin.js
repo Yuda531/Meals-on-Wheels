@@ -86,13 +86,6 @@ const MemberAdmin = () => {
                       <td>
                         <div className="d-flex justify-content-between">
                           <button
-                            className="btn btn-primary rounded-2 ms-2"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editMenu"
-                          >
-                            <i className="fas fa-edit fa-sm"></i>
-                          </button>
-                          <button
                             className="btn btn-danger rounded-2 ms-2"
                             data-bs-toggle="modal"
                             data-bs-target="#deleteMenu"
