@@ -7,6 +7,9 @@ import thumb9 from "../images/recipeThumb-09.jpg";
 function Sidebar() {
   const [meals, setMeals] = useState([]);
 
+  let userSession = sessionStorage.getItem("user");
+  userSession = JSON.parse(userSession);
+
   useEffect(() => {
     fetchMealsData();
   }, []);
@@ -49,14 +52,14 @@ function Sidebar() {
 
       {/* Author Box */}
       <div className="widget">
-        <a href="/Dashboard">
+        <a href="/profile">
           <div className="author-box">
             <span className="title">Profile</span>
             <span className="name">
-              Sasha <br /> Maria
+            {userSession.name}
             </span>
             <span className="contact">
-              <a href="mailto:sasha@gmail.com">sasha@gmail.com</a>
+              <a href="mailto:sasha@gmail.com">{userSession.email}</a>
             </span>
             <img src={author} alt="" />
           </div>

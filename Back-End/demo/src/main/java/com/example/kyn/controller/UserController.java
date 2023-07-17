@@ -1,6 +1,7 @@
 package com.example.kyn.controller;
 import com.example.kyn.DTO.RegisDTO;
 import com.example.kyn.DTO.UserDTO;
+import com.example.kyn.model.Member;
 import com.example.kyn.model.Role;
 import com.example.kyn.model.User;
 import com.example.kyn.response.ResponseData;
@@ -26,6 +27,8 @@ public class UserController {
     @Autowired
     private DonorService donorService;
 
+    @Autowired
+    private MemberService memberService;
 
 
     @Autowired
@@ -57,6 +60,16 @@ public class UserController {
             }
             userService.saveUser(newUser);
 
+            if(roleId == 2){
+            	Member member = registerRequest.getMember();
+            	
+            	 // Pengecekan null untuk member
+                if (member == null) {
+                    throw new IllegalArgumentException("Member details not provided");
+                }
+                member.setUserId(newUser);
+                memberService.save(registerRequest.getMember());
+            }
             if(roleId == 3){
                 newUser.setActive(false);
 //                boolean isLicensed = registerRequest.getCaregiver().isLicensed();

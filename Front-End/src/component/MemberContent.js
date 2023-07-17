@@ -19,7 +19,7 @@ function MemberContent() {
   useEffect(() => {
     // Make an API call to fetch the meals data from the backend
     axios
-      .get("http://localhost:8080/meals/all-meals")
+      .get("http://localhost:8080/admin/all-meals")
       .then((response) => {
         setMeals(response.data);
       })
@@ -55,7 +55,7 @@ function MemberContent() {
             <div className="four recipe-box columns" key={meal.meals_id}>
               {/*  Thumbnail */}
               <div className="thumbnail-holder">
-                <a href="/detail">
+                <a href={`/detail/${meal.meals_id}`}>
                   <img src={thumbImages[index % thumbImages.length]} alt="" />
                   <div className="hover-cover"></div>
                   <div className="hover-icon">View Meals</div>

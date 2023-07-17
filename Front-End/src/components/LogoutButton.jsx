@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 function LogoutButton(props) {
 
-  
+
   const logout = () => {
     Swal.fire({
       title: 'Sign Out?',
@@ -29,22 +29,22 @@ function LogoutButton(props) {
       }
     });
   };
-  
-  
 
-  return(
+
+
+  return (
 
 
     <NavDropdown className='my-auto' title="Account" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="/dashboard">My Profile</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => logout()} href="#">Sign Out</NavDropdown.Item>
-            </NavDropdown>
+      <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+      <NavDropdown.Item onClick={() => logout()} href="#">Sign Out</NavDropdown.Item>
+    </NavDropdown>
 
 
 
 
 
-  ) 
+  )
 }
 
 export default LogoutButton;

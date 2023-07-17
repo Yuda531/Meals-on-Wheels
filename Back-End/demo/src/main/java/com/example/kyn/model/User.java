@@ -43,6 +43,10 @@ public class User {
 
     @JsonIgnore
     @OneToOne(mappedBy = "userId")
+    private Member member;
+    
+    @JsonIgnore
+    @OneToOne(mappedBy = "userId")
     private Partner partner;
 
     @JsonIgnore

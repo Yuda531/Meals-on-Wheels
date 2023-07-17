@@ -36,6 +36,11 @@ public class AdminController {
         return mealsService.findMealsByMealsName(mealsName);
 
     }
+    
+	@GetMapping("/{mealsId}")
+    public Meals findMealsById(@PathVariable Long mealsId) {
+        return mealsService.findMealsById(mealsId);
+    }
 
     @GetMapping("/all-meals")
     public List<Meals> findMealsByName(){

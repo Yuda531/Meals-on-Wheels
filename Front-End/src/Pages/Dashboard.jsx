@@ -27,7 +27,7 @@ function Dashboard() {
         console.error('Error fetching user role:', error);
       }
     };
-  
+
     fetchUserRole();
   }, []);
 
@@ -39,13 +39,13 @@ function Dashboard() {
       DashboardComponent = DashboardAdmin;
       break;
     case 2:
-      DashboardComponent = Partner;
+      DashboardComponent = MemberDashboard;
       break;
     case 3:
       DashboardComponent = CaregiverDashboard;
       break;
     case 4:
-      DashboardComponent = MemberDashboard;
+      DashboardComponent = Partner;
       break;
     case 5:
       DashboardComponent = Donor;

@@ -5,10 +5,34 @@ import thumb3 from "../images/recipeThumb-03.jpg";
 import author from "../images/author-photo.png";
 import recipebg from "../images/recipeBackground.jpg";
 import Sidebar from "./Sidebar";
+import StickyHeader from "../components/Navbar";
+
+import { useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 
 function MemberDetailMeals() {
+  const [meal, setMeal] = useState(null);
+
+  useEffect(() => {
+    // Mengambil ID makanan dari URL
+    const mealsId = window.location.pathname.split('/').pop();
+  
+    // Membuat API call untuk mengambil data makanan berdasarkan ID
+    axios
+      .get(`http://localhost:8080/admin/${mealsId}`)
+      .then((response) => {
+        setMeal(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  console.log(meal && meal.meals_name);
+
   return (
     <div>
+      <StickyHeader/>
       <div class='recipeBackground'>
         <img src={recipebg} alt='' />
       </div>
@@ -19,7 +43,7 @@ function MemberDetailMeals() {
             {/*  Header */}
             <section class='recipe-header'>
               <div class='title-alignment'>
-                <h2>Chunky Beef Stew</h2>
+                <h2>{meal && meal.meals_name}</h2>
               </div>
             </section>
 
@@ -51,35 +75,14 @@ function MemberDetailMeals() {
             </section>
 
             {/*  Text */}
-            <p itemprop='description'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-              facere non cupiditate dicta accusantium! Magni voluptatum dolore,
-              aspernatur laborum architecto eveniet!
-            </p>
+            <div className="my-3">
+              <h3 className="fw-bold">Description</h3>
+              <h4>
+              {meal && meal.meals_description}
+              </h4>
+            </div>
 
-            {/*  Directions */}
-            <h3>Ingredient</h3>
-            <ol class='directions' itemprop='recipeInstructions'>
-              <li>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Exercitationem quibusdam veniam molestias deleniti minus iure
-                nemo consectetur perferendis minima? Deleniti?
-              </li>
-              <li>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
-                doloribus voluptatibus nihil vitae, enim quos necessitatibus
-                cum.
-              </li>
-              <li>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam
-                optio laboriosam exercitationem minima, necessitatibus tempora!
-                Provident.
-              </li>
-              <li>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptatum.
-              </li>
-            </ol>
+
           </div>
         </div>
 
