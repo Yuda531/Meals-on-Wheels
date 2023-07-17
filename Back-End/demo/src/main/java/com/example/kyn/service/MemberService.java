@@ -7,6 +7,8 @@ import com.example.kyn.model.Member;
 import com.example.kyn.repository.MemberRepository;
 import com.example.kyn.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 public class MemberService{
 
@@ -22,6 +24,14 @@ public class MemberService{
 	}
 	public Member save(Member member) {
 		return memberRepository.save(member);
+	}
+
+	public List<Member> findAllMember(){
+		return memberRepository.findAll();
+	}
+
+	public void deleteMemberById(Long memberId){
+		memberRepository.deleteById(memberId);
 	}
 	
 	public Member findMemberByUserId(Long userId) {

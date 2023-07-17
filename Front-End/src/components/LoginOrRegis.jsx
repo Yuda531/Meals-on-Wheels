@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Form } from 'react-bootstrap';
-import axios from 'axios';
-import Swal from 'sweetalert2'
-
+import React, { useState, useEffect } from "react";
+import { Form } from "react-bootstrap";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const LoginOrRegis = () => {
-
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
@@ -16,24 +14,23 @@ const LoginOrRegis = () => {
     }
   }, []);
 
-
-  const [name, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginName, setLoginName] = useState('');
-  const [loginPassword, setPasswordLogin] = useState('');
-  const [roleId, setRoleId] = useState('');
-  const [driverName, setDriverName] = useState('');
-  const [driverPlate, setDriverPlate] = useState('');
-  const [isLicensed, setLicensed] = useState('');
-  const [licenseNumber, setLicenseNumber] = useState('');
+  const [name, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginName, setLoginName] = useState("");
+  const [loginPassword, setPasswordLogin] = useState("");
+  const [roleId, setRoleId] = useState("");
+  const [driverName, setDriverName] = useState("");
+  const [driverPlate, setDriverPlate] = useState("");
+  const [isLicensed, setLicensed] = useState("");
+  const [licenseNumber, setLicenseNumber] = useState("");
 
   //MEMBER
-  const [memberAge, setAge] = useState('');
-  const [memberReason, setReason] = useState('');
+  const [memberAge, setAge] = useState("");
+  const [memberReason, setReason] = useState("");
 
-  const [isActive, setActive] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isActive, setActive] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [validated, setValidated] = useState(false);
   const [showReplacement, setShowReplacement] = useState(false);
@@ -49,70 +46,67 @@ const LoginOrRegis = () => {
       email: loginName,
       password: loginPassword,
       roleId: roleId,
-      active: isActive
+      active: isActive,
     };
-
 
     // Check if user isActive is true
 
-
-    axios.post('http://localhost:8080/auth/login', user)
+    axios
+      .post("http://localhost:8080/auth/login", user)
       .then((response) => {
         console.log(response.data);
         sessionStorage.setItem("user", JSON.stringify(response.data));
         Swal.fire({
-          icon: 'success',
-          title: 'Login success!',
-          footer: '',
-          confirmButtonColor: '#127d3f',
-          confirmButtonText: 'Go to homepage',
+          icon: "success",
+          title: "Login success!",
+          footer: "",
+          confirmButtonColor: "#127d3f",
+          confirmButtonText: "Go to homepage",
           preConfirm: () => {
             return new Promise((resolve) => {
-              window.location.href = '/';
+              window.location.href = "/";
               resolve();
             });
           },
         });
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.log(error.response.data.message);
-        if (error.response.status === 401 && error.response.data.message === "Inactive user") {
+        if (
+          error.response.status === 401 &&
+          error.response.data.message === "Inactive user"
+        ) {
           Swal.fire({
-            icon: 'error',
-            title: 'Oops... Sorry',
-            text: 'Your Account is not activated yet, please wait or contact admin for activation.',
-            footer: '<a href="/contact-us">Contact us</a>'
-          })
+            icon: "error",
+            title: "Oops... Sorry",
+            text: "Your Account is not activated yet, please wait or contact admin for activation.",
+            footer: '<a href="/contact-us">Contact us</a>',
+          });
         }
         if (error.response.data.message === "Invalid password.") {
           Swal.fire({
-            icon: 'error',
-            title: 'Oops... Sorry',
-            text: 'Incorrect password. Check your credentials',
-            footer: '<a href="/contact-us">Contact us</a>'
-          })
-
+            icon: "error",
+            title: "Oops... Sorry",
+            text: "Incorrect password. Check your credentials",
+            footer: '<a href="/contact-us">Contact us</a>',
+          });
         }
         if (error.response.data.message === "Email not found.") {
           Swal.fire({
-            icon: 'error',
-            title: 'Oops... Sorry',
+            icon: "error",
+            title: "Oops... Sorry",
             text: "We couldn't find your email. Please register if your email is not registered.",
-            footer: '<a href="/getStarted">Register</a>'
-          })
+            footer: '<a href="/getStarted">Register</a>',
+          });
         }
+      });
+    // error.response.status === 401 &&
 
-      })
-    // error.response.status === 401 && 
-
-
-    setEmail('');
-    setPassword('');
+    setEmail("");
+    setPassword("");
     setRoleId(roleId);
-    setActive(isActive)
+    setActive(isActive);
   };
-
-
-
 
   // REGIS
   const handleSubmit = (e) => {
@@ -127,11 +121,11 @@ const LoginOrRegis = () => {
       name: name,
       email: email,
       password: password,
-      roleId: roleId
+      roleId: roleId,
     };
 
     let data = {
-      userDTO: user
+      userDTO: user,
     };
 
     if (roleId === 3) {
@@ -139,12 +133,12 @@ const LoginOrRegis = () => {
         driverName: driverName,
         driverPlate: driverPlate,
         isLicensed: isLicensed,
-        licenseNumber: licenseNumber
+        licenseNumber: licenseNumber,
       };
 
       data = {
         ...data,
-        caregiver: caregiverData
+        caregiver: caregiverData,
       };
     } else if (roleId === 5) {
       const donorData = {
@@ -158,29 +152,27 @@ const LoginOrRegis = () => {
     } else if (roleId === 2) {
       const memberData = {
         age: memberAge,
-        reason: memberReason
-      }
+        reason: memberReason,
+      };
       data = {
         ...data,
         member: memberData,
-      }
+      };
     }
 
     axios
-      .post('http://localhost:8080/user/register', data)
+      .post("http://localhost:8080/user/register", data)
       .then((response) => {
-        alert('Registration Successful');
-        window.location.href = '/login';
+        Swal.fire("Registration Success", "", "success").then(() => {
+          window.location.href = "/login";
+        });
         console.log(response.data);
       })
       .catch((error) => {
-        alert('Error Occurred');
+        alert("Error Occurred");
         console.error(error);
       });
   };
-
-
-
 
   const handleClick = () => {
     if (!showReplacement) {
@@ -195,21 +187,16 @@ const LoginOrRegis = () => {
     setShowReplacement(false);
   };
 
-
-
-
-
   return (
-    <div style={{ maxHeight: "560px", overflow: "auto" }} className="col-9 teams">
-
-
-
+    <div
+      style={{ maxHeight: "560px", overflow: "auto" }}
+      className="col-9 teams"
+    >
       {!showReplacement ? (
         <div id="regisForm">
           <h1 className="display-6 text-white">Sign Up</h1>
           <hr className="border-white" />
           <form className="col-12" onSubmit={handleSubmit}>
-
             <div className="d-flex col-12">
               <div className="col-6 px-1 mx-auto">
                 <div className="form-floating col-12 mb-3">
@@ -292,14 +279,9 @@ const LoginOrRegis = () => {
               </div>
             </div>
 
-
-
             {roleId === 2 && (
-
               <div id="details">
-                <p className="display-6 mt-5 text-white">
-                  Detail Information
-                </p>
+                <p className="display-6 mt-5 text-white">Detail Information</p>
 
                 <hr className="border-white" />
                 <div className="d-flex col-12">
@@ -329,20 +311,12 @@ const LoginOrRegis = () => {
                     />
                     <label htmlFor="name">Reason</label>
                   </div>
-
-
                 </div>
-
               </div>
-
-
             )}
             {roleId === 3 && (
-
               <div id="details">
-                <p className="display-6 mt-5 text-white">
-                  Detail Information
-                </p>
+                <p className="display-6 mt-5 text-white">Detail Information</p>
 
                 <hr className="border-white" />
                 <div className="d-flex col-12">
@@ -371,8 +345,6 @@ const LoginOrRegis = () => {
                     />
                     <label htmlFor="name">License Number</label>
                   </div>
-
-
                 </div>
 
                 <div className="form-floating col-6 px-1 mb-3">
@@ -388,26 +360,27 @@ const LoginOrRegis = () => {
                   <label htmlFor="name">Police Number</label>
                 </div>
               </div>
-
-
             )}
             <br />
             <p className="lead text-white">
-              Already have an account? Click{' '}
+              Already have an account? Click{" "}
               <span>
                 <a className="text-warning" onClick={handleClick}>
                   here to Sign-In
                 </a>
               </span>
             </p>
-            <button type="submit" className="btn btn-outline-warning col-6 my-3">
+            <button
+              type="submit"
+              className="btn btn-outline-warning col-6 my-3"
+            >
               Register
             </button>
             <br />
           </form>
         </div>
-        // REPLACE
       ) : (
+        // REPLACE
         <div id="loginForm">
           <h1 className="display-6 text-white">Sign In</h1>
           <hr className="border-white" />
@@ -437,13 +410,17 @@ const LoginOrRegis = () => {
               <label htmlFor="password">Password</label>
             </div>
             <div className="form-group form-check">
-              <input type="checkbox" className="form-check-input" id="remember" />
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="remember"
+              />
               <label className="form-check-label text-white" htmlFor="remember">
                 Remember me
               </label>
             </div>
             <p className="lead text-white mt-3">
-              Don't have an account? Click{' '}
+              Don't have an account? Click{" "}
               <span>
                 <a className="text-warning" onClick={handleBack}>
                   here to Sign-Up
@@ -451,7 +428,10 @@ const LoginOrRegis = () => {
               </span>
             </p>
 
-            <button type="submit" className="btn btn-outline-warning col-6 my-3">
+            <button
+              type="submit"
+              className="btn btn-outline-warning col-6 my-3"
+            >
               Login
             </button>
           </form>

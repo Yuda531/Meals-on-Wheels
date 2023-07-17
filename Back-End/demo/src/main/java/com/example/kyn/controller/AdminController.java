@@ -3,8 +3,10 @@ package com.example.kyn.controller;
 
 import com.example.kyn.model.Donation;
 import com.example.kyn.model.Meals;
+import com.example.kyn.model.Member;
 import com.example.kyn.service.DonationService;
 import com.example.kyn.service.MealsService;
+import com.example.kyn.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,9 @@ public class AdminController {
 
     @Autowired
     public DonationService donateService;
+
+    @Autowired
+    public MemberService memberService;
 
     @Autowired
     private MealsService mealsService;
@@ -74,5 +79,17 @@ public class AdminController {
 
         return mealsService.saveMeals(existingMeals);
     }
+
+    @GetMapping("/all-members")
+    public List<Member> findAllMember(){
+        return memberService.findAllMember() ;
+    }
+
+    @DeleteMapping("/delete-members")
+    public void deleteMemberById(@RequestParam(name = "memberId") Long memberId) {
+        memberService.deleteMemberById(memberId);
+    }
+
+
 
 }
