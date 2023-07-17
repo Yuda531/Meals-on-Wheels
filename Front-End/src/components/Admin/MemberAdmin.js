@@ -26,32 +26,7 @@ const MemberAdmin = () => {
     fetchMembers();
   }, []);
 
-  const handleDeleteMember = (memberId) => {
-    axios
-      .delete(`http://localhost:8080/admin/delete-members?memberId=${memberId}`)
-      .then((response) => {
-        // Tindakan yang dilakukan setelah penghapusan berhasil
-        console.log("Member berhasil dihapus");
-        // Show SweetAlert2 success notification
-        Swal.fire("Delete Member Success", "", "success").then(() => {
-          // Navigate to /admin_meals
-          window.location.href = "/admin_members";
-        });
-        // Refresh data (optional)
-        axios
-          .get("/admin/all-members")
-          .then((response) => {
-            setMembers(response.data);
-            setFilteredMembers(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  
 
   useEffect(() => {
     const filtered = members.filter((member) => {
@@ -102,7 +77,7 @@ const MemberAdmin = () => {
                     <th>Members Name</th>
                     <th>Email</th>
                     <th>Age</th>
-                    <th>Action</th>
+                    <th>Address</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -113,14 +88,7 @@ const MemberAdmin = () => {
                       <td>{member.userId.email}</td>
                       <td>{member.age}</td>
                       <td>
-                        <div className="d-flex justify-content-between">
-                          <button
-                            className="btn btn-danger rounded-2 ms-2"
-                            onClick={() => handleDeleteMember(member.id)}
-                          >
-                            <i className="fas fa-trash fa-sm"></i>
-                          </button>
-                        </div>
+                        Addressnya manaaaaa
                       </td>
                     </tr>
                   ))}
