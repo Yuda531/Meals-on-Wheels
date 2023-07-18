@@ -72,7 +72,6 @@ public class UserController {
             }
             if(roleId == 3){
                 newUser.setActive(false);
-//                boolean isLicensed = registerRequest.getCaregiver().isLicensed();
                 if(registerRequest.getCaregiver().getLicenseNumber() == ""){
                     registerRequest.getCaregiver().setLicensed(false);
                 } else {
@@ -81,9 +80,14 @@ public class UserController {
                 registerRequest.getCaregiver().setUserId(newUser);
                 caregiverService.save(registerRequest.getCaregiver());
             }
-            if(roleId == 4){
 
-//                METODE KHUSUS LAIN UNTUK ROLE PARTNER
+            if(roleId == 4){
+                Integer activeOrNot = registerRequest.getPartner().getActiveOrNot();
+                if(activeOrNot == 1){
+                    registerRequest.getPartner().setPartnerStatus(true);
+                } else if (activeOrNot == 0){
+                    registerRequest.getPartner().setPartnerStatus(false);
+                }
                 newUser.setActive(false);
                 registerRequest.getPartner().setUserId(newUser);
                 partnerService.savePartner(registerRequest.getPartner());

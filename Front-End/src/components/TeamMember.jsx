@@ -32,7 +32,7 @@ function AboutMembers() {
           }`}
         >
             <div className="py-5 mt-5">
-            <h1 className="display-6">{name}</h1>
+            <h1 className="display-6 text-white">{name}</h1>
           <hr />
           <p className="lead">{description}</p>
             </div>

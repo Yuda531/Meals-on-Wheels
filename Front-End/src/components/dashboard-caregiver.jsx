@@ -39,7 +39,7 @@ function CaregiverDashboard() {
         <div className='col-4 theProfileImg'>
 
          
-         <br />
+        
 
           <div className="col-12 px-5 py-5 profileCard2 text-white">
           <div className="col-10 my-5 mx-auto text-white">
