@@ -68,7 +68,7 @@ function ContactUsContent(){
                         <iframe className="col-11 rounded-5" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.5166128085034!2d107.59893341744385!3d-6.948221999999992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6279d52ed8b%3A0xfbc31838ba12ddbf!2sSekolah%20Tinggi%20Teknologi%20Bandung!5e0!3m2!1sid!2sid!4v1688222866125!5m2!1sid!2sid" width="600" height="450" style={{ border: '0' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                         <div className="col-4  my-auto">
-                        <h3 className="display-1 container text-white">
+                        <h3 className="display-1 col-12 text-white">
                         Where to find <span className="text-warning">Us</span>.
                         </h3>
                         </div>

@@ -128,12 +128,16 @@ function LandingNoLogin() {
             >
               {/* <img style={{borderRadius:"23% 40% 22% 60%"}} src={deliver} className="col-10" alt="" /> */}
               <h1
-                style={{ fontSize: "95px" }}
+                style={{ fontSize: "100px" }}
                 className="text-white fw-bold col-12 my-auto"
               >
                 Fast <span className=" text-success"> and </span>
+                <br />
+                <br />
                 <span className="text-warning">Satisfying.</span>
               </h1>
+              <br />
+              <br />
               <h4 className="text-white lead col-6 my-4">
                 Guaranteed{" "}
                 <span className="text-warning fw-bold">Satisfaction</span>, On-

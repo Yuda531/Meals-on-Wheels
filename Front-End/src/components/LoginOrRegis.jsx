@@ -25,6 +25,13 @@ const LoginOrRegis = () => {
   const [isLicensed, setLicensed] = useState("");
   const [licenseNumber, setLicenseNumber] = useState("");
 
+  // PARTNER
+  const [partnerAddress, setPartnerAddress] = useState("");
+  const [partnerName, setPartnerName] = useState("");
+  const [activeOrNot, setActiveOrNot] = useState("");
+  
+
+
   //MEMBER
   const [memberAge, setAge] = useState("");
   const [memberReason, setReason] = useState("");
@@ -157,6 +164,16 @@ const LoginOrRegis = () => {
       data = {
         ...data,
         member: memberData,
+      };
+    } else if (roleId === 4) {
+      const partnerData = {
+        partnerAddress: partnerAddress,
+        partnerName: partnerName,
+        activeOrNot: activeOrNot
+      };
+      data = {
+        ...data,
+        partner: partnerData,
       };
     }
 
@@ -304,7 +321,7 @@ const LoginOrRegis = () => {
                       type="text"
                       className="form-control"
                       id="license"
-                      placeholder="Reason"
+                      placeholder="Why are you joining us?"
                       value={memberReason}
                       onChange={(e) => setReason(e.target.value)}
                       required
@@ -359,6 +376,61 @@ const LoginOrRegis = () => {
                   />
                   <label htmlFor="name">Police Number</label>
                 </div>
+              </div>
+            )}
+             {roleId === 4 && (
+              <div id="details">
+                <p className="display-6 mt-5 text-white">Detail Information</p>
+
+                <hr className="border-white" />
+                <div className="d-flex col-12">
+                  <div className="form-floating col-6 px-1 mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      placeholder="Partner name"
+                      value={partnerName}
+                      onChange={(e) => setPartnerName(e.target.value)}
+                      required
+                    />
+                    <label htmlFor="name">Partner name</label>
+                  </div>
+
+                  <div className="form-floating col-6 px-1 mb-3">
+                  <select
+                    placeholder="Are you cooking and supplying in the last 18 months?"
+                    id="roleId"
+                    className="form-control"
+                    value={activeOrNot}
+                    onChange={(e) => setActiveOrNot(Number(e.target.value))}
+                    required
+                  >
+                    <option value="" disabled>
+                     Yes or No
+                    </option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                  <label htmlFor="roleId">Are you cooking and supplying in the last 18 months?</label>
+                </div>
+
+                </div>
+
+ 
+                <div className="form-floating  col-6 px-1 mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="license"
+                      placeholder="Complete address"
+                      value={partnerAddress}
+                      onChange={(e) => setPartnerAddress(e.target.value)}
+                      required
+                    />
+                    <label htmlFor="name">Complete address</label>
+                  </div>
+
               </div>
             )}
             <br />
