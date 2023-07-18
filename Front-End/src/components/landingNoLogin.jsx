@@ -59,8 +59,8 @@ function LandingNoLogin() {
                 <div className="d-flex justify-content-center">
                   <Button
                     href="/dashboard"
-                    variant="success"
-                    className="col-12 mx-auto"
+                    variant="outline-success"
+                    className="col-12 mx-auto greenBtns"
                   >
                     Go to dashboard
                   </Button>

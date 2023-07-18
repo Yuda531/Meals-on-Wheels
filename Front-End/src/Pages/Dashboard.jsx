@@ -4,7 +4,7 @@ import DashboardAdmin from "./Admin/DashboardAdmin";
 import Partner from "./Partner";
 import MemberDashboard from "./MemberDashboard";
 import Donor from "./Donor";
-import CaregiverDashboard from "./dashboard-caregiver";
+import CaregiverDashboard from "../components/dashboard-caregiver";
 import VolunteerChoice from "../components/volunteerChoice";
 
 

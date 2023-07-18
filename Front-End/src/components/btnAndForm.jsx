@@ -110,9 +110,9 @@ const ButtonAndForm = () => {
       <div className="col-6 px-5 py-auto my-auto">
         {!showReplacement ? (
           <div id="replace" className="replace col-12 ">
-            <Button href='/getStarted' className="homeBtn btn btn-success col-12 my-3 py-2 btnOrder fw-bold mx-auto">Get Started</Button>
+            <Button id="homeBtn" href='/getStarted' className=" btn btn-success col-12 my-3 py-2 btnOrder fw-bold mx-auto">Get Started</Button>
             {/* <button className="homeBtn btn btn-success col-12 my-3 py-2 btnOrder mx-auto">Get started</button> */}
-            <button onClick={handleClick} className="homeBtn btn btn-outline-warning col-12 py-2 mx-auto">Sign In</button>
+            <button onClick={handleClick} className=" btn btn-outline-warning col-12 py-2 mx-auto">Sign In</button>
           </div>
         ) : (
           <div id="loginForm">

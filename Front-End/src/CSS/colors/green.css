@@ -9,14 +9,14 @@
 .rsDefaultInv .rsThumb.rsNavSelected,
 .rsDefault .rsThumb.rsNavSelected,
 .ingredients input[type=checkbox]:checked + label:before {
-	border-color: #8dc63f !important;
+	border-color: #198754 !important;
 }
 
 
 .alternative #current:hover,
 .menu.alternative ul li a:hover,
 .menu.alternative ul > li.sfHover > a {
-	background-color: #8dc63f !important;
+	background-color: #198754 !important;
 }
 
 
@@ -44,7 +44,7 @@ a.nav-toggle.active,
 a.button.color, input[type="button"], 
 input[type="submit"],
 a.button.light:hover,
-.pagination ul li a.current-page { background-color: #8dc63f; }
+.pagination ul li a.current-page { background-color: #198754; }
 
 
 .rsDefaultInv .rsThumb.rsNavSelected,
@@ -58,7 +58,7 @@ a.blockTitle:hover,
 .pagination .current,
 .pagination ul li a:hover,
 .pagination-next-prev ul li a:hover,
-.highlight.color { background: #8dc63f; }
+.highlight.color { background: #198754; }
 
 
 .author-box .title,
@@ -71,10 +71,10 @@ a.adv-search-btn:hover,
 .list-1.color li:before,
 .list-2.color li:before,
 .list-3.color li:before,
-.list-4.color li:before { color: #8dc63f; }
+.list-4.color li:before { color: #198754; }
 
 .rsDefaultInv .rsThumb.rsNavSelected {
-	-webkit-box-shadow: inset 0px -1px 0px 0px rgba(50, 50, 50, 0.12), 1px 0px 0px 0px #8dc63f;
-	-moz-box-shadow: inset 0px -1px 0px 0px rgba(50, 50, 50, 0.12), 1px 0px 0px 0px #8dc63f;
-	box-shadow: inset 0px -1px 0px 0px rgba(50, 50, 50, 0.12), 1px 0px 0px 0px #8dc63f;
+	-webkit-box-shadow: inset 0px -1px 0px 0px rgba(50, 50, 50, 0.12), 1px 0px 0px 0px #198754;
+	-moz-box-shadow: inset 0px -1px 0px 0px rgba(50, 50, 50, 0.12), 1px 0px 0px 0px #198754;
+	box-shadow: inset 0px -1px 0px 0px rgba(50, 50, 50, 0.12), 1px 0px 0px 0px #198754;
 }

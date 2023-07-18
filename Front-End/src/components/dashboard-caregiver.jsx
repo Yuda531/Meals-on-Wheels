@@ -4,6 +4,7 @@ import { CircleFill } from 'react-bootstrap-icons';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import foodBanner from '../img/mexican-food.jpg'
 import Swal from 'sweetalert2'
 
 function CaregiverDashboard() {
@@ -14,6 +15,7 @@ function CaregiverDashboard() {
   const [userEmail, setUserEmail] = useState(null);
   const [driverName, setDriverName] = useState(null);
   const [driverPlate, setDriverPlate] = useState(null);
+  const [driverEmail, setDriverEmail] = useState(null);
   const [driverLicense, setDriverLicense] = useState(false);
 
   useEffect(() => {
@@ -22,6 +24,7 @@ function CaregiverDashboard() {
       const parsedUser = JSON.parse(user);
       setUserEmail(parsedUser.caregiver?.userId?.name || '');
       setDriverName(parsedUser.caregiver?.driverName || '');
+      setDriverEmail(parsedUser.caregiver?.userId?.email || '');
       setDriverPlate(parsedUser.caregiver?.driverPlate || '');
       setDriverLicense(parsedUser.caregiver?.licensed || false);
     }
@@ -32,56 +35,53 @@ function CaregiverDashboard() {
 
     <div className="body">
       <div className="backblur">
-
         <div className="col-12 d-flex">
+        <div className='col-4 theProfileImg'>
 
-
-
-<div className='col-4'>
-
-            <div className="col-12 profileCard">
-              <div className="col-6 mx-auto ">
-                <img style={{borderRadius:"50%"}} src={richie} className="col-12" alt="" />
-              </div>
-              <div className="col-10 profileCardData mx-auto my-5 text-center text-white">
-
-                
-                <small className="display-6">
-                {userEmail ? userEmail : 'Driver'}
-
-                </small>
-                
-                
-                <br />
-                
-                <hr className="border-white" />
-                
-                <small className="lead">
-                {driverName}
-                </small>
-              </div>
-            </div>
          
          <br />
 
-          <div className="col-12 px-5 py-5 profileCard2 text-white text-center">
-            <p className="lead fw-bold">Police Number</p>
+          <div className="col-12 px-5 py-5 profileCard2 text-white">
+          <div className="col-10 my-5 mx-auto text-white">
+                <img style={{borderRadius:"50%"}} src={richie} className="col-12" alt="" />
+              </div>
+          <div className=''>
+                <small className="display-5 ">
+                  {userEmail ? userEmail : 'Driver'}
+                </small>
+                <br />
+               
+                <p className="lead mt-3">
+                 {driverName}
+                 </p>
+
+                 <p className="lead mt-3">
+                 {driverEmail}
+                 </p>
+                </div>
+
+
+            <hr className='border-white'/>
+
+            <p className="lead">Police Number</p>
+
             <small className="display-6">
             {driverPlate}
             </small>
             <hr className='border-white'/>
-            <p className="lead">{driverLicense ? 'Licensed Driver' : 'Not Licensed'}</p>
+
+            <p className="lead mt-2">{driverLicense ? 'Licensed Driver' : 'Not Licensed'}</p>
             </div>
 
 </div>
           
-          <div className="col-8 ms-5 px-4 aboutt">
+          <div className="col-8 ms-5 px-4 aboutt text-white theOrders">
           <div className="orderTable text-white">
             <small className="display-6 m-4">New Orders</small>
             
                 <div className="newOrder d-flex col-12 p-3">
                     <table className="custom-table col-12">
-                        <thead>
+                        <div>
         
                             <div className="d-flex mb-2">
                                 <th className='col-3 mx-auto'>Order Name</th>
@@ -89,7 +89,7 @@ function CaregiverDashboard() {
                                 <th className='col-6 mx-auto'>Status</th>
                             </div>
                             <hr className="border-white" />
-                        </thead>
+                        </div>
                         <div style={{maxHeight:"300px", overflow:"auto"}} className="orders teams">
                         
                         <div className="anOrder">
@@ -207,7 +207,7 @@ function CaregiverDashboard() {
             
                 <div className="newOrder d-flex col-12 p-3">
                     <table className="custom-table col-12">
-                        <thead>
+                        <div>
         
                             <div className="d-flex mb-2">
                                 <th className='col-3 mx-auto'>Order Name</th>
@@ -215,7 +215,7 @@ function CaregiverDashboard() {
                                 <th className='col-6 mx-auto'>Status</th>
                             </div>
                             <hr className="border-white" />
-                        </thead>
+                        </div>
                         <div style={{maxHeight:"300px", overflow:"auto"}} className="orders teams">
                         
                         

@@ -36,7 +36,7 @@ function LogoutButton(props) {
 
 
     <NavDropdown className='my-auto' title="Account" id="collasible-nav-dropdown">
-      <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+      <NavDropdown.Item href="/dashboard">My Profile</NavDropdown.Item>
       <NavDropdown.Item onClick={() => logout()} href="#">Sign Out</NavDropdown.Item>
     </NavDropdown>
 
