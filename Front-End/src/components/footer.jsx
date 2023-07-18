@@ -32,13 +32,23 @@ function Footer() {
                 Sitemap
               </h1>
               <ul className='mt-3'>
+                <div className="d-flex col-12">
+                <div>
                 <li className='mb-1'><a href="/">Home</a></li>
                 <li className='mb-1'><a href="/about-us">About us</a></li>
                 <li className='mb-1'><a href="/contact-us">Contact us</a></li>
                 <li className='mb-1'><a href="/about-us">Where to find us</a></li>
-                <hr />
+                </div>
+                <div className='ms-3'>
                 <li className='mb-1'><a href="/terms">Terms & Conditions</a></li>
                 <li className='mb-1'><a href="/privacy">Privacy Policy</a></li>
+                </div>
+                </div>
+                
+                
+                {/* <br />
+                <hr style={{border:"1px solid gray"}} /> */}
+                
 
                 
               </ul>
