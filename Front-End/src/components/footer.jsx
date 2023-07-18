@@ -6,8 +6,12 @@ function Footer() {
  <div style={{ padding:"0.25%"}} className="bg-success"></div>
 
         <div style={{backgroundColor:"white", padding: "60px"}} className="col-12 d-flex">
-            <div className="col-3">
-                <img src={logo} className='col-1 mx-auto' alt="" /><span><h5 className="fw-bold">MoW</h5></span>
+            <div className="col-3 px-5 mt-3">
+              <div className="col-12 d-flex">
+              <img src={logo} className='col-1' alt="" />
+              <h5 className="fw-bold">MoW</h5>
+              </div>
+                <br />
                 <small className="mt-1">
                 Jl. Soekarno Hatta No.378, Kb. Lega, Kec. Bojongloa Kidul, Kota Bandung, Jawa Barat 40235
                 </small>
@@ -27,6 +31,17 @@ function Footer() {
               <h1 className="lead fw-bold">
                 Sitemap
               </h1>
+              <ul className='mt-3'>
+                <li className='mb-1'><a href="/">Home</a></li>
+                <li className='mb-1'><a href="/about-us">About us</a></li>
+                <li className='mb-1'><a href="/contact-us">Contact us</a></li>
+                <li className='mb-1'><a href="/about-us">Where to find us</a></li>
+                <hr />
+                <li className='mb-1'><a href="/terms">Terms & Conditions</a></li>
+                <li className='mb-1'><a href="/privacy">Privacy Policy</a></li>
+
+                
+              </ul>
             </div>
         </div>
 
