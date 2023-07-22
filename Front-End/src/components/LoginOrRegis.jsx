@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
+import MapModal from "./map";
+import 'leaflet/dist/leaflet.css';
+
+import { getCurrentLocation } from "../utils/geolocation";
 
 const LoginOrRegis = () => {
   const [userRole, setUserRole] = useState(null);
@@ -116,6 +120,53 @@ const LoginOrRegis = () => {
   };
 
   // REGIS
+  const [showModal, setShowModal] = useState(false);
+
+ const [latitude, setLatitude] = useState(0);
+ const [longitude, setLongitude] = useState(0);
+
+
+ const [searchQuery, setSearchQuery] = useState('');
+ const [searchedLatitude, setSearchedLatitude] = useState(null);
+ const [searchedLongitude, setSearchedLongitude] = useState(null);
+
+//  const handleSelectLocation = (lat, lng) => {
+//   setLatitude(lat);
+//   setLongitude(lng);
+// };
+
+// const handleCloseModal = () => {
+//   setShowMapModal(false);
+// };
+
+  const handleShowModal = () => {
+    setShowModal(true)
+  };
+
+  if(setShowModal){
+    // const handleGetLocation = () => {
+      getCurrentLocation(
+        (lat, lng) => {
+          setLatitude(lat);
+          setLongitude(lng);
+        },
+        (error) => {
+          console.error("Error getting current location:", error.message);
+        }
+      );
+    // };
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleSelectLocation = (lat, lng) => {
+    setLatitude(lat);
+    setLongitude(lng);
+  };
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -160,6 +211,8 @@ const LoginOrRegis = () => {
       const memberData = {
         age: memberAge,
         reason: memberReason,
+        // latitude: latitude,
+        // longitude: longitude
       };
       data = {
         ...data,
@@ -308,12 +361,12 @@ const LoginOrRegis = () => {
                       max={122}
                       className="form-control"
                       id="name"
-                      placeholder="Age"
+                      placeholder="How old are you?"
                       value={memberAge}
                       onChange={(e) => setAge(e.target.value)}
                       required
                     />
-                    <label htmlFor="name">Age</label>
+                    <label htmlFor="name">How old are you?</label>
                   </div>
 
                   <div className="form-floating  col-6 px-1 mb-3">
@@ -326,9 +379,56 @@ const LoginOrRegis = () => {
                       onChange={(e) => setReason(e.target.value)}
                       required
                     />
-                    <label htmlFor="name">Reason</label>
+                    <label htmlFor="name">Why are you joining us?</label>
                   </div>
                 </div>
+                <p className="lead mt-2 text-white">Please enter your address</p>
+                <div className="form-floating col-6 px-1 mb-3">
+                    <input
+                      type="text"
+                      max={122}
+                      className="form-control"
+                      id="age"
+                      placeholder="Address details eg. white bulding, 2 cars, ..."
+                      // value={memberAge}
+                      // onChange={(e) => setAge(e.target.value)}
+                      required
+                    />
+                    <label htmlFor="name">Address details eg. white bulding, 2 cars, ...</label>
+                    <button type="button" className="btn btn-success col-6 mt-4" onClick={handleShowModal}>
+                    Select on map
+                  </button>
+                  </div>
+                  <MapModal
+                  latitude={latitude}
+                  longitude={longitude}
+                  onSelectLocation={handleSelectLocation}
+                  show={showModal}
+                  handleClose={handleCloseModal}
+                   />
+
+                  {/* <div className="col-6 d-flex"> */}
+
+
+                  {/* <button
+                  type="button"
+                  className="btn btn-outline-success col-6 me-2"
+                  onClick={handleGetLocation}
+                >
+                  Get Current Location
+                </button> */}
+               
+                  
+
+
+
+      {/* Render the MapModal component */}
+      {/* <MapModal
+        onSelectLocation={handleSelectLocation}
+        show={showModal}
+        handleClose={handleCloseModal}
+      /> */}
+
               </div>
             )}
             {roleId === 3 && (
@@ -450,7 +550,9 @@ const LoginOrRegis = () => {
             </button>
             <br />
           </form>
+
         </div>
+        
       ) : (
         // REPLACE
         <div id="loginForm">
@@ -509,7 +611,9 @@ const LoginOrRegis = () => {
           </form>
         </div>
       )}
+      
     </div>
+    
   );
 };
 
