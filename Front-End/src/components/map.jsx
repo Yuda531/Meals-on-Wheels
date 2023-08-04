@@ -6,10 +6,21 @@ import customMark from "../img/geo-alt-fill.svg";
 import axios from "axios";
 
 const MapModal = ({ latitude, longitude, onSelectLocation, show, handleClose }) => {
-  const handleMapClick = (event) => {
+  const handleMapClick = async (event) => {
     const { lat, lng } = event.latlng;
-    onSelectLocation(lat, lng);
-    handleClose();
+    console.log("Koordinat yang dipilih:", lat, lng);
+
+    // Melakukan permintaan geokoding menggunakan Axios
+    try {
+      const response = await axios.get(
+        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
+      );
+      console.log("Informasi tambahan:", response.data);
+      onSelectLocation(lat, lng);
+      handleClose();
+    } catch (error) {
+      console.error("Error occurred during geocoding:", error);
+    }
   };
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -26,11 +37,9 @@ const MapModal = ({ latitude, longitude, onSelectLocation, show, handleClose }) 
         setSearchedLatitude(parseFloat(lat));
         setSearchedLongitude(parseFloat(lon));
       } else {
-        // Handle no results found
         console.log("No results found for the search query");
       }
     } catch (error) {
-      // Handle error
       console.error("Error occurred during geocoding:", error);
     }
   };
@@ -54,7 +63,7 @@ const MapModal = ({ latitude, longitude, onSelectLocation, show, handleClose }) 
       role="dialog"
       style={{ display: `${show ? "block" : "none"}` }}
     >
-      <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div className="modal-dialog modal-dialog-centered modal-lg" role="document" style={{ maxWidth: "90%", maxHeight: "90%" }}>
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Select Location on Map</h5>
@@ -69,7 +78,6 @@ const MapModal = ({ latitude, longitude, onSelectLocation, show, handleClose }) 
             </button>
           </div>
           <div className="modal-body">
-            {/* SEARCH FORM  */}
             <div className="form-floating col-12 d-flex mb-4">
               <input
                 id="loc"
@@ -92,7 +100,7 @@ const MapModal = ({ latitude, longitude, onSelectLocation, show, handleClose }) 
               <MapContainer
                 center={searchedLatitude && searchedLongitude ? [searchedLatitude, searchedLongitude] : [latitude, longitude]}
                 zoom={13}
-                style={{ height: "500px", width: "100%" }}
+                style={{ height: "450px", width: "100%" }}
               >
                 <TileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -106,6 +114,7 @@ const MapModal = ({ latitude, longitude, onSelectLocation, show, handleClose }) 
                   }
                   icon={customIcon}
                 />
+                <MyClickHandler />
               </MapContainer>
             )}
           </div>
