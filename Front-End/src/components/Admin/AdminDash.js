@@ -243,7 +243,7 @@ const AdminDashboard = () => {
 
           <main className="table mt-5">
             <section className="table__header ">
-              <h1 className="ps-2">Request Meals</h1>
+              <h1 className="ps-2">Orders</h1>
               <div className="input-group">
                 <input
                   type="search"
