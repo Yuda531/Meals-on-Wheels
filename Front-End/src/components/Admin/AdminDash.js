@@ -132,9 +132,10 @@ const AdminDashboard = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredMeals = requestMeals.filter((meal) =>
-    meal.mealsName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    meal.memberName.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredMeals = requestMeals.filter(
+    (meal) =>
+      meal.mealsName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      meal.memberName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -277,9 +278,7 @@ const AdminDashboard = () => {
                       <td>{meal.orderDate}</td>
                       <td>
                         <a href="" style={{ textDecoration: "none" }}>
-                          <p
-                            className={`status ${meal.status.toLowerCase()}`}
-                          >
+                          <p className={`status ${meal.status.toLowerCase()}`}>
                             {meal.status}
                           </p>
                         </a>
