@@ -79,8 +79,6 @@ const PartnerDash = () => {
 		<section class="jumbotron">
                 <div class="jumbotron__content">
                     <h1 className='text-light'>Hi Welcome, <span className='text-warning'>Partner🥗</span> </h1>
-                    <p className='text-light'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
-                        cursus ante dapibus diam. Sed nisi.</p>
                 </div>
               
             </section>
@@ -124,7 +122,7 @@ const PartnerDash = () => {
                                 <td class="align-middle">Rocky</td>
                                 <td class="align-middle">27 Aug, 9000</td>
                                 <td class="align-middle">
-                                    <p className="status cancelled m-0">Panding</p>
+                                    <p className="status cancelled m-0">Pending</p>
                                 </td>
                                 <td class="align-middle">
                                     <p className="status shipped m-0">Detail</p>
@@ -157,7 +155,7 @@ const PartnerDash = () => {
                                 <td class="align-middle">Rocky</td>
                                 <td class="align-middle">27 Aug, 9000</td>
                                 <td class="align-middle">
-                                    <p className="status delivered m-0">Panding</p>
+                                    <p className="status delivered m-0">Pending</p>
                                 </td>
                                 <td class="align-middle">
                                     <p className="status shipped m-0">Detail</p>
@@ -173,7 +171,7 @@ const PartnerDash = () => {
                                 <td class="align-middle">Rocky</td>
                                 <td class="align-middle">27 Aug, 9000</td>
                                 <td class="align-middle">
-                                    <p className="status delivered m-0">Panding</p>
+                                    <p className="status delivered m-0">Pending</p>
                                 </td>
                                 <td class="align-middle">
                                     <p className="status shipped m-0">Detail</p>
