@@ -3,6 +3,8 @@ import axios from "axios";
 import author from "../images/author-photo.png";
 import thumb5 from "../images/recipeThumb-05.jpg";
 import thumb9 from "../images/recipeThumb-09.jpg";
+import pp from '../img/user.png';
+
 
 function Sidebar() {
   const [meals, setMeals] = useState([]);
@@ -53,15 +55,19 @@ function Sidebar() {
       {/* Author Box */}
       <div className="widget">
         <a href="/profile">
-          <div className="author-box">
-            <span className="title">Profile</span>
-            <span className="name">
-            {userSession.name}
-            </span>
-            <span className="contact">
-              <a href="mailto:sasha@gmail.com">{userSession.email}</a>
-            </span>
-            <img src={author} alt="" />
+          <div className="author-box row">
+            <div className="col-8">
+              <span className="title">Profile</span>
+              <span className="name">
+              {userSession.name}
+              </span>
+              <span className="contact">
+                <a href="mailto:sasha@gmail.com">{userSession.email}</a>
+              </span>
+            </div>
+            <div className="col-4">
+              <img src={pp} alt="" />
+            </div>
           </div>
         </a>
       </div>

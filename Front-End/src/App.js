@@ -32,9 +32,9 @@ import VolunteerSelection from "./Pages/VolunteerSelection";
 
 import Partner from './Pages/Partner';
 import ThankyouDonor from "./Pages/ThankyouDonor";
-import ProfileComp from "./components/profile";
 import TermsAndCondition from "./Pages/TermsAndConditions";
 import PrivacyAndPolicy from "./Pages/PrivacyPolicy";
+import UserProfile from "./Pages/UserProfile";
 
 
 
@@ -60,7 +60,7 @@ function App() {
         <Route path='memberdashboard' element={<MemberDashboard />} />
         <Route path='/detail/:id' element={<MemberDetailMeals />} />
         <Route path='/myorder' element={<MyOrder />} />
-        <Route path='/profile' element={<ProfileComp />} />
+        <Route path='/profile' element={<UserProfile />} />
 
         <Route path="/admin_dashboard" element={<DashboardAdmin />} />
           <Route path="/admin_meals" element={<ManageMeals />} />
