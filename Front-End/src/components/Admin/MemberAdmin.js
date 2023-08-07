@@ -26,8 +26,6 @@ const MemberAdmin = () => {
     fetchMembers();
   }, []);
 
-  
-
   useEffect(() => {
     const filtered = members.filter((member) => {
       const memberName = member.member_name
@@ -77,7 +75,7 @@ const MemberAdmin = () => {
                     <th>Members Name</th>
                     <th>Email</th>
                     <th>Age</th>
-                    <th>Address</th>
+                    <th className="text-center">Address</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -88,7 +86,12 @@ const MemberAdmin = () => {
                       <td>{member.userId.email}</td>
                       <td>{member.age}</td>
                       <td>
-                        Addressnya manaaaaa
+                        <table>
+                          <tr>
+                            <td>Latitude: {member.latitude}</td>
+                            <td>Longitude: {member.longitude}</td>
+                          </tr>
+                        </table>
                       </td>
                     </tr>
                   ))}
