@@ -5,23 +5,36 @@ import "leaflet/dist/leaflet.css";
 import customMark from "../img/geo-alt-fill.svg";
 import axios from "axios";
 
-const MapModal = ({ latitude, longitude, onSelectLocation, show, handleClose }) => {
+const MapModal = ({ latitude, longitude, onSelectLocation, show, handleClose, setAddressInfo }) => {
   const handleMapClick = async (event) => {
     const { lat, lng } = event.latlng;
+
     console.log("Koordinat yang dipilih:", lat, lng);
 
-    // Melakukan permintaan geokoding menggunakan Axios
     try {
       const response = await axios.get(
         `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
       );
-      console.log("Informasi tambahan:", response.data);
+
+      const { address } = response.data;
+      console.log("Informasi Alamat:", address);
+      setAddressInfo({
+        road: address.road || "",
+        village: address.village || "",
+        subdistrict: address.suburb || address.subdistrict || "",
+        city: address.city || "",
+        state: address.state || "",
+        country: address.country || "",
+        postcode: address.postcode || "",
+      });
+
       onSelectLocation(lat, lng);
       handleClose();
     } catch (error) {
       console.error("Error occurred during geocoding:", error);
     }
   };
+  
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchedLatitude, setSearchedLatitude] = useState(null);

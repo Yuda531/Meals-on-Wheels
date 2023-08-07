@@ -25,6 +25,13 @@ public class Member {
 
 	private Double latitude;
 	private Double longitude;
+	private String road;
+	private String village;
+	private String subdistrict;
+	private String city;
+	private String state;
+	private String country;
+	private String postcode;
 
 
 	@OneToOne

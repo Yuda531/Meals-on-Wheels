@@ -88,7 +88,9 @@ const MemberAdmin = () => {
                       <td>
                         <table>
                           <tr>
-                            <td>Latitude: {member.latitude}</td>
+                            <td>City: {member.city}</td>
+                            <td>Country: {member.country}</td>
+                            <td>Longitude: {member.longitude}</td>
                             <td>Longitude: {member.longitude}</td>
                           </tr>
                         </table>

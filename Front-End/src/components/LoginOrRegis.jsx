@@ -125,6 +125,16 @@ const LoginOrRegis = () => {
   const [searchedLatitude, setSearchedLatitude] = useState(null);
   const [searchedLongitude, setSearchedLongitude] = useState(null);
 
+  const [addressInfo, setAddressInfo] = useState({
+    road: "",
+    village: "",
+    subdistrict: "",
+    city: "",
+    state: "",
+    country: "",
+    postcode: "",
+  });
+
   const handleShowModal = () => {
     setShowModal(true);
   };
@@ -216,6 +226,7 @@ const LoginOrRegis = () => {
         reason: memberReason,
         latitude: latitude,
         longitude: longitude,
+        ...addressInfo,
       };
       data = {
         ...data,
@@ -240,6 +251,7 @@ const LoginOrRegis = () => {
           window.location.href = "/login";
         });
         console.log(response.data);
+        console.log("addressInfo:", addressInfo);
       })
       .catch((error) => {
         alert("Error Occurred");
@@ -401,10 +413,10 @@ const LoginOrRegis = () => {
                   latitude={latitude}
                   longitude={longitude}
                   onSelectLocation={(lat, lng) => {
-                    // Set latitude dan longitude ke dalam state atau lakukan apa pun yang Anda butuhkan
                     setLatitude(lat);
                     setLongitude(lng);
                   }}
+                  setAddressInfo={setAddressInfo} // Menyediakan setAddressInfo ke dalam MapModal
                   show={showModal}
                   handleClose={handleCloseModal}
                 />
