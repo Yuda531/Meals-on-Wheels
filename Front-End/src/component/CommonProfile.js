@@ -52,9 +52,7 @@ const CommonProfile = () => {
                   <br />
                   <br />
                   
-                  <button className="btn btn-success col-12 mb-3">Edit Profile</button> <br />
-                  <button onClick={handleShow} className="btn btn-outline-warning col-12 mb-3">Set Status</button>
-                  
+                  <button onClick={handleShow} className="btn btn-success col-12 mb-3">Edit Profile</button>                  
                   
                 </div>
               </div>

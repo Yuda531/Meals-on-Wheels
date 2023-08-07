@@ -14,8 +14,6 @@ import ContactUs from './Pages/ContactUs';
 import Dashboard from './Pages/Dashboard';
 import RegisSuccess from './Pages/RegisSuccess';
 import LandingPage from './Pages/Landing';
-import header from './components/header'
-import MyOrder from "./component/MyOrder";
 import MemberDashboard from "./Pages/MemberDashboard";
 import MemberDetailMeals from "./component/MemberDetailMeals";
 
@@ -35,6 +33,7 @@ import ThankyouDonor from "./Pages/ThankyouDonor";
 import TermsAndCondition from "./Pages/TermsAndConditions";
 import PrivacyAndPolicy from "./Pages/PrivacyPolicy";
 import UserProfile from "./Pages/UserProfile";
+import HistoryOrder from "./Pages/HistoryOrder";
 
 
 
@@ -59,7 +58,7 @@ function App() {
 
         <Route path='memberdashboard' element={<MemberDashboard />} />
         <Route path='/detail/:id' element={<MemberDetailMeals />} />
-        <Route path='/myorder' element={<MyOrder />} />
+        <Route path='/myorder' element={<HistoryOrder />} />
         <Route path='/profile' element={<UserProfile />} />
 
         <Route path="/admin_dashboard" element={<DashboardAdmin />} />
