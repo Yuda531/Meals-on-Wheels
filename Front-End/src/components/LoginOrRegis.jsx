@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 import MapModal from "./map";
-import 'leaflet/dist/leaflet.css';
+import "leaflet/dist/leaflet.css";
 
 import { getCurrentLocation } from "../utils/geolocation";
 
@@ -33,8 +33,6 @@ const LoginOrRegis = () => {
   const [partnerAddress, setPartnerAddress] = useState("");
   const [partnerName, setPartnerName] = useState("");
   const [activeOrNot, setActiveOrNot] = useState("");
-  
-
 
   //MEMBER
   const [memberAge, setAge] = useState("");
@@ -46,7 +44,6 @@ const LoginOrRegis = () => {
   const [validated, setValidated] = useState(false);
   const [showReplacement, setShowReplacement] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  
 
   // LOGIN
 
@@ -120,32 +117,31 @@ const LoginOrRegis = () => {
     setActive(isActive);
   };
 
-// MODAL PETA
-const [showModal, setShowModal] = useState(false);
-const [latitude, setLatitude] = useState(0);
-const [longitude, setLongitude] = useState(0);
-const [searchQuery, setSearchQuery] = useState('');
-const [searchedLatitude, setSearchedLatitude] = useState(null);
-const [searchedLongitude, setSearchedLongitude] = useState(null);
-
+  // MODAL PETA
+  const [showModal, setShowModal] = useState(false);
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchedLatitude, setSearchedLatitude] = useState(null);
+  const [searchedLongitude, setSearchedLongitude] = useState(null);
 
   const handleShowModal = () => {
-    setShowModal(true)
+    setShowModal(true);
   };
 
-  if(setShowModal){
-    // const handleGetLocation = () => {
-      getCurrentLocation(
-        (lat, lng) => {
-          setLatitude(lat);
-          setLongitude(lng);
-        },
-        (error) => {
-          console.error("Error getting current location:", error.message);
-        }
-      );
-    // };
-  }
+  // if (setShowModal) {
+  //   // const handleGetLocation = () => {
+  //   getCurrentLocation(
+  //     (lat, lng) => {
+  //       setLatitude(lat);
+  //       setLongitude(lng);
+  //     },
+  //     (error) => {
+  //       console.error("Error getting current location:", error.message);
+  //     }
+  //   );
+  //   // };
+  // }
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -173,8 +169,6 @@ const [searchedLongitude, setSearchedLongitude] = useState(null);
       console.error("Error occurred during geocoding:", error);
     }
   };
-
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -221,7 +215,7 @@ const [searchedLongitude, setSearchedLongitude] = useState(null);
         age: memberAge,
         reason: memberReason,
         latitude: latitude,
-        longitude: longitude
+        longitude: longitude,
       };
       data = {
         ...data,
@@ -231,7 +225,7 @@ const [searchedLongitude, setSearchedLongitude] = useState(null);
       const partnerData = {
         partnerAddress: partnerAddress,
         partnerName: partnerName,
-        activeOrNot: activeOrNot
+        activeOrNot: activeOrNot,
       };
       data = {
         ...data,
@@ -391,19 +385,29 @@ const [searchedLongitude, setSearchedLongitude] = useState(null);
                     <label htmlFor="name">Why are you joining us?</label>
                   </div>
                 </div>
-                <p className="lead mt-1 text-white">Please Open The Map and Pick Your Address</p>
+                <p className="lead mt-1 text-white">
+                  Please Open The Map and Pick Your Address
+                </p>
                 <div className="form-floating col-6 mb-1">
-                    <button type="button" className="btn btn-success col-6 mt-4" onClick={handleShowModal}>
+                  <button
+                    type="button"
+                    className="btn btn-success col-6 mt-4"
+                    onClick={handleShowModal}
+                  >
                     Select on map
                   </button>
-                  </div>
-                  <MapModal
+                </div>
+                <MapModal
                   latitude={latitude}
                   longitude={longitude}
-                  onSelectLocation={handleSelectLocation}
+                  onSelectLocation={(lat, lng) => {
+                    // Set latitude dan longitude ke dalam state atau lakukan apa pun yang Anda butuhkan
+                    setLatitude(lat);
+                    setLongitude(lng);
+                  }}
                   show={showModal}
                   handleClose={handleCloseModal}
-                   />
+                />
               </div>
             )}
             {roleId === 3 && (
@@ -453,7 +457,7 @@ const [searchedLongitude, setSearchedLongitude] = useState(null);
                 </div>
               </div>
             )}
-             {roleId === 4 && (
+            {roleId === 4 && (
               <div id="details">
                 <p className="display-6 mt-5 text-white">Detail Information</p>
 
@@ -473,39 +477,38 @@ const [searchedLongitude, setSearchedLongitude] = useState(null);
                   </div>
 
                   <div className="form-floating col-6 px-1 mb-3">
-                  <select
-                    placeholder="Are you cooking and supplying in the last 18 months?"
-                    id="roleId"
-                    className="form-control"
-                    value={activeOrNot}
-                    onChange={(e) => setActiveOrNot(Number(e.target.value))}
-                    required
-                  >
-                    <option value="" disabled>
-                     Yes or No
-                    </option>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                  </select>
-                  <label htmlFor="roleId">Are you cooking and supplying in the last 18 months?</label>
-                </div>
-
-                </div>
-
- 
-                <div className="form-floating  col-6 px-1 mb-3">
-                    <input
-                      type="text"
+                    <select
+                      placeholder="Are you cooking and supplying in the last 18 months?"
+                      id="roleId"
                       className="form-control"
-                      id="license"
-                      placeholder="Complete address"
-                      value={partnerAddress}
-                      onChange={(e) => setPartnerAddress(e.target.value)}
+                      value={activeOrNot}
+                      onChange={(e) => setActiveOrNot(Number(e.target.value))}
                       required
-                    />
-                    <label htmlFor="name">Complete address</label>
+                    >
+                      <option value="" disabled>
+                        Yes or No
+                      </option>
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                    <label htmlFor="roleId">
+                      Are you cooking and supplying in the last 18 months?
+                    </label>
                   </div>
+                </div>
 
+                <div className="form-floating  col-6 px-1 mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="license"
+                    placeholder="Complete address"
+                    value={partnerAddress}
+                    onChange={(e) => setPartnerAddress(e.target.value)}
+                    required
+                  />
+                  <label htmlFor="name">Complete address</label>
+                </div>
               </div>
             )}
             <br />
@@ -525,9 +528,7 @@ const [searchedLongitude, setSearchedLongitude] = useState(null);
             </button>
             <br />
           </form>
-
         </div>
-        
       ) : (
         // REPLACE
         <div id="loginForm">
@@ -586,9 +587,7 @@ const [searchedLongitude, setSearchedLongitude] = useState(null);
           </form>
         </div>
       )}
-      
     </div>
-    
   );
 };
 
