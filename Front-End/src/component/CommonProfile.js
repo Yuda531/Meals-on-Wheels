@@ -81,7 +81,7 @@ const CommonProfile = () => {
                                   <p className="col-3 my-auto">Food name</p>
                                   <p className="col-3 my-auto">06/08/2023</p>
                                   <div className="col-6 d-flex">
-                                      <button className=" col-4 btn btn-outline-danger">Proccess</button>
+                                      <button className=" btn btn-outline-danger">Proccess</button>
   
                                   </div>
                               </div>

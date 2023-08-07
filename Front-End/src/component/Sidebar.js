@@ -34,26 +34,9 @@ function Sidebar() {
 
   return (
     <div className="four columns">
-      {/* Search Form */}
-      <div className="widget search-form">
-        <nav className="search">
-          <form action="#" method="get">
-            <button>
-              <i className="fa fa-search"></i>
-            </button>
-            <input
-              className="search-field"
-              type="text"
-              placeholder="Search for meals"
-              value=""
-            />
-          </form>
-        </nav>
-        <div className="clearfix"></div>
-      </div>
 
       {/* Author Box */}
-      <div className="widget">
+      <div className="widget mt-4">
         <a href="/profile">
           <div className="author-box row">
             <div className="col-8">
