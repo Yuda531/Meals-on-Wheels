@@ -61,9 +61,9 @@ public class UserController {
             userService.saveUser(newUser);
 
             if(roleId == 2){
-            	Member member = registerRequest.getMember();
-            	
-            	 // Pengecekan null untuk member
+                Member member = registerRequest.getMember();
+
+                // Pengecekan null untuk member
                 if (member == null) {
                     throw new IllegalArgumentException("Member details not provided");
                 }

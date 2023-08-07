@@ -46,6 +46,7 @@ const LoginOrRegis = () => {
   const [validated, setValidated] = useState(false);
   const [showReplacement, setShowReplacement] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  
 
   // LOGIN
 
@@ -119,25 +120,14 @@ const LoginOrRegis = () => {
     setActive(isActive);
   };
 
-  // REGIS
-  const [showModal, setShowModal] = useState(false);
+// MODAL PETA
+const [showModal, setShowModal] = useState(false);
+const [latitude, setLatitude] = useState(0);
+const [longitude, setLongitude] = useState(0);
+const [searchQuery, setSearchQuery] = useState('');
+const [searchedLatitude, setSearchedLatitude] = useState(null);
+const [searchedLongitude, setSearchedLongitude] = useState(null);
 
- const [latitude, setLatitude] = useState(0);
- const [longitude, setLongitude] = useState(0);
-
-
- const [searchQuery, setSearchQuery] = useState('');
- const [searchedLatitude, setSearchedLatitude] = useState(null);
- const [searchedLongitude, setSearchedLongitude] = useState(null);
-
-//  const handleSelectLocation = (lat, lng) => {
-//   setLatitude(lat);
-//   setLongitude(lng);
-// };
-
-// const handleCloseModal = () => {
-//   setShowMapModal(false);
-// };
 
   const handleShowModal = () => {
     setShowModal(true)
@@ -164,7 +154,26 @@ const LoginOrRegis = () => {
   const handleSelectLocation = (lat, lng) => {
     setLatitude(lat);
     setLongitude(lng);
+    handleCloseModal();
   };
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        `https://nominatim.openstreetmap.org/search?q=${searchQuery}&format=json&limit=1`
+      );
+      if (response.data.length > 0) {
+        const { lat, lon } = response.data[0];
+        setSearchedLatitude(parseFloat(lat));
+        setSearchedLongitude(parseFloat(lon));
+      } else {
+        console.log("No results found for the search query");
+      }
+    } catch (error) {
+      console.error("Error occurred during geocoding:", error);
+    }
+  };
+
 
 
   const handleSubmit = (e) => {
@@ -211,8 +220,8 @@ const LoginOrRegis = () => {
       const memberData = {
         age: memberAge,
         reason: memberReason,
-        // latitude: latitude,
-        // longitude: longitude
+        latitude: latitude,
+        longitude: longitude
       };
       data = {
         ...data,
@@ -382,19 +391,8 @@ const LoginOrRegis = () => {
                     <label htmlFor="name">Why are you joining us?</label>
                   </div>
                 </div>
-                <p className="lead mt-2 text-white">Please enter your address</p>
-                <div className="form-floating col-6 px-1 mb-3">
-                    <input
-                      type="text"
-                      max={122}
-                      className="form-control"
-                      id="age"
-                      placeholder="Address details eg. white bulding, 2 cars, ..."
-                      // value={memberAge}
-                      // onChange={(e) => setAge(e.target.value)}
-                      required
-                    />
-                    <label htmlFor="name">Address details eg. white bulding, 2 cars, ...</label>
+                <p className="lead mt-1 text-white">Please Open The Map and Pick Your Address</p>
+                <div className="form-floating col-6 mb-1">
                     <button type="button" className="btn btn-success col-6 mt-4" onClick={handleShowModal}>
                     Select on map
                   </button>
@@ -406,29 +404,6 @@ const LoginOrRegis = () => {
                   show={showModal}
                   handleClose={handleCloseModal}
                    />
-
-                  {/* <div className="col-6 d-flex"> */}
-
-
-                  {/* <button
-                  type="button"
-                  className="btn btn-outline-success col-6 me-2"
-                  onClick={handleGetLocation}
-                >
-                  Get Current Location
-                </button> */}
-               
-                  
-
-
-
-      {/* Render the MapModal component */}
-      {/* <MapModal
-        onSelectLocation={handleSelectLocation}
-        show={showModal}
-        handleClose={handleCloseModal}
-      /> */}
-
               </div>
             )}
             {roleId === 3 && (

@@ -19,12 +19,16 @@ public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long memberId;
-	
+
 	private Integer age;
 	private String reason;
-	
+
+	private Double latitude;
+	private Double longitude;
+
+
 	@OneToOne
 	@JoinColumn(name = "userId")
 	private User userId;
-	
+
 }
