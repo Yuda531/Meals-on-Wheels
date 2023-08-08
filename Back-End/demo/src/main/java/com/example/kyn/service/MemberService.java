@@ -34,7 +34,5 @@ public class MemberService{
 		memberRepository.deleteById(memberId);
 	}
 	
-	public Member findMemberByUserId(Long userId) {
-		return memberRepository.getMemberByUserId(userId);
-	}
+
 }
