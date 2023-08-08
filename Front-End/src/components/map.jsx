@@ -143,6 +143,7 @@ const MapModal = ({onSelectLocation, show, handleClose, setAddressInfo }) => {
           </div>
           <div className="modal-body">
           <p className="lead text-dark">Click anywhere to choose your location</p>
+          
         
             <div className="form-floating col-12 d-flex mb-4">
               <input

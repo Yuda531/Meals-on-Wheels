@@ -245,6 +245,9 @@ const LoginOrRegis = () => {
         partnerAddress: partnerAddress,
         partnerName: partnerName,
         activeOrNot: activeOrNot,
+        latitude: latitude,
+        longitude: longitude,
+        ...addressInfo,
       };
       data = {
         ...data,
@@ -409,7 +412,7 @@ const LoginOrRegis = () => {
                   Where do you live?
                 </p>
                 <p className="lead text-white col-6 px-1 mt-3">
-                         {`${addressInfo.road || ''} ${addressInfo.village || ''} ${addressInfo.subdistrict || addressInfo.city || ''} ${addressInfo.state || ''} ${addressInfo.country || ''} ${addressInfo.postcode || ''}`}
+                {`${addressInfo.road || ''} ${addressInfo.village || ''} ${addressInfo.subdistrict || addressInfo.city || ''} ${addressInfo.state || ''} ${addressInfo.country || ''} ${addressInfo.postcode || ''}`}
 
                 </p>
                 
