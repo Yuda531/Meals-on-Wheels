@@ -16,6 +16,10 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "userId")
+    private Order order;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -49,9 +53,6 @@ public class User {
     @OneToOne(mappedBy = "userId")
     private Partner partner;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "userId")
-    private Order order;
 
 
 }
