@@ -37,14 +37,33 @@ function MemberDetailMeals() {
       confirmButtonText: 'Yes, order it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Success!',
-          'Successfull meals order.',
-          'success',
-          );
-        handleClose();
+        // Create order object
+        const orderData = {
+          orderMaker: userSession.name,
+          orderName: meal.meals_name,
+          // Other order details...
+        };
+
+        // Send POST request to save order
+        axios.post("http://localhost:8080/user/order", orderData)
+          .then(response => {
+            Swal.fire(
+              'Success!',
+              'Successfully ordered.',
+              'success'
+            );
+            handleClose();
+          })
+          .catch(error => {
+            console.error(error);
+            Swal.fire(
+              'Error!',
+              'Failed to place order.',
+              'error'
+            );
+          });
       }
-    })
+    });
   }
 
   useEffect(() => {
