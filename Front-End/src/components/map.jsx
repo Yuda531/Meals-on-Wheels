@@ -11,6 +11,7 @@ const MapModal = ({onSelectLocation, show, handleClose, setAddressInfo }) => {
 
   
   const handleMapClick = async (event) => {
+    // event.preventDefault()
     const { lat, lng } = event.latlng;
 
     console.log("Koordinat yang dipilih:", lat, lng);
@@ -38,6 +39,8 @@ const MapModal = ({onSelectLocation, show, handleClose, setAddressInfo }) => {
       console.error("Error occurred during geocoding:", error);
     }
   };
+
+
   
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -127,6 +130,7 @@ const MapModal = ({onSelectLocation, show, handleClose, setAddressInfo }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Select Location on Map</h5>
+          
             <button
               type="button"
               className="close"
@@ -138,6 +142,8 @@ const MapModal = ({onSelectLocation, show, handleClose, setAddressInfo }) => {
             </button>
           </div>
           <div className="modal-body">
+          <p className="lead text-dark">Click anywhere to choose your location</p>
+        
             <div className="form-floating col-12 d-flex mb-4">
               <input
                 id="loc"
@@ -178,15 +184,21 @@ const MapModal = ({onSelectLocation, show, handleClose, setAddressInfo }) => {
               </MapContainer>
             )}
           </div>
-          <div className="modal-footer">
+          <div className="modal-footer d-flex justify-content-end col-12">
+
+
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-secondary col-4 mx-auto"
               data-dismiss="modal"
               onClick={handleClose}
             >
               Close
             </button>
+
+
+
+            
           </div>
         </div>
       </div>

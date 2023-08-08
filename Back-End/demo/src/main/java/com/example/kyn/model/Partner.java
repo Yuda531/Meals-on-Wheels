@@ -21,8 +21,15 @@ public class Partner {
     @Column(name = "partner_name")
     private String partnerName;
 
-    @Column(name = "partner_address")
-    private String partnerAddress;
+    private Double latitude;
+    private Double longitude;
+    private String road;
+    private String village;
+    private String subdistrict;
+    private String city;
+    private String state;
+    private String country;
+    private String postcode;
 
     @Column(name = "active")
     private Integer activeOrNot;
