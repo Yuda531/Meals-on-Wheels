@@ -140,7 +140,7 @@ const LoginOrRegis = () => {
   };
 
   // if (setShowModal) {
-  //   // const handleGetLocation = () => {
+  //   const handleGetLocation = () => {
   //   getCurrentLocation(
   //     (lat, lng) => {
   //       setLatitude(lat);
@@ -150,7 +150,7 @@ const LoginOrRegis = () => {
   //       console.error("Error getting current location:", error.message);
   //     }
   //   );
-  //   // };
+  //   };
   // }
 
   const handleCloseModal = () => {
@@ -398,15 +398,16 @@ const LoginOrRegis = () => {
                   </div>
                 </div>
                 <p className="lead mt-1 text-white">
-                  Please Open The Map and Pick Your Address
+                  Where do you live?
                 </p>
-                <div className="form-floating col-6 mb-1">
+                
+                <div className="form-floating col-6 px-1 mb-4">
                   <button
                     type="button"
-                    className="btn btn-success col-6 mt-4"
+                    className="btn btn-success col-12 p-2 mx-auto mt-2"
                     onClick={handleShowModal}
                   >
-                    Select on map
+                    Get My Address
                   </button>
                 </div>
                 <MapModal
