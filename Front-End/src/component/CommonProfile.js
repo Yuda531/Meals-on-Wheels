@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useEffect } from 'react';
 import pp from '../img/user.png';
+import axios from 'axios';
 
 const CommonProfile = () => {
     const [show, setShow] = useState(false);
@@ -15,8 +16,41 @@ const CommonProfile = () => {
 
     let userSession = sessionStorage.getItem("user");
     userSession = JSON.parse(userSession);
-  
 
+    const [members, setMembers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filteredMembers, setFilteredMembers] = useState([]);
+  
+    useEffect(() => {
+      const fetchMembers = async () => {
+        try {
+          const response = await axios.get(
+            "http://localhost:8080/admin/all-members"
+          );
+          setMembers(response.data);
+          setFilteredMembers(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+  
+      fetchMembers();
+    }, []);
+  
+    useEffect(() => {
+      const filtered = members.filter((member) => {
+        const memberName = member.member_name
+          ? member.member_name.toLowerCase()
+          : "";
+        const memberAge = member.age ? member.age.toString() : "";
+        return (
+          memberName.includes(searchTerm.toLowerCase()) ||
+          memberAge.includes(searchTerm.toLowerCase())
+        );
+      });
+      setFilteredMembers(filtered);
+    }, [searchTerm, members]);
+  
 
     return ( 
         <div className="body">
@@ -31,23 +65,23 @@ const CommonProfile = () => {
                 <div className="col-6 mx-auto ">
                   <img style={{borderRadius:"50%"}} src={pp} className="col-12" alt="" />
                 </div>
-                <div className="col-6 profileCardData mx-auto text-center text-white">
+                {filteredMembers.filter((member) => member.memberId === userSession.id).map((member, index) => (
+                <div key={index} className="col-6 profileCardData mx-auto text-center text-white">
                   <small className="display-6">
-                    {userSession.name}
+                    {member.userId.name}
                   </small>
                   <br />
                   <br />
                   <small className="lead text-white fw-bold">
-                    {userSession.email}
+                    {member.userId.email}
                   </small>
                   <br />
-                  <small className="lead"><CircleFill color="green" /> {userSession.roleId.roleName}</small>
-                  <small className="lead d-none"><CircleFill color="red" /> {userSession.roleId.roleName}</small>
+                  <small className="lead"> {member.country}</small>
                   <small className="lead d-none"><CircleFill color="yellow" /> Busy</small>
                   <hr className="border-white" />
                   
                   <small className="lead">
-                    Joined since 2011
+                    Age {member.age}
                   </small>
                   <br />
                   <br />
@@ -55,6 +89,7 @@ const CommonProfile = () => {
                   <button onClick={handleShow} className="btn btn-success col-12 mb-3">Edit Profile</button>                  
                   
                 </div>
+                ))}
               </div>
             </div>
             <div className="col-7 px-5 aboutt">
