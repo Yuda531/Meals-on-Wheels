@@ -1,193 +1,164 @@
-import img from '../images/gorengan.jpg'
+import img from '../images/measl2.jpeg'
 import bg from '../images/bgmakananjay.jpg'
+import iconGif from '../images/barbecue.gif'
 import { useState } from "react";
 import { useEffect } from "react";
+import Swal from 'sweetalert2';
+
 
 const PartnerDash = () => {
-	const donations = [
-		{
-		  id: 1,
-		  name: "Roger Richard",
-		  address: "Los Angeles",
-		  amount: 50,
-		},
-		{
-		  id: 2,
-		  name: "Sarah Moan",
-		  address: "Amsterdam",
-		  amount: 25,
-		},
-		{
-		  id: 3,
-		  name: "Harry Scarfield",
-		  address: "Edinburgh",
-		  amount: 150,
-		},
-		{
-		  id: 4,
-		  name: "Antonio Gracha",
-		  address: "California",
-		  amount: 50,
-		},
-		{
-		  id: 5,
-		  name: "Agung Yuda",
-		  address: "Baleendah",
-		  amount: 500,
-		},
-		{
-		  id: 6,
-		  name: "Asep Supriyadi",
-		  address: "Pameungpeuk",
-		  amount: 250,
-		},
-	  ];
-	
-	  // Calculate the total donation amount
-	  const totalDonation = donations.reduce(
-		(accumulator, donate) => accumulator + donate.amount,
-		0
-	  );
-	
-	  const [searchTerm, setSearchTerm] = useState("");
-	  const [filteredDonors, setFilteredDonors] = useState(donations);
-	
-	  useEffect(() => {
-		const filtered = donations.filter(
-		  (donor) =>
-			donor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-			donor.address.toLowerCase().includes(searchTerm.toLowerCase())
-		);
-		setFilteredDonors(filtered);
-	  }, [searchTerm]);
+  const donations = [
+    {
+      id: 1,
+      meals: "Paha ajri",
+      name: "Asep Roger",
+      date: "06/08/2023",
+      amount: 8,
+      status: "Panding",
+    },
+    {
+      id: 2,
+      meals: "Serabi nesan",
+      name: "Yang Maha Agung",
+      date: "06/08/2023",
+      amount: 100,
+      status: "Process",
+    },
+    {
+      id: 3,
+      meals: "loly SD",
+      name: "Rehan crod",
+      date: "06/08/2023",
+      amount: 13,
+      status: "Success",
+    },
+  ];
 
-    return (  
-    <>
-        <div
-      className="backimg"
-      style={{
-        backgroundImage: `url(${bg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        minHeight: "100vh",
-        padding: "50px",
-		backgroundColor: 'black',
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredDonors, setFilteredDonors] = useState(donations);
 
-		
-      }}
-    >
-		<section class="jumbotron">
-                <div class="jumbotron__content">
-                    <h1 className='text-light'>Hi Welcome, <span className='text-warning'>Partner🥗</span> </h1>
-                </div>
-              
-            </section>
-
-
-      {/* table kedua */}	
-      <div className="container">
-        <main className="table">
-          <section className="table__header">
-            <h1 className="text-dark ps-3 ">Member Orders</h1>
-            <div className="input-group">
-            <input
-                // type="search"
-                // placeholder="Search Donor..."
-                // value={searchTerm}
-                // onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              {/* <img src="images/search.png" alt="" /> */}
-            </div>
-          </section>
-          <section className="table__body">
-		  <table>
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Meals Request</th>
-                                <th>Name</th>
-                                <th>Order Date</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="align-middle">1</td>
-                                <td class="d-flex align-items-center">
-                                    <img src="https://img.kurio.network/0_fXbTBqMzFnVY00OV-Erl1b9Ks=/1200x900/filters:quality(80)/https://kurio-img.kurioapps.com/20/05/08/6ade4a06-0dda-41f7-b08a-d870a37f9248.jpg"
-                                        alt="" />
-                                    <span>burayot</span>
-                                </td>
-                                <td class="align-middle">Rocky</td>
-                                <td class="align-middle">27 Aug, 9000</td>
-                                <td class="align-middle">
-                                    <p className="status cancelled m-0">Pending</p>
-                                </td>
-                                <td class="align-middle">
-                                    <p className="status shipped m-0">Detail</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="align-middle">2</td>
-                                <td class="d-flex align-items-center">
-                                    <img src="https://pasundan.jabarekspres.com/wp-content/uploads/2022/04/ayam-geprek.jpg" alt="" />
-                                    <span>Bakso Kimochi</span>
-                                </td>
-                                <td class="align-middle">Rocky</td>
-                                <td class="align-middle">27 Aug, 9000</td>
-                                <td class="align-middle">
-                                    <p className="status pending">Pending</p>
-                                </td>
-                                <td class="align-middle">
-                                    <p className="status shipped m-0">Detail</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="align-middle">3</td>
-                                <td class="d-flex align-items-center">
-                                    <img src="https://img-global.cpcdn.com/recipes/5d60946d255537b4/680x482cq70/bubur-ayam-sayur-foto-resep-utama.jpg"
-                                        alt="" />
-                                    <span>Bubur Enak</span>
-                                </td>
-                                <td class="align-middle">Rocky</td>
-                                <td class="align-middle">27 Aug, 9000</td>
-                                <td class="align-middle">
-                                    <p className="status delivered m-0">Pending</p>
-                                </td>
-                                <td class="align-middle">
-                                    <p className="status shipped m-0">Detail</p>
-                                </td>
-                            </tr>
-							<tr>
-                                <td class="align-middle">3</td>
-                                <td class="d-flex align-items-center">
-                                    <img src="https://cdn.keepo.me/images/post/lists/2019/10/30/main-list-image-c4f340f1-3fc6-4557-b72c-992f5f457cb4-1.jpg"
-                                        alt="" />
-                                    <span>Bubur Enak</span>
-                                </td>
-                                <td class="align-middle">Rocky</td>
-                                <td class="align-middle">27 Aug, 9000</td>
-                                <td class="align-middle">
-                                    <p className="status delivered m-0">Pending</p>
-                                </td>
-                                <td class="align-middle">
-                                    <p className="status shipped m-0">Detail</p>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-          </section>
-        </main>
-      </div>
-    </div>
-
-
-        </>
+  useEffect(() => {
+    const filtered = donations.filter(
+      (donor) =>
+        donor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        donor.address.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    setFilteredDonors(filtered);
+  }, [searchTerm]);
+
+  const handleStatusChange = (donor, selectedStatus) => {
+    if (selectedStatus !== null) {
+      Swal.fire({
+            title: 'Status Updated!',
+            text: `Meals ${donor.meals} status has been updated to ${selectedStatus}.`,
+            icon: 'success',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: ` Meals ${donor.meals} ${selectedStatus}`,
+            text: `Status Updated!`,
+            
+            imageUrl: iconGif, // Replace this with the URL of your success GIF
+            imageWidth: 200,
+            imageHeight: 200,
+            imageAlt: 'Success GIF',
+          }).then(() => {
+            const updatedDonors = donations.map((item) =>
+              item.id === donor.id ? { ...item, status: selectedStatus } : item
+            );
+            setFilteredDonors(updatedDonors);
+          });
+        }
+      });
+    }
+  };
+
+
+
+  return (
+    <>
+      <div
+        className="backimg"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          minHeight: "100vh",
+          padding: "50px",
+          backgroundColor: 'black',
+
+
+          
+        }}
+
+        
+      >
+        <section class="jumbotron mt-5">
+          <div class="jumbotron__content">
+            <h1 className='text-light'>Hi Welcome, <span className='text-warning'>Partner🥗</span> </h1>
+            <p className='text-light'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
+              cursus ante dapibus diam. Sed nisi.</p>
+          </div>
+        </section>
+
+        <div className="container">
+          <main className="table">
+            <section className="table__header">
+              <h1 className="text-dark ps-3 ">Member Orders</h1>
+              <div className="input-group">
+                <input type="button" value="Search" />
+              </div>
+            </section>
+            <section className="table__body">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Meals Request</th>
+                    <th>Name</th>
+                    <th>Order Date</th>
+                    <th>amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredDonors.map((donor) => (
+                    <tr key={donor.id}>
+                      <td className="align-middle">{donor.id}</td>
+                      <td className="d-flex align-items-center">
+                        <img src={img} alt="" />
+                        <span>{donor.meals}</span>
+                      </td>
+                      <td className="align-middle">{donor.name}</td>
+                      <td className="align-middle">{donor.date}</td>
+                      <td className="align-middle">{donor.amount}</td>
+                      <td className="align-middle">
+                        <select
+                          className={`status status-${donor.status.toLowerCase()} m-0 text-dark`}
+                          onChange={(e) => handleStatusChange(donor, e.target.value)}
+                        >
+                          <option value="Panding">Panding</option>
+                          <option value="Process">Proccess</option>
+                          <option value="Success">Success</option>
+                          <option value="Cancelled">Cancelled</option>
+                        </select>
+                      </td>
+                      <td className="align-middle">
+                        <a href="detail-meals">
+                          <p className="status shipped m-0 text-dark">Detail</p>
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          </main>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default PartnerDash;
