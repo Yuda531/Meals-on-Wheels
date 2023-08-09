@@ -22,9 +22,9 @@ public class OrderService {
     }
 
     public Order saveOrder(Order order) {
-        if (order.getOrderDistance() > 10.0){
-            order.setMoreThanTenKm(true);
-        }
+//        if (order.getOrderDistance() > 10.0){
+//            order.setMoreThanTenKm(true);
+//        }
         order.setApproved(false);
         return orderRepository.save(order);
     }
