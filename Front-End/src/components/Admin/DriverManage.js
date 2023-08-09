@@ -167,9 +167,12 @@ const DriverManage = () => {
                               <td>{driverReq.vehicle}</td>
                               <td>
                                 <button
+                                  className="btn btn-secondary rounded-2 ms-2"
+                                >
+                                  Details <i className="fas fa-eye fa-sm"></i>
+                                </button>
+                                <button
                                   className="btn btn-danger rounded-2 ms-2"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#editMenu"
                                 >
                                   Reject <i className="fas fa-times fa-sm"></i>
                                 </button>
