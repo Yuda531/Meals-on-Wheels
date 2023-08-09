@@ -93,6 +93,13 @@ public class UserController {
             }
 
             if(roleId == 4){
+                Double partnerLat = registerRequest.getPartner().getLatitude();
+                Double partnerLng = registerRequest.getPartner().getLongitude();
+
+                if (partnerLat == 0 || partnerLng == 0) {
+                    throw new IllegalArgumentException("Unauthorized - Missing or Invalid Latitude/Longitude");
+                }
+                
                 Integer activeOrNot = registerRequest.getPartner().getActiveOrNot();
                 if(activeOrNot == 1){
                     registerRequest.getPartner().setPartnerStatus(true);
