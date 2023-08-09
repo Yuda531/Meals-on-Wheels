@@ -8,6 +8,7 @@ import "leaflet/dist/leaflet.css";
 
 import { getCurrentLocation } from "../utils/geolocation";
 import { map } from "leaflet";
+import Feedback from "react-bootstrap/esm/Feedback";
 
 const LoginOrRegis = () => {
   const [userRole, setUserRole] = useState(null);
@@ -43,6 +44,7 @@ const LoginOrRegis = () => {
   const [isActive, setActive] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+  const [noAddress, setAddressError] = useState(false);
   const [validated, setValidated] = useState(false);
   const [showReplacement, setShowReplacement] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -191,10 +193,26 @@ const LoginOrRegis = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+      if (latitude === 0 || longitude === 0) {
+    setAddressError(true);
+
+    // Show SweetAlert when latitude or longitude is 0
+    Swal.fire({
+      icon: "error",
+      title: "Oops... Sorry",
+      text: "Looks like you forgot to add your location. Please select your location by clicking a spot in the map.",
+      footer: '<a href="/contact-us">Contact us</a>',
+    });
+
+    return;
+  }
+    
+
     if (password !== confirmPassword) {
       setPasswordError(true);
       return;
     }
+
 
     const user = {
       name: name,

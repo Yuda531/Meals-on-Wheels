@@ -4,9 +4,11 @@ import com.example.kyn.DTO.UserDTO;
 import com.example.kyn.model.Member;
 import com.example.kyn.model.Role;
 import com.example.kyn.model.User;
+import com.example.kyn.response.CustomErrorResponse;
 import com.example.kyn.response.ResponseData;
 import com.example.kyn.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,10 +65,19 @@ public class UserController {
             if(roleId == 2){
                 Member member = registerRequest.getMember();
 
+                Double memberLat = registerRequest.getMember().getLatitude();
+                Double memberLng = registerRequest.getMember().getLongitude();
+
                 // Pengecekan null untuk member
                 if (member == null) {
                     throw new IllegalArgumentException("Member details not provided");
                 }
+
+                if (memberLat == 0 || memberLng == 0) {
+                    throw new IllegalArgumentException("Unauthorized - Missing or Invalid Latitude/Longitude");
+                }
+
+
                 member.setUserId(newUser);
                 memberService.save(registerRequest.getMember());
             }
