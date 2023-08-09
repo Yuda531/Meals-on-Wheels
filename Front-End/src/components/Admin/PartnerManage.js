@@ -163,13 +163,6 @@ const PartnerManage = () => {
                               <td>{PartnerReq.address}</td>
                               <td>
                                 <button
-                                  className="btn btn-secondary rounded-2 ms-2"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#deleteMenu"
-                                >
-                                  Details <i className="fas fa-eye fa-sm"></i>
-                                </button>
-                                <button
                                   className="btn btn-danger rounded-2 ms-2"
                                   data-bs-toggle="modal"
                                   data-bs-target="#editMenu"

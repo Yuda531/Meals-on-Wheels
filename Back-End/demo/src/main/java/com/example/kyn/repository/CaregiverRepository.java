@@ -13,13 +13,6 @@ public interface CaregiverRepository extends JpaRepository<Caregiver,Long> {
 
     @Query("SELECT p FROM Caregiver p JOIN p.userId u WHERE u.userId = :userId")
     Caregiver getDriverByUserId(@Param("userId")Long userId);
-
-//    Optional<Caregiver> findDriverByName(User user);
-
-//    @Query("SELECT *\n" +
-//            "FROM users\n" +
-//            "JOIN caregivers ON users.id = caregivers.userId\n" +
-//            "WHERE users.isActive = true\n")
-//    List<Caregiver> getAllActiveDrivers();
+    
 
 }
