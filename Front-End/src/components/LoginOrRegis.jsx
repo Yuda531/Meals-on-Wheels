@@ -5,7 +5,9 @@ import Swal from "sweetalert2";
 import MapModal from "./map";
 import "leaflet/dist/leaflet.css";
 
+
 import { getCurrentLocation } from "../utils/geolocation";
+import { map } from "leaflet";
 
 const LoginOrRegis = () => {
   const [userRole, setUserRole] = useState(null);
@@ -124,6 +126,10 @@ const LoginOrRegis = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchedLatitude, setSearchedLatitude] = useState(null);
   const [searchedLongitude, setSearchedLongitude] = useState(null);
+  const [onSelectLocation, setSelectedLocation] = useState(null);
+  const [handleClose, setClose] = useState(null)
+
+  
 
   const [addressInfo, setAddressInfo] = useState({
     road: "",
@@ -135,12 +141,14 @@ const LoginOrRegis = () => {
     postcode: "",
   });
 
+  //road + village + subdistrict + city + state + country + postcode
+
   const handleShowModal = () => {
     setShowModal(true);
   };
 
   // if (setShowModal) {
-  //   // const handleGetLocation = () => {
+  //   const handleGetLocation = () => {
   //   getCurrentLocation(
   //     (lat, lng) => {
   //       setLatitude(lat);
@@ -150,7 +158,7 @@ const LoginOrRegis = () => {
   //       console.error("Error getting current location:", error.message);
   //     }
   //   );
-  //   // };
+  //   };
   // }
 
   const handleCloseModal = () => {
@@ -237,6 +245,9 @@ const LoginOrRegis = () => {
         partnerAddress: partnerAddress,
         partnerName: partnerName,
         activeOrNot: activeOrNot,
+        latitude: latitude,
+        longitude: longitude,
+        ...addressInfo,
       };
       data = {
         ...data,
@@ -271,15 +282,16 @@ const LoginOrRegis = () => {
     setShowForm(false);
     setShowReplacement(false);
   };
+  const [selectedAddress, setSelectedAddress] = useState({});
 
   return (
     <div
       style={{ maxHeight: "560px", overflow: "auto" }}
-      className="col-9 teams"
+      className="col-9 teams aboutt px-5"
     >
       {!showReplacement ? (
         <div id="regisForm">
-          <h1 className="display-6 text-white">Sign Up</h1>
+          <h1 className="display-3 text-white">Sign Up</h1>
           <hr className="border-white" />
           <form className="col-12" onSubmit={handleSubmit}>
             <div className="d-flex col-12">
@@ -366,9 +378,8 @@ const LoginOrRegis = () => {
 
             {roleId === 2 && (
               <div id="details">
-                <p className="display-6 mt-5 text-white">Detail Information</p>
+                <p className="lead mt-5 fw-bold text-white">Personal Information:</p>
 
-                <hr className="border-white" />
                 <div className="d-flex col-12">
                   <div className="form-floating col-6 px-1 mb-3">
                     <input
@@ -397,16 +408,21 @@ const LoginOrRegis = () => {
                     <label htmlFor="name">Why are you joining us?</label>
                   </div>
                 </div>
-                <p className="lead mt-1 text-white">
-                  Please Open The Map and Pick Your Address
+                <p className="lead fw-bold mt-1 text-white">
+                  Where do you live?
                 </p>
-                <div className="form-floating col-6 mb-1">
+                <p className="lead text-white col-6 px-1 mt-3">
+                {`${addressInfo.road || ''} ${addressInfo.village || ''} ${addressInfo.subdistrict || addressInfo.city || ''} ${addressInfo.state || ''} ${addressInfo.country || ''} ${addressInfo.postcode || ''}`}
+
+                </p>
+                
+                <div className="form-floating col-6 px-1 mb-4">
                   <button
                     type="button"
-                    className="btn btn-success col-6 mt-4"
+                    className="btn btn-success col-12 p-2 mx-auto mt-2"
                     onClick={handleShowModal}
                   >
-                    Select on map
+                    Get My Address
                   </button>
                 </div>
                 <MapModal
@@ -424,9 +440,7 @@ const LoginOrRegis = () => {
             )}
             {roleId === 3 && (
               <div id="details">
-                <p className="display-6 mt-5 text-white">Detail Information</p>
-
-                <hr className="border-white" />
+                <p className="lead mt-5 text-white">Personal Information:</p>
                 <div className="d-flex col-12">
                   <div className="form-floating col-6 px-1 mb-3">
                     <input
@@ -471,9 +485,7 @@ const LoginOrRegis = () => {
             )}
             {roleId === 4 && (
               <div id="details">
-                <p className="display-6 mt-5 text-white">Detail Information</p>
-
-                <hr className="border-white" />
+                 <p className="lead mt-5 fw-bold text-white">Personal Information:</p>
                 <div className="d-flex col-12">
                   <div className="form-floating col-6 px-1 mb-3">
                     <input
@@ -509,18 +521,35 @@ const LoginOrRegis = () => {
                   </div>
                 </div>
 
-                <div className="form-floating  col-6 px-1 mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="license"
-                    placeholder="Complete address"
-                    value={partnerAddress}
-                    onChange={(e) => setPartnerAddress(e.target.value)}
-                    required
-                  />
-                  <label htmlFor="name">Complete address</label>
+                <p className="lead fw-bold mt-1 text-white">
+                  Store Address
+                </p>
+              
+                <p className="lead text-white col-6 px-1 mt-3">
+                         {`${addressInfo.road || ''} ${addressInfo.village || ''} ${addressInfo.subdistrict || addressInfo.city || ''} ${addressInfo.state || ''} ${addressInfo.country || ''} ${addressInfo.postcode || ''}`}
+
+                </p>
+                
+                <div className="form-floating col-6 px-1 mb-4">
+                  <button
+                    type="button"
+                    className="btn btn-success col-12 p-2 mx-auto mt-2"
+                    onClick={handleShowModal}
+                  >
+                    Find My Store Address
+                  </button>
                 </div>
+                <MapModal
+                  latitude={latitude}
+                  longitude={longitude}
+                  onSelectLocation={(lat, lng) => {
+                    setLatitude(lat);
+                    setLongitude(lng);
+                  }}
+                  setAddressInfo={setAddressInfo} // Menyediakan setAddressInfo ke dalam MapModal
+                  show={showModal}
+                  handleClose={handleCloseModal}
+                />
               </div>
             )}
             <br />
@@ -544,7 +573,7 @@ const LoginOrRegis = () => {
       ) : (
         // REPLACE
         <div id="loginForm">
-          <h1 className="display-6 text-white">Sign In</h1>
+          <h1 className="display-3 text-white">Sign In</h1>
           <hr className="border-white" />
           <form onSubmit={handleLoginFormSubmit} className="col-12">
             <div className="form-floating mb-3">
