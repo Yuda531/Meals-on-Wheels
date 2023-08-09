@@ -4,13 +4,18 @@ package com.example.kyn.controller;
 import com.example.kyn.model.Donation;
 import com.example.kyn.model.Meals;
 import com.example.kyn.model.Member;
+import com.example.kyn.model.User;
+import com.example.kyn.repository.UserRepository;
 import com.example.kyn.service.DonationService;
 import com.example.kyn.service.MealsService;
 import com.example.kyn.service.MemberService;
+import com.example.kyn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/admin")
@@ -25,6 +30,12 @@ public class AdminController {
 
     @Autowired
     private MealsService mealsService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping("add-donate")
     public Donation addDonate(@RequestBody Donation donate) {
@@ -88,6 +99,36 @@ public class AdminController {
     @DeleteMapping("/delete-members")
     public void deleteMemberById(@RequestParam(name = "memberId") Long memberId) {
         memberService.deleteMemberById(memberId);
+    }
+
+
+    @PutMapping("/approve-user/{userId}")
+    public ResponseEntity<String> approveUser(@PathVariable Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setActive(true);
+            userRepository.save(user); // Simpan perubahan pada user yang diaktifkan menggunakan userRepository
+            return ResponseEntity.ok("User berhasil diapprove");
+        } else {
+            return ResponseEntity.badRequest().body("User tidak ditemukan");
+        }
+
+    }
+
+
+    @DeleteMapping("/reject-user/{userId}")
+    public ResponseEntity<String> rejectUser(@PathVariable Long userId) {
+        // Lakukan logika untuk menolak akun user dan menghapus datanya berdasarkan userId
+        User user = userService.findUserById(userId);
+
+        if (user != null) {
+            userService.deleteUser(user); // Hapus user dari database
+            return ResponseEntity.ok("User berhasil direject dan dihapus");
+        } else {
+            return ResponseEntity.badRequest().body("User tidak ditemukan");
+        }
     }
 
 

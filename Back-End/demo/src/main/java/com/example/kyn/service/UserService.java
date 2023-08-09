@@ -48,13 +48,6 @@ public class UserService {
     }
 
 
-
-
-
-
-
-
-
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -62,6 +55,18 @@ public class UserService {
 
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+
+    // Fungsi untuk menemukan user berdasarkan ID
+    public User findUserById(Long userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        return userOptional.orElse(null);
+    }
+
+    // Fungsi untuk menghapus user
+    public void deleteUser(User user) {
+        userRepository.delete(user);
     }
 
 
