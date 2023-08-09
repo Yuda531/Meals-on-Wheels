@@ -1,10 +1,7 @@
 package com.example.kyn.controller;
 
 
-import com.example.kyn.model.Donation;
-import com.example.kyn.model.Meals;
-import com.example.kyn.model.Member;
-import com.example.kyn.model.User;
+import com.example.kyn.model.*;
 import com.example.kyn.repository.UserRepository;
 import com.example.kyn.service.DonationService;
 import com.example.kyn.service.MealsService;
@@ -131,6 +128,29 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/caregivers/not-active")
+    public List<User> getNotActiveCaregivers() {
+        Role caregiverRole = userService.findRoleById(3L);
+        return userRepository.findAllByIsActiveAndRoleId(false, caregiverRole);
+    }
+
+    @GetMapping("/caregivers/active")
+    public List<User> getActiveCaregivers() {
+        Role caregiverRole = userService.findRoleById(3L);
+        return userRepository.findAllByIsActiveAndRoleId(true, caregiverRole);
+    }
+
+    @GetMapping("/partners/not-active")
+    public List<User> getNotActivePartners() {
+        Role partnerRole = userService.findRoleById(4L);
+        return userRepository.findAllByIsActiveAndRoleId(false, partnerRole);
+    }
+
+    @GetMapping("/partners/active")
+    public List<User> getActivePartners() {
+        Role partnerRole = userService.findRoleById(4L);
+        return userRepository.findAllByIsActiveAndRoleId(true, partnerRole);
+    }
 
 
 }
