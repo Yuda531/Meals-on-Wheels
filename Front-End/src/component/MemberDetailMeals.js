@@ -26,6 +26,40 @@ function MemberDetailMeals() {
   let userSession = sessionStorage.getItem("user");
   userSession = JSON.parse(userSession);
 
+  const [members, setMembers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredMembers, setFilteredMembers] = useState([]);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/admin/all-members"
+        );
+        setMembers(response.data);
+        setFilteredMembers(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchMembers();
+  }, []);
+
+  useEffect(() => {
+    const filtered = members.filter((member) => {
+      const memberName = member.member_name
+        ? member.member_name.toLowerCase()
+        : "";
+      const memberAge = member.age ? member.age.toString() : "";
+      return (
+        memberName.includes(searchTerm.toLowerCase()) ||
+        memberAge.includes(searchTerm.toLowerCase())
+      );
+    });
+    setFilteredMembers(filtered);
+  }, [searchTerm, members]);
+
   const handleOrder = () => {
     Swal.fire({
       title: 'Are you sure?',
@@ -37,12 +71,16 @@ function MemberDetailMeals() {
       confirmButtonText: 'Yes, order it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Create order object
-        const orderData = {
+        const orderData = filteredMembers
+        .filter((member) => member.memberId === userSession.id)
+        .map((member) => ({
           orderMaker: userSession.name,
           orderName: meal.meals_name,
-          // Other order details...
-        };
+          orderLocation: "Partnert kitchen",
+          orderDescription: meal.meals_description,
+          orderDestination: `${member.longitude}, ${member.latitude}`
+          
+        }))[0]; 
 
         // Send POST request to save order
         axios.post("http://localhost:8080/user/order", orderData)
@@ -65,7 +103,6 @@ function MemberDetailMeals() {
       }
     });
   }
-
   useEffect(() => {
     // Mengambil ID makanan dari URL
     const mealsId = window.location.pathname.split('/').pop();
