@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import MapModal from "./map";
 import "leaflet/dist/leaflet.css";
 
-
 import { getCurrentLocation } from "../utils/geolocation";
 import { map } from "leaflet";
 import Feedback from "react-bootstrap/esm/Feedback";
@@ -129,9 +128,7 @@ const LoginOrRegis = () => {
   const [searchedLatitude, setSearchedLatitude] = useState(null);
   const [searchedLongitude, setSearchedLongitude] = useState(null);
   const [onSelectLocation, setSelectedLocation] = useState(null);
-  const [handleClose, setClose] = useState(null)
-
-  
+  const [handleClose, setClose] = useState(null);
 
   const [addressInfo, setAddressInfo] = useState({
     road: "",
@@ -193,26 +190,24 @@ const LoginOrRegis = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-      if (latitude === 0 || longitude === 0) {
-    setAddressError(true);
+    if ((roleId === 2 || roleId === 4) && (latitude === 0 || longitude === 0)) {
+      setAddressError(true);
 
-    // Show SweetAlert when latitude or longitude is 0
-    Swal.fire({
-      icon: "error",
-      title: "Oops... Sorry",
-      text: "Looks like you forgot to add your location. Please select your location by clicking a spot in the map.",
-      footer: '<a href="/contact-us">Contact us</a>',
-    });
+      // Show SweetAlert when latitude or longitude is 0
+      Swal.fire({
+        icon: "error",
+        title: "Oops... Sorry",
+        text: "Looks like you forgot to add your location. Please select your location by clicking a spot in the map.",
+        footer: '<a href="/contact-us">Contact us</a>',
+      });
 
-    return;
-  }
-    
+      return;
+    }
 
     if (password !== confirmPassword) {
       setPasswordError(true);
       return;
     }
-
 
     const user = {
       name: name,
@@ -396,7 +391,9 @@ const LoginOrRegis = () => {
 
             {roleId === 2 && (
               <div id="details">
-                <p className="lead mt-5 fw-bold text-white">Personal Information:</p>
+                <p className="lead mt-5 fw-bold text-white">
+                  Personal Information:
+                </p>
 
                 <div className="d-flex col-12">
                   <div className="form-floating col-6 px-1 mb-3">
@@ -430,10 +427,13 @@ const LoginOrRegis = () => {
                   Where do you live?
                 </p>
                 <p className="lead text-white col-6 px-1 mt-3">
-                {`${addressInfo.road || ''} ${addressInfo.village || ''} ${addressInfo.subdistrict || addressInfo.city || ''} ${addressInfo.state || ''} ${addressInfo.country || ''} ${addressInfo.postcode || ''}`}
-
+                  {`${addressInfo.road || ""} ${addressInfo.village || ""} ${
+                    addressInfo.subdistrict || addressInfo.city || ""
+                  } ${addressInfo.state || ""} ${addressInfo.country || ""} ${
+                    addressInfo.postcode || ""
+                  }`}
                 </p>
-                
+
                 <div className="form-floating col-6 px-1 mb-4">
                   <button
                     type="button"
@@ -503,7 +503,9 @@ const LoginOrRegis = () => {
             )}
             {roleId === 4 && (
               <div id="details">
-                 <p className="lead mt-5 fw-bold text-white">Personal Information:</p>
+                <p className="lead mt-5 fw-bold text-white">
+                  Personal Information:
+                </p>
                 <div className="d-flex col-12">
                   <div className="form-floating col-6 px-1 mb-3">
                     <input
@@ -539,15 +541,16 @@ const LoginOrRegis = () => {
                   </div>
                 </div>
 
-                <p className="lead fw-bold mt-1 text-white">
-                  Store Address
-                </p>
-              
-                <p className="lead text-white col-6 px-1 mt-3">
-                         {`${addressInfo.road || ''} ${addressInfo.village || ''} ${addressInfo.subdistrict || addressInfo.city || ''} ${addressInfo.state || ''} ${addressInfo.country || ''} ${addressInfo.postcode || ''}`}
+                <p className="lead fw-bold mt-1 text-white">Store Address</p>
 
+                <p className="lead text-white col-6 px-1 mt-3">
+                  {`${addressInfo.road || ""} ${addressInfo.village || ""} ${
+                    addressInfo.subdistrict || addressInfo.city || ""
+                  } ${addressInfo.state || ""} ${addressInfo.country || ""} ${
+                    addressInfo.postcode || ""
+                  }`}
                 </p>
-                
+
                 <div className="form-floating col-6 px-1 mb-4">
                   <button
                     type="button"
