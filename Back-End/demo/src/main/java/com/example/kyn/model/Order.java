@@ -23,10 +23,10 @@ public class Order {
     private String orderName;
 
     @Column()
-    private Member member;
+    private String orderLocation;
 
     @Column()
-    private Partner partner;
+    private String orderDestination;
 
     @Column()
     private double orderDistance;

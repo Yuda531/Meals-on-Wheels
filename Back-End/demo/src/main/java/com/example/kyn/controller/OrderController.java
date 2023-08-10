@@ -1,9 +1,6 @@
 package com.example.kyn.controller;
 
-import com.example.kyn.model.Member;
 import com.example.kyn.model.Order;
-import com.example.kyn.model.Partner;
-import com.example.kyn.service.LocationUtils;
 import com.example.kyn.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +19,7 @@ public class OrderController {
 
     @PostMapping("/order")
     public ResponseEntity<Order> saveOrder(@RequestBody Order order) {
+<<<<<<< HEAD
         // ... (other parts of the method)
 
         Double orderLocationLat = order.getMember().getLatitude();
@@ -35,9 +33,9 @@ public class OrderController {
 
         order.setOrderDistance(distance);
 
+=======
+>>>>>>> 9caa3eae4414c0d5c05decfb556d7e7101fa0e38
         Order savedOrder = orderService.saveOrder(order);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedOrder);
     }
-
 }
-

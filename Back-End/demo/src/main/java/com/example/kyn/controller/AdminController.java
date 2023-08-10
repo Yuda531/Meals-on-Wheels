@@ -129,28 +129,29 @@ public class AdminController {
     }
 
     @GetMapping("/caregivers/not-active")
-    public List<User> getNotActiveCaregivers() {
+    public List<Object[]> getNotActiveCaregivers() {
         Role caregiverRole = userService.findRoleById(3L);
-        return userRepository.findAllByIsActiveAndRoleId(false, caregiverRole);
+        return userRepository.findCaregiversAndUsersByIsActiveAndRoleId(false, caregiverRole);
     }
 
     @GetMapping("/caregivers/active")
-    public List<User> getActiveCaregivers() {
+    public List<Object[]> getActiveCaregivers() {
         Role caregiverRole = userService.findRoleById(3L);
-        return userRepository.findAllByIsActiveAndRoleId(true, caregiverRole);
+        return userRepository.findCaregiversAndUsersByIsActiveAndRoleId(true, caregiverRole);
     }
 
     @GetMapping("/partners/not-active")
-    public List<User> getNotActivePartners() {
+    public List<Object[]> getNotActivePartners() {
         Role partnerRole = userService.findRoleById(4L);
-        return userRepository.findAllByIsActiveAndRoleId(false, partnerRole);
+        return userRepository.findPartnersAndUsersByIsActiveAndRoleId(false, partnerRole);
     }
 
     @GetMapping("/partners/active")
-    public List<User> getActivePartners() {
+    public List<Object[]> getActivePartners() {
         Role partnerRole = userService.findRoleById(4L);
-        return userRepository.findAllByIsActiveAndRoleId(true, partnerRole);
+        return userRepository.findPartnersAndUsersByIsActiveAndRoleId(true, partnerRole);
     }
+
 
 
 }
