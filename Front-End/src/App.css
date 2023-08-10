@@ -112,7 +112,7 @@ h2 {
 }
 
 .navbar-custom {
-  background-color: #fbfbfbf0 !important;
+  background-color: #fbfbfb !important;
 }
 
 body {
@@ -123,6 +123,11 @@ body {
 .backblur {
   backdrop-filter: blur(9px);
   padding: 10%;
+}
+
+.paddingNoBlur{
+  margin: 0 !important;
+  padding: 5%;
 }
 
 .fadeBg {
@@ -267,6 +272,31 @@ body {
 
 }
 
+.teamsGreen {
+  overflow: auto;
+  overflow-x: hidden !important;
+  padding-right: 10px;
+}
+
+.teamsGreen::-webkit-scrollbar {
+  width: 2px;
+}
+
+.teamsGreen::-webkit-scrollbar-track {
+  background-color: transparent;
+  /* Set the background color of the track to transparent */
+
+}
+
+.teamsGreen::-webkit-scrollbar-thumb {
+  background-color: #0a6e35;
+}
+
+.teamsGreen::-webkit-scrollbar-thumb:hover {
+  background-color: #0a6e35;
+
+}
+
 #contacts3,
 #contacts5,
 #contacts4 {
@@ -306,7 +336,7 @@ ul {
 }
 
 .greenBtns {
-  color: #198754 !important;
+  color: #fdfdfd !important;
 }
 
 .greenBtns:hover {

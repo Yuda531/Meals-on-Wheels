@@ -37,32 +37,45 @@ const CommonProfile = () => {
       fetchMembers();
     }, []);
   
+    // useEffect(() => {
+    //   const filtered = members.filter((member) => {
+    //     const memberName = member.member_name
+    //       ? member.member_name.toLowerCase()
+    //       : "";
+    //     const memberAge = member.age ? member.age.toString() : "";
+    //     return (
+    //       memberName.includes(searchTerm.toLowerCase()) ||
+    //       memberAge.includes(searchTerm.toLowerCase())
+    //     );
+    //   });
+    //   setFilteredMembers(filtered);
+    // }, [searchTerm, members]);
+
+    const [memberAddress, setMemberAddress] = useState(null);
+
     useEffect(() => {
-      const filtered = members.filter((member) => {
-        const memberName = member.member_name
-          ? member.member_name.toLowerCase()
-          : "";
-        const memberAge = member.age ? member.age.toString() : "";
-        return (
-          memberName.includes(searchTerm.toLowerCase()) ||
-          memberAge.includes(searchTerm.toLowerCase())
-        );
-      });
-      setFilteredMembers(filtered);
-    }, [searchTerm, members]);
-  
+
+      const user = sessionStorage.getItem("user");
+      if (user) {
+        const parsedUser = JSON.parse(user);
+        setMemberAddress(parsedUser.member?.userId?.country || "");
+        // setDriverName(parsedUser.caregiver?.driverName || "");
+        // setDriverEmail(parsedUser.caregiver?.userId?.email || "");
+       
+      }
+    }, []);
 
     return ( 
       <div className="body">
       <div className="backblur">
         <h1 className="display-5 text-white">
-          Welcome, {userSession.roleId.roleName}!
+          Welcome, {userSession.name}!
         </h1>
         <hr className="border-white" />
-        <div className="col-12 d-flex flex-wrap">
-          <div className="col-md-5 col-12 profileCard">
+        <div className="col-12 d-flex">
+          <div className="col-md-5 col-12 me-5 profileCard">
             <div className="col-12 d-flex flex-column align-items-center">
-              <div className="col-6 mx-auto ">
+              <div className="col-8 d-flex  align-items-center justify-content-center">
                 <img
                   style={{ borderRadius: "50%" }}
                   src={pp}
@@ -70,29 +83,31 @@ const CommonProfile = () => {
                   alt=""
                 />
               </div>
-              {filteredMembers.filter((member) => member.memberId === userSession.id).map((member, index) => (
-              <div key={index} className="col-6 profileCardData mx-auto text-center text-white">
-                <small className="display-6">
-                  {member.userId.name}
+
+                <small className="lead fw-bold text-center text-white mt-4">
+                {userSession.roleId.roleName} 
+                </small>
+              {/* {filteredMembers.filter((member) => member.memberId === userSession.id).map((member, index) => ( */}
+              <br />
+                <br />
+
+              <div  className="col-6 profileCardData mx-auto text-center text-white">
+                <small className="display-6 mb-5">
+                  {userSession.name}
                 </small>
                 <br />
                 <br />
-                <small className="lead text-white fw-bold">
-                {member.userId.email}
+
+
+                <small className="lead text-white text-center mt-5">
+                {userSession.email} 
                 </small>
-                <br />
-                <small className="lead"> {member.country}</small>
-                <small className="lead d-none">
-                  <CircleFill color="red" /> {userSession.roleId.roleName}
-                </small>
-                <small className="lead d-none">
-                  <CircleFill color="yellow" /> Busy
-                </small>
-                <hr className="border-white" />
-    
-                <small className="lead">Age {member.age}</small>
+
                 <br />
                 <br />
+
+
+
     
                 <button
                   onClick={handleShow}
@@ -101,7 +116,7 @@ const CommonProfile = () => {
                   Edit Profile
                 </button>
               </div>
-             ))}
+             {/* ))} */}
 
             </div>
           </div>
@@ -111,16 +126,16 @@ const CommonProfile = () => {
     
               <div className="newOrder d-flex col-12 p-3">
                 <table className="custom-table col-12">
-                  <thead>
-                    <div className="d-flex mb-2 text-black">
+                  {/* <thead> */}
+                    <div className="d-flex mb-2 text-white py-4">
                       <th className="col-md-3 col-6 mx-auto">Order Name</th>
                       <th className="col-md-3 col-6 mx-auto">Time Order</th>
                       <th className="col-md-6 col-12 mx-auto">Status</th>
                     </div>
                     <hr className="border-white" />
-                  </thead>
+                  {/* </thead> */}
                   <div
-                    style={{ maxHeight: "147px", overflow: "auto" }}
+                    style={{ maxHeight: "400px", overflow: "auto" }}
                     className="orders teams"
                   >
                     <div className="anOrder">
@@ -160,6 +175,54 @@ const CommonProfile = () => {
                       <hr className="border-light" />
                     </div>
     
+                    <div className="anOrder">
+                      <div className="d-flex col-12 mb-3 px-4">
+                        <p className="col-md-3 col-6 my-auto">Food name</p>
+                        <p className="col-md-3 col-6 my-auto">06/08/2023</p>
+                        <div className="col-md-6 col-12 d-flex">
+                          <button className="col-md-4 col-6 btn btn-outline-success">
+                            Done
+                          </button>
+                        </div>
+                      </div>
+                      <hr className="border-light" />
+                    </div>
+                    <div className="anOrder">
+                      <div className="d-flex col-12 mb-3 px-4">
+                        <p className="col-md-3 col-6 my-auto">Food name</p>
+                        <p className="col-md-3 col-6 my-auto">06/08/2023</p>
+                        <div className="col-md-6 col-12 d-flex">
+                          <button className="col-md-4 col-6 btn btn-outline-success">
+                            Done
+                          </button>
+                        </div>
+                      </div>
+                      <hr className="border-light" />
+                    </div>
+                    <div className="anOrder">
+                      <div className="d-flex col-12 mb-3 px-4">
+                        <p className="col-md-3 col-6 my-auto">Food name</p>
+                        <p className="col-md-3 col-6 my-auto">06/08/2023</p>
+                        <div className="col-md-6 col-12 d-flex">
+                          <button className="col-md-4 col-6 btn btn-outline-success">
+                            Done
+                          </button>
+                        </div>
+                      </div>
+                      <hr className="border-light" />
+                    </div>
+                    <div className="anOrder">
+                      <div className="d-flex col-12 mb-3 px-4">
+                        <p className="col-md-3 col-6 my-auto">Food name</p>
+                        <p className="col-md-3 col-6 my-auto">06/08/2023</p>
+                        <div className="col-md-6 col-12 d-flex">
+                          <button className="col-md-4 col-6 btn btn-outline-success">
+                            Done
+                          </button>
+                        </div>
+                      </div>
+                      <hr className="border-light" />
+                    </div>
                     <div className="anOrder">
                       <div className="d-flex col-12 mb-3 px-4">
                         <p className="col-md-3 col-6 my-auto">Food name</p>

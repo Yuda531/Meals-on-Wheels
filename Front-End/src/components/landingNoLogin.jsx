@@ -51,20 +51,34 @@ function LandingNoLogin() {
 
             {!User && <ButtonAndForm />}
             {User && (
-              <div className="col-6 p-4 text-white aboutt">
-                <h1 className="display-1 text-white">Welcome, {userEmail ? userEmail : "Guest"}</h1>
+              <div className="col-6 p-5 text-white aboutt my-auto">
+                <h1 className="display-6 text-white">Welcome, {userEmail ? userEmail : "Guest"}</h1>
                 <br />
-                <hr className="border-white" />
                 <br />
-                <div className="d-flex justify-content-center">
+
                   <Button
                     href="/dashboard"
-                    variant="outline-success"
-                    className="col-12 mx-auto greenBtns"
+                    variant="success"
+                    className="col-12 mx-auto mb-3 greenBtns"
                   >
                     Go to dashboard
                   </Button>
-                </div>
+
+
+             
+                
+                
+                {/* IF MEMBER */}
+                {User && User.roleId.roleName === "MEMBER" && (
+
+                            <button
+                              href="/dashboard"
+                              className="col-12 mx-auto btn btn-outline-warning"
+                            >
+                              Make an Order
+                            </button>
+                )}
+
               </div>
             )}
           </div>
@@ -113,10 +127,13 @@ function LandingNoLogin() {
     </div>
   </div>
 </div>
+<div style={{ padding: "0.25%" }} className="bg-white"></div>
 
-        <div style={{ padding: "0.25%" }} className="bg-white"></div>
       </div>
 
+      {User && User.roleId.roleName === "MEMBER" && (
+
+        
       <div className="backblur1">
   <div style={{ padding: "0%" }} className="col-12">
     <div className="row">
@@ -125,13 +142,15 @@ function LandingNoLogin() {
         className="col-12 col-md-9 my-auto"
       >
         <h1
-          style={{ fontSize: "65px" }}
+          style={{ fontSize: "90px" }}
           className="text-white fw-bold col-12 my-auto"
         >
           Fast <span className="text-success">and</span>
           <br />
+          <br />
           <span className="text-warning">Satisfying.</span>
         </h1>
+        <br />
         <h4 className="text-white lead col-12 col-md-6 my-4">
           Guaranteed <span className="text-warning fw-bold">Satisfaction</span>,
           On-<span className="text-success fw-bold">time</span> delivery, and{" "}
@@ -149,6 +168,8 @@ function LandingNoLogin() {
     </div>
   </div>
 </div>
+
+      )}
 
     </div>
   );

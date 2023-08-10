@@ -57,13 +57,19 @@ function Sidebar() {
 
       {/* Status Order */}
       <div className="widget">
-        <h4 className="headline">Order Status</h4>
+        <h4 className="headline">Orders</h4>
         <span className="line margin-bottom-20"></span>
         <div className="clearfix"></div>
 
+        <ul className="categories mb-2">
+          <li>
+            <a href="/MyOrder">Make Order</a>
+          </li>
+        </ul>
+
         <ul className="categories">
           <li>
-            <a href="/MyOrder">My Order</a>
+            <a href="/MyOrder">My Orders</a>
           </li>
         </ul>
       </div>

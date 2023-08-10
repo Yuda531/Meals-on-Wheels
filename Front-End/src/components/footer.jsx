@@ -3,7 +3,6 @@ import logo from "../img/mowlogonew.png";
 function Footer() {
   return (
     <footer>
-      <div style={{ padding: "0.25%" }} className="bg-success"></div>
 
       <div
         style={{ backgroundColor: "white", padding: "60px" }}

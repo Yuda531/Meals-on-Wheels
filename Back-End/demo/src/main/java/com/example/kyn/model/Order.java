@@ -22,12 +22,19 @@ public class Order {
     @Column()
     private String orderName;
 
+//ORDER LOCATION
     @Column()
-    private String orderLocation;
-
+    private double orderLocationLat;
     @Column()
-    private String orderDestination;
+    private double orderLocationLng;
 
+//ORDER DESTINATION
+    @Column()
+    private double orderDestinationLat;
+    @Column()
+    private double orderDestinationLng;
+
+//CALCULATED DISTANCE
     @Column()
     private double orderDistance;
 
