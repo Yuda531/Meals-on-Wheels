@@ -26,7 +26,7 @@ public class OrderController {
 
         Double orderLocationLat = order.getMember().getLatitude();
         Double orderLocationLng = order.getMember().getLongitude();
-        
+
         Double orderDestinationLat = order.getPartner().getLatitude();
         Double orderDestinationLng = order.getPartner().getLongitude();
 
