@@ -6,8 +6,21 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import foodBanner from "../img/mexican-food.jpg";
 import Swal from "sweetalert2";
+import NotFound from "../Pages/404NotFound";
 
 function CaregiverDashboard() {
+  let User = sessionStorage.getItem("user");
+  User = JSON.parse(User);
+
+
+  useEffect(() => {
+    const user = sessionStorage.getItem("user");
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      setUserEmail(parsedUser.name);
+    }
+  }, []);
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -31,6 +44,10 @@ function CaregiverDashboard() {
   }, []);
 
   return (
+    
+
+    <div>
+    {User && User.roleId.roleName === "CAREGIVER" && (
     <div className="body">
       <div className="backblur">
         <div className="col-12 d-flex">
@@ -211,6 +228,11 @@ function CaregiverDashboard() {
           </div>
         </Modal.Footer>
       </Modal>
+    </div>
+    )}
+    {User && User.roleId.roleName !== "CAREGIVER" && (
+    <NotFound />
+    )}
     </div>
   );
 }

@@ -339,6 +339,15 @@ ul {
   color: #fdfdfd !important;
 }
 
+.yellowBtns{
+  color: #ffc451 !important;
+
+}
+.yellowBtns:hover{
+  color: #ffffff !important;
+
+}
+
 .greenBtns:hover {
   color: white !important;
 }

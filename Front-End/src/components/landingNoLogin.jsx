@@ -71,12 +71,14 @@ function LandingNoLogin() {
                 {/* IF MEMBER */}
                 {User && User.roleId.roleName === "MEMBER" && (
 
-                            <button
+                            <Button
+                            style={{color:"#ffc451"}}
+                              variant="outline-warning"
                               href="/dashboard"
-                              className="col-12 mx-auto btn btn-outline-warning"
+                              className="col-12 mx-auto btn btn-outline-warning yellowBtns"
                             >
                               Make an Order
-                            </button>
+                            </Button>
                 )}
 
               </div>
@@ -156,7 +158,7 @@ function LandingNoLogin() {
           On-<span className="text-success fw-bold">time</span> delivery, and{" "}
           <span className="text-success fw-bold">Healthy</span>
         </h4>
-        <button className="btn btn-success col-6 my-3">Order Now</button>
+        <Button href="/dashboard" className="btn btn-success greenBtns col-6 my-3">Order Now</Button>
       </div>
       <div className="col-12 col-md-3 my-auto">
         <img
