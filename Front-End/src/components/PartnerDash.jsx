@@ -7,6 +7,9 @@ import Swal from 'sweetalert2';
 
 
 const PartnerDash = () => {
+  let User = sessionStorage.getItem("user");
+  User = JSON.parse(User);
+
   const donations = [
     {
       id: 1,
@@ -93,20 +96,26 @@ const PartnerDash = () => {
 
         
       >
-        <section class="jumbotron mt-5">
-          <div class="jumbotron__content">
-            <h1 className='text-light'>Hi Welcome, <span className='text-warning'>Partner🥗</span> </h1>
-            <p className='text-light'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
-              cursus ante dapibus diam. Sed nisi.</p>
+        <div class="col-10 mx-auto p-5 my-4 jumb">
+          <div class=" col-10">
+            <h1 className='text-light display-4'>Welcome, <span className='text-warning'>{User.name}🥗</span> </h1>
+            <br />
+            <p className='text-light lead'>Here's a to do list for you. Happy cooking!</p>
           </div>
-        </section>
+        </div>
 
         <div className="container">
           <main className="table">
             <section className="table__header">
               <h1 className="text-dark ps-3 ">Member Orders</h1>
-              <div className="input-group">
-                <input type="button" value="Search" />
+              <div className='input-group my-auto'>
+              <input
+                  type="search"
+                  placeholder="Search Partner..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <img src="images/search.png" alt="" />
               </div>
             </section>
             <section className="table__body">
@@ -135,10 +144,10 @@ const PartnerDash = () => {
                       <td className="align-middle">{donor.amount}</td>
                       <td className="align-middle">
                         <select
-                          className={`status status-${donor.status.toLowerCase()} m-0 text-dark`}
+                          className={`status status-${donor.status.toLowerCase()} m-0 px-4 bg-none text-dark`}
                           onChange={(e) => handleStatusChange(donor, e.target.value)}
                         >
-                          <option value="Panding">Panding</option>
+                          <option className="text-center" value="Panding">Pending</option>
                           <option value="Process">Proccess</option>
                           <option value="Success">Success</option>
                           <option value="Cancelled">Cancelled</option>

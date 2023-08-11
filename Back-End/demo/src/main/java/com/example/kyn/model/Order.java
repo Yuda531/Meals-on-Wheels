@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -21,6 +22,8 @@ public class Order {
 
     @Column()
     private String orderName;
+
+    private LocalDate orderDate;
 
 //ORDER LOCATION
     @Column()

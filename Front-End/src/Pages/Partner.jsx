@@ -17,10 +17,10 @@ const Partner = () => {
   }, []);
   return (
     <div>
-  {User && User.roleId.roleName === "MEMBER" && (
+  {User && User.roleId.roleName === "PARTNER" && (
       <PartnerDash />
      )}
-  {User && User.roleId.roleName !== "MEMBER" && (
+  {User && User.roleId.roleName !== "PARTNER" && (
      <NotFound />
   )}
     </div>

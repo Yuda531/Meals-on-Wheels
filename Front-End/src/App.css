@@ -369,6 +369,11 @@ ul {
   border-radius: 10px;
 }
 
+.jumb{
+  background-color: #8c8c8c7d;
+  backdrop-filter: blur(3px);
+  border-radius: 20px;
+}
 
 .profileCard {
   padding: 50px 10px 10px 10px;
