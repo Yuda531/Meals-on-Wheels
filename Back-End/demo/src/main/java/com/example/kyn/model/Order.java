@@ -50,6 +50,8 @@ public class Order {
     @Column()
     private boolean isApproved;
 
+    private boolean frozenFood;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private User userId;

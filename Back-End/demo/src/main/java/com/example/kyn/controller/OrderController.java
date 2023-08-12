@@ -1,20 +1,19 @@
 package com.example.kyn.controller;
 
-import com.example.kyn.DTO.OrderRequestDTO;
-import com.example.kyn.DTO.OrderResponseDTO;
+import com.example.kyn.DTO.OrderDTO;
+import com.example.kyn.model.Member;
 import com.example.kyn.model.Order;
-import com.example.kyn.service.LocationUtils;
+import com.example.kyn.model.Partner;
 import com.example.kyn.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
+@CrossOrigin
 public class OrderController {
     private final OrderService orderService;
 
@@ -23,35 +22,34 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<OrderResponseDTO> createOrder(@RequestBody OrderRequestDTO orderRequest) {
-        OrderResponseDTO createdOrder = orderService.createOrder(orderRequest);
-        return ResponseEntity.ok(createdOrder);
-    }
+    @PostMapping("/new")
+    public ResponseEntity<Order> saveOrder(@RequestBody OrderDTO orderDTO) {
+        Order order = orderDTO.getOrder();
+        Member member = orderDTO.getMember();
+        Partner partner = orderDTO.getPartner();
 
-    @GetMapping("/all")
-    public ResponseEntity<List<OrderResponseDTO>> getAllOrders() {
-        List<OrderResponseDTO> orders = orderService.getAllOrders();
-        return ResponseEntity.ok(orders);
-    }
+        order.setOrderDestinationLat(member.getLatitude());
+        order.setOrderDestinationLng(member.getLongitude());
+        order.setOrderLocationLat(partner.getLatitude());
+        order.setOrderLocationLng(partner.getLongitude());
 
-    @GetMapping("/{id}")
-    public ResponseEntity<OrderResponseDTO> getOrderById(@PathVariable Long id) {
-        Optional<OrderResponseDTO> order = orderService.getOrderById(id);
-        return order.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
+        double lat1 = member.getLatitude();
+        double lon1 = member.getLongitude();
+        double lat2 = partner.getLatitude();
+        double lon2 = partner.getLongitude();
 
-    @GetMapping("/byName/{name}")
-    public ResponseEntity<OrderResponseDTO> getOrdersByName(@PathVariable String name) {
-        Optional<OrderResponseDTO> order = orderService.getOrdersByName(name);
-        return order.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
-    @GetMapping("/byMaker/{orderMaker}")
-    public ResponseEntity<List<OrderResponseDTO>> getOrdersByOrderMaker(@PathVariable String orderMaker) {
-        List<OrderResponseDTO> orders = orderService.getOrdersByMaker(orderMaker);
-        return ResponseEntity.ok(orders);
-    }
+        order.setOrderDistance(orderService.calculateDistance(lat1,lon1,lat2,lon2));
 
-    // Add more endpoints and methods as needed
+        double orderDistance = order.getOrderDistance();
+        if (orderDistance > 10.00){
+            order.setMoreThanTenKm(true);
+        }
+        if(order.isMoreThanTenKm()){
+            order.setFrozenFood(true);
+        }
+
+        Order savedOrder = orderService.saveOrder(order);
+
+        return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
+    }
 }
-

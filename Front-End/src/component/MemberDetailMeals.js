@@ -83,7 +83,7 @@ function MemberDetailMeals() {
         }))[0]; 
 
         // Send POST request to save order
-        axios.post("http://localhost:8080/user/order", orderData)
+        axios.post("http://localhost:8080/orders/new", orderData)
           .then(response => {
             Swal.fire(
               'Success!',
