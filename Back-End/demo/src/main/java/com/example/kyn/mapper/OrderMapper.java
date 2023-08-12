@@ -1,4 +1,4 @@
-package com.example.kyn.repository;
+package com.example.kyn.mapper;
 
 import com.example.kyn.DTO.OrderRequestDTO;
 import com.example.kyn.DTO.OrderResponseDTO;
@@ -6,8 +6,10 @@ import com.example.kyn.model.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 
-@Mapper
+@Mapper(componentModel = "spring")
+@Component
 public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 

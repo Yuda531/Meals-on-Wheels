@@ -6,12 +6,11 @@ import com.example.kyn.model.Member;
 import com.example.kyn.model.Order;
 import com.example.kyn.model.Partner;
 import com.example.kyn.repository.MemberRepository;
-import com.example.kyn.repository.OrderMapper;
 import com.example.kyn.repository.OrderRepository;
 import com.example.kyn.repository.PartnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.example.kyn.mapper.OrderMapper;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -28,7 +27,6 @@ public class OrderService {
     private final OrderMapper orderMapper;
 
 
-    @Autowired
     public OrderService(OrderRepository orderRepository, MemberRepository memberRepository, PartnerRepository partnerRepository, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
         this.memberRepository = memberRepository;
