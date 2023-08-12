@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -23,7 +24,7 @@ public class Order {
     @Column()
     private String orderName;
 
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
 
 //ORDER LOCATION
     @Column()
@@ -51,6 +52,8 @@ public class Order {
     private boolean isApproved;
 
     private boolean frozenFood;
+
+    private Long mealsId;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")

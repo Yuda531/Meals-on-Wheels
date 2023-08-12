@@ -1,5 +1,7 @@
 package com.example.kyn.service;
 
+import com.example.kyn.DTO.MemberDTO;
+import com.example.kyn.DTO.PartnerDTO;
 import com.example.kyn.model.Member;
 import com.example.kyn.model.Order;
 import com.example.kyn.model.Partner;
@@ -19,6 +21,14 @@ public class OrderService {
     }
 
     public Order saveOrder(Order order){
+        Member member = new Member();
+        Partner partner = new Partner();
+        MemberDTO memberDTO = new MemberDTO();
+        PartnerDTO partnerDTO = new PartnerDTO();
+        memberDTO.setMemberId(member.getMemberId());
+        partnerDTO.setPartnerId(partner.getPartnerId());
+
+
         return orderRepository.save(order);
     }
 
@@ -38,11 +48,19 @@ public class OrderService {
     }
 
     // You can also use this method to calculate distance between two orders
-    public double calculateDistanceBetweenOrders(Member member, Partner partner) {
-        double lat1 = member.getLatitude();
-        double lon1 = member.getLongitude();
-        double lat2 = partner.getLatitude();
-        double lon2 = partner.getLongitude();
+    public double calculateDistanceBetweenOrders(MemberDTO memberDTO, PartnerDTO partnerDTO) {
+        Member member = new Member();
+        Partner partner = new Partner();
+
+        memberDTO.setMemberLat(member.getLatitude());
+        memberDTO.setMemberLong(member.getLongitude());
+        partnerDTO.setPartnerLng(partner.getLongitude());
+        partnerDTO.setPartnerLat(partner.getLatitude());
+
+        double lat1 = memberDTO.getMemberLat();
+        double lon1 = memberDTO.getMemberLong();
+        double lat2 = partnerDTO.getPartnerLat();
+        double lon2 = partnerDTO.getPartnerLng();
 
         return calculateDistance(lat1, lon1, lat2, lon2);
     }

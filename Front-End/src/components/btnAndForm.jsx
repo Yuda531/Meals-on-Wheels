@@ -135,7 +135,7 @@ const ButtonAndForm = () => {
                   <input type="checkbox" className="form-check-input" id="remember" />
                   <label className="form-check-label text-white" htmlFor="remember">Remember me</label>
                 </div>
-              <p className="lead text-white mt-3">Don't have an account? Click <span><a className='text-info' href='getStarted'>here to Sign-Up</a></span></p>
+              <p className="lead text-white mt-3">Don't have an account? Click <span><a className='text-warning' href='getStarted'>here to Sign-Up</a></span></p>
 
               <button type="submit" className="btn btn-outline-warning col-6 my-3">Login</button>
               <br />

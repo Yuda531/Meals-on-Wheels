@@ -65,7 +65,8 @@ function MemberContent() {
               {/*  Content */}
               <div className="recipe-box-content">
                 <h3>
-                  <a href="/detail">{meal.meals_name}</a>
+                <a href={`/detail/${meal.meals_id}`}>
+                {meal.meals_name}</a>
                 </h3>
 
                 <div className="recipe-meta">

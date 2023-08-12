@@ -17,25 +17,19 @@ import Swal from "sweetalert2";
 
 function MemberDetailMeals() {
   const [meal, setMeal] = useState(null);
-
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  let userSession = sessionStorage.getItem("user");
-  userSession = JSON.parse(userSession);
-
   const [members, setMembers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredMembers, setFilteredMembers] = useState([]);
+  const [partner, setPartner] = useState(null);
+
+  let userSession = JSON.parse(sessionStorage.getItem("user"));
 
   useEffect(() => {
+    // Fetch members data from the backend
     const fetchMembers = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/admin/all-members"
-        );
+        const response = await axios.get("http://localhost:8080/admin/all-members");
         setMembers(response.data);
         setFilteredMembers(response.data);
       } catch (error) {
@@ -47,18 +41,26 @@ function MemberDetailMeals() {
   }, []);
 
   useEffect(() => {
-    const filtered = members.filter((member) => {
-      const memberName = member.member_name
-        ? member.member_name.toLowerCase()
-        : "";
-      const memberAge = member.age ? member.age.toString() : "";
-      return (
-        memberName.includes(searchTerm.toLowerCase()) ||
-        memberAge.includes(searchTerm.toLowerCase())
-      );
-    });
-    setFilteredMembers(filtered);
-  }, [searchTerm, members]);
+    // Fetch meal and partner data from the backend based on the URL
+    const mealsId = window.location.pathname.split('/').pop();
+
+    const fetchData = async () => {
+      try {
+        const mealResponse = await axios.get(`http://localhost:8080/admin/${mealsId}`);
+        setMeal(mealResponse.data);
+
+        const partnerResponse = await axios.get(`http://localhost:8080/partner/${mealResponse.data.partnerId}`);
+        setPartner(partnerResponse.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleOrder = () => {
     Swal.fire({
@@ -71,53 +73,40 @@ function MemberDetailMeals() {
       confirmButtonText: 'Yes, order it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        const orderData = filteredMembers
-        .filter((member) => member.memberId === userSession.id)
-        .map((member) => ({
+        const selectedMember = filteredMembers.find(member => member.memberId === userSession.id);
+        if (!selectedMember) {
+          Swal.fire('Error!', 'Selected member not found.', 'error');
+          return;
+        }
+
+        const orderData = {
           orderMaker: userSession.name,
           orderName: meal.meals_name,
-          orderLocation: "Partnert kitchen",
+          orderLocation: "Partner kitchen",
           orderDescription: meal.meals_description,
-          orderDestination: `${member.longitude}, ${member.latitude}`
-          
-        }))[0]; 
+          orderLocationLat: partner?.latitude,
+          orderLocationLng: partner?.longitude,
+          member: {
+            memberId: selectedMember.memberId
+          },
+          partner: {
+            partnerId: partner.partnerId
+          }
+        };
 
         // Send POST request to save order
         axios.post("http://localhost:8080/orders/new", orderData)
           .then(response => {
-            Swal.fire(
-              'Success!',
-              'Successfully ordered.',
-              'success'
-            );
+            Swal.fire('Success!', 'Successfully ordered.', 'success');
             handleClose();
           })
           .catch(error => {
             console.error(error);
-            Swal.fire(
-              'Error!',
-              'Failed to place order.',
-              'error'
-            );
+            Swal.fire('Error!', 'Failed to place order.', 'error');
           });
       }
     });
   }
-  useEffect(() => {
-    // Mengambil ID makanan dari URL
-    const mealsId = window.location.pathname.split('/').pop();
-  
-    // Membuat API call untuk mengambil data makanan berdasarkan ID
-    axios
-      .get(`http://localhost:8080/admin/${mealsId}`)
-      .then((response) => {
-        setMeal(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  console.log(meal && meal.meals_name);
 
   return (
     <div>
