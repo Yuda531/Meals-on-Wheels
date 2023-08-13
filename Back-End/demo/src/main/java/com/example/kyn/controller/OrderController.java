@@ -85,8 +85,8 @@ public class OrderController {
         order.setOrderLocationLat(partnerFromDb.getLatitude());
         order.setOrderLocationLng(partnerFromDb.getLongitude());
         order.setOrderDistance(orderDistance);
-        order.setOrderMaker(orderDTO.getOrderMaker());
-        order.setOrderDescription(orderDTO.getOrderDescription());
+        order.setOrderMaker(memberFromDb.getUserId().getName());
+        order.setOrderDescription(mealFromdb.getMeals_description());
         order.setOrderDate(LocalDateTime.now());
         order.setUserId(memberFromDb.getUserId());
 
