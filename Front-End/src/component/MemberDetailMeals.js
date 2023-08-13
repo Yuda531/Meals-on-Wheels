@@ -73,26 +73,18 @@ function MemberDetailMeals() {
       confirmButtonText: 'Yes, order it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        const selectedMember = filteredMembers.find(member => member.memberId === userSession.id);
-        if (!selectedMember) {
-          Swal.fire('Error!', 'Selected member not found.', 'error');
-          return;
+  
+        const orderData = {
+          member: userSession.id,
+          partner: {
+            partnerId: 1
+          },
+          meals: {
+            meals_id: meal.meals_id
+          }
         }
 
-        const orderData = {
-          orderMaker: userSession.name,
-          orderName: meal.meals_name,
-          orderLocation: "Partner kitchen",
-          orderDescription: meal.meals_description,
-          orderLocationLat: partner?.latitude,
-          orderLocationLng: partner?.longitude,
-          member: {
-            memberId: selectedMember.memberId
-          },
-          partner: {
-            partnerId: partner.partnerId
-          }
-        };
+        console.log(orderData);
 
         // Send POST request to save order
         axios.post("http://localhost:8080/orders/new", orderData)

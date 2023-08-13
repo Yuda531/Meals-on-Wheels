@@ -20,7 +20,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/auth/whoAmI",
                         "/user/register",
                         "/user/order",
-                        "/admin/**"
+                        "/admin/**",
+                        "/partner/**",
+                        "/orders/**"
                 );
     }
 }

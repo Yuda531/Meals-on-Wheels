@@ -44,7 +44,7 @@ public class OrderController {
     @PostMapping("/new")
     public ResponseEntity<Order> saveOrder(@RequestBody OrderDTO orderDTO) {
 
-        Optional<Member> idMember = memberRepository.findById(orderDTO.getMember().getMemberId());
+        Member idMember = memberRepository.findByUserId(orderDTO.getMember());
         Optional<Partner> idPartner = partnerRepository.findById(orderDTO.getPartner().getPartnerId());
 
         Meals meals = new Meals();
@@ -52,11 +52,11 @@ public class OrderController {
         List<Meals> mealName = mealsRepo.findMealsByName(meals.getMeals_name());
         Meals mealFromdb = mealId.get();
 
-        if (idMember.isEmpty() || idPartner.isEmpty()) {
+        if (idMember == null || idPartner.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        Member memberFromDb = idMember.get();
+        Member memberFromDb = idMember;
         Partner partnerFromDb = idPartner.get();
 
         MemberDTO memberDTO = new MemberDTO();
