@@ -45,58 +45,58 @@ public class OrderController {
     public ResponseEntity<Order> saveOrder(@RequestBody OrderDTO orderDTO) {
 
         Optional<Member> idMember = memberRepository.findById(orderDTO.getMember().getMemberId());
-        Optional<Partner> idPartner = partnerRepository.findById(orderDTO.getPartner().getPartnerId());
+//        Optional<Partner> idPartner = partnerRepository.findById(orderDTO.getPartner().getPartnerId());
 
         Meals meals = new Meals();
         Optional<Meals> mealId = mealsRepo.findById(orderDTO.getMeals().getMeals_id());
         List<Meals> mealName = mealsRepo.findMealsByName(meals.getMeals_name());
         Meals mealFromdb = mealId.get();
 
-        if (idMember.isEmpty() || idPartner.isEmpty()) {
+        if (idMember.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         Member memberFromDb = idMember.get();
-        Partner partnerFromDb = idPartner.get();
+//        Partner partnerFromDb = idPartner.get();
 
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setMemberId(memberFromDb.getMemberId());
         memberDTO.setMemberLat(memberFromDb.getLatitude());
         memberDTO.setMemberLong(memberFromDb.getLongitude());
 
-        PartnerDTO partnerDTO = new PartnerDTO();
-        partnerDTO.setPartnerId(partnerFromDb.getPartnerId());
-        partnerDTO.setPartnerLat(partnerFromDb.getLatitude());
-        partnerDTO.setPartnerLng(partnerFromDb.getLongitude());
+//        PartnerDTO partnerDTO = new PartnerDTO();
+//        partnerDTO.setPartnerId(partnerFromDb.getPartnerId());
+//        partnerDTO.setPartnerLat(partnerFromDb.getLatitude());
+//        partnerDTO.setPartnerLng(partnerFromDb.getLongitude());
 
         // Calculate distance using coordinates
         double lat1 = memberFromDb.getLatitude();
         double lon1 = memberFromDb.getLongitude();
-        double lat2 = partnerFromDb.getLatitude();
-        double lon2 = partnerFromDb.getLongitude();
+//        double lat2 = partnerFromDb.getLatitude();
+//        double lon2 = partnerFromDb.getLongitude();
 
-        double orderDistance = orderService.calculateDistance(lat1, lon1, lat2, lon2);
+//        double orderDistance = orderService.calculateDistance(lat1, lon1);
 
         Order order = new Order();
         order.setOrderName(mealFromdb.getMeals_name());
         order.setMealsId(mealFromdb.getMeals_id());
         order.setOrderDestinationLat(memberFromDb.getLatitude());
         order.setOrderDestinationLng(memberFromDb.getLongitude());
-        order.setOrderLocationLat(partnerFromDb.getLatitude());
-        order.setOrderLocationLng(partnerFromDb.getLongitude());
-        order.setOrderDistance(orderDistance);
+        order.setOrderLocationLng(0.00);
+        order.setOrderLocationLat(0.00);
+//        order.setOrderDistance(orderDistance);
         order.setOrderMaker(memberFromDb.getUserId().getName());
         order.setOrderDescription(mealFromdb.getMeals_description());
         order.setOrderDate(LocalDateTime.now());
         order.setUserId(memberFromDb.getUserId());
 
-        if (orderDistance > 10.00) {
-            order.setMoreThanTenKm(true);
-        }
-
-        if (order.isMoreThanTenKm()) {
-            order.setFrozenFood(true);
-        }
+//        if (orderDistance > 10.00) {
+//            order.setMoreThanTenKm(true);
+//        }
+//
+//        if (order.isMoreThanTenKm()) {
+//            order.setFrozenFood(true);
+//        }
 
         Order savedOrder = orderService.saveOrder(order);
 

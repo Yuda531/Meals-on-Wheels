@@ -1,13 +1,13 @@
 package com.example.kyn.controller;
 
 
+import com.example.kyn.DTO.OrderDTO;
+import com.example.kyn.DTO.PartnerDTO;
 import com.example.kyn.model.*;
-import com.example.kyn.repository.UserRepository;
-import com.example.kyn.service.DonationService;
-import com.example.kyn.service.MealsService;
-import com.example.kyn.service.MemberService;
-import com.example.kyn.service.UserService;
+import com.example.kyn.repository.*;
+import com.example.kyn.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,9 +32,60 @@ public class AdminController {
     private UserService userService;
 
     @Autowired
+    private OrderService orderService;
+    @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("add-donate")
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private MealsRepository mealsRepository;
+
+    @Autowired
+    private PartnerRepository partnerRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
+
+
+    @PostMapping("/assign-order/{orderId}")
+    public ResponseEntity<Order> assignOrder(@PathVariable Long orderId, @RequestBody OrderDTO orderDTO) {
+        Optional<Order> selectedOrder = orderService.getOrderById(orderId);
+        Optional<Partner> partnerOptional = partnerRepository.findById(orderDTO.getPartner().getPartnerId());
+
+        if (selectedOrder.isEmpty() || partnerOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        Order selectedOrderDetails = selectedOrder.get();
+        Partner partnerFromDb = partnerOptional.get();
+
+        selectedOrderDetails.setOrderLocationLat(partnerFromDb.getLatitude());
+        selectedOrderDetails.setOrderLocationLng(partnerFromDb.getLongitude());
+
+        double partnerLat = partnerFromDb.getLatitude();
+        double partnerLng = partnerFromDb.getLongitude();
+        double memberLat = selectedOrderDetails.getOrderDestinationLat();
+        double memberLng = selectedOrderDetails.getOrderDestinationLng();
+
+        double orderDistance = orderService.calculateDistance(partnerLat, partnerLng, memberLat, memberLng);
+        selectedOrderDetails.setOrderDistance(orderDistance);
+
+        if (orderDistance > 10.00) {
+            selectedOrderDetails.setMoreThanTenKm(true);
+            selectedOrderDetails.setFrozenFood(true);
+        } else {
+            selectedOrderDetails.setMoreThanTenKm(false);
+            selectedOrderDetails.setFrozenFood(false);
+        }
+
+        Order updatedOrder = orderRepository.save(selectedOrderDetails);
+        return ResponseEntity.ok(updatedOrder);
+    }
+
+
+    @PostMapping("/add-donate")
     public Donation addDonate(@RequestBody Donation donate) {
         return donateService.saveDonation(donate);
     }
@@ -47,12 +98,16 @@ public class AdminController {
     @GetMapping("/find-meals")
     public List<Meals> findMealsByName(@RequestParam(name = "mealsName") String mealsName){
         return mealsService.findMealsByMealsName(mealsName);
-
     }
     
 	@GetMapping("/{mealsId}")
     public Meals findMealsById(@PathVariable Long mealsId) {
         return mealsService.findMealsById(mealsId);
+    }
+
+    @GetMapping("/orderDetails/{orderId}")
+    public Optional<Order> getOrderById(@PathVariable Long orderId){
+        return orderService.getOrderById(orderId);
     }
 
     @GetMapping("/all-meals")
