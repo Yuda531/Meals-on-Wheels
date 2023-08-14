@@ -68,10 +68,9 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Optional<Order> getOrderById(Long orderId) {
+    public Order getOrderById(Long orderId) {
         Optional<Order> optional = orderRepository.findById(orderId);
-        return optional;
-//        return orderRepository.findById(orderId);
+        return optional.orElse(null);
     }
 
     public Optional<Order> getOrderByOrderName(String name) {

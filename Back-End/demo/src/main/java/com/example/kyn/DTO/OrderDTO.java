@@ -12,11 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 public class OrderDTO {
-    private String orderMaker;
-    private String orderName;
-    private String orderDescription;
-    private double orderDistance;
-    private Long member;
+    private MemberDTO member;
     private PartnerDTO partner;
     private Meals meals;
 }

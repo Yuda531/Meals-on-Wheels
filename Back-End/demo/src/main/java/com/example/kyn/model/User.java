@@ -16,9 +16,9 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "userId")
-    private Order order;
+//    @JsonIgnore
+//    @OneToOne(mappedBy = "userId")
+//    private Order order;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,6 +6,7 @@ import com.example.kyn.DTO.PartnerDTO;
 import com.example.kyn.model.*;
 import com.example.kyn.repository.*;
 import com.example.kyn.service.*;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,39 +50,71 @@ public class AdminController {
     private MemberRepository memberRepository;
 
 
-    @PostMapping("/assign-order/{orderId}")
+    @PutMapping("/assign-order/{orderId}")
     public ResponseEntity<Order> assignOrder(@PathVariable Long orderId, @RequestBody OrderDTO orderDTO) {
-        Optional<Order> selectedOrder = orderService.getOrderById(orderId);
-        Optional<Partner> partnerOptional = partnerRepository.findById(orderDTO.getPartner().getPartnerId());
 
-        if (selectedOrder.isEmpty() || partnerOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        Optional<Partner> idPartner = partnerRepository.findById(orderDTO.getPartner().getPartnerId());
+        Partner selectedPartner = idPartner.get();
+        Order currentOrder = orderService.getOrderById(orderId);
+        if (currentOrder == null){
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("ORDER NOT FOUND");
         }
 
-        Order selectedOrderDetails = selectedOrder.get();
-        Partner partnerFromDb = partnerOptional.get();
+        currentOrder.setOrderLocationLat(selectedPartner.getLatitude());
+        currentOrder.setOrderLocationLng(selectedPartner.getLongitude());
 
-        selectedOrderDetails.setOrderLocationLat(partnerFromDb.getLatitude());
-        selectedOrderDetails.setOrderLocationLng(partnerFromDb.getLongitude());
+        double latPartner = selectedPartner.getLatitude();
+        double lngPartner = selectedPartner.getLatitude();
+        double latMember = currentOrder.getOrderDestinationLat();
+        double lngMember = currentOrder.getOrderDestinationLng();
 
-        double partnerLat = partnerFromDb.getLatitude();
-        double partnerLng = partnerFromDb.getLongitude();
-        double memberLat = selectedOrderDetails.getOrderDestinationLat();
-        double memberLng = selectedOrderDetails.getOrderDestinationLng();
+        double orderDistance = orderService.calculateDistance(latPartner, lngPartner, latMember, lngMember);
+        currentOrder.setOrderDistance(orderDistance);
 
-        double orderDistance = orderService.calculateDistance(partnerLat, partnerLng, memberLat, memberLng);
-        selectedOrderDetails.setOrderDistance(orderDistance);
-
-        if (orderDistance > 10.00) {
-            selectedOrderDetails.setMoreThanTenKm(true);
-            selectedOrderDetails.setFrozenFood(true);
+        if(orderDistance > 10.00){
+            currentOrder.setMoreThanTenKm(true);
         } else {
-            selectedOrderDetails.setMoreThanTenKm(false);
-            selectedOrderDetails.setFrozenFood(false);
+            currentOrder.setMoreThanTenKm(false);
         }
 
-        Order updatedOrder = orderRepository.save(selectedOrderDetails);
-        return ResponseEntity.ok(updatedOrder);
+        if(currentOrder.isMoreThanTenKm()){
+            currentOrder.setFrozenFood(true);
+        }
+
+        Order assignedOrder =  orderRepository.save(currentOrder);
+        return ResponseEntity.ok(assignedOrder);
+
+//        Optional<Order> selectedOrder = Optional.ofNullable(orderService.getOrderById(orderId));
+//        Optional<Partner> partnerOptional = partnerRepository.findById(orderDTO.getPartner().getPartnerId());
+//
+//        if (selectedOrder.isEmpty() || partnerOptional.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+//
+//        Order selectedOrderDetails = selectedOrder.get();
+//        Partner partnerFromDb = partnerOptional.get();
+//
+//        selectedOrderDetails.setOrderLocationLat(partnerFromDb.getLatitude());
+//        selectedOrderDetails.setOrderLocationLng(partnerFromDb.getLongitude());
+//
+//        double partnerLat = partnerFromDb.getLatitude();
+//        double partnerLng = partnerFromDb.getLongitude();
+//        double memberLat = selectedOrderDetails.getOrderDestinationLat();
+//        double memberLng = selectedOrderDetails.getOrderDestinationLng();
+//
+//        double orderDistance = orderService.calculateDistance(partnerLat, partnerLng, memberLat, memberLng);
+//        selectedOrderDetails.setOrderDistance(orderDistance);
+//
+//        if (orderDistance > 10.00) {
+//            selectedOrderDetails.setMoreThanTenKm(true);
+//            selectedOrderDetails.setFrozenFood(true);
+//        } else {
+//            selectedOrderDetails.setMoreThanTenKm(false);
+//            selectedOrderDetails.setFrozenFood(false);
+//        }
+//
+//        Order updatedOrder = orderRepository.save(selectedOrderDetails);
+//        return ResponseEntity.ok(updatedOrder);
     }
 
 
@@ -105,8 +138,8 @@ public class AdminController {
         return mealsService.findMealsById(mealsId);
     }
 
-    @GetMapping("/orderDetails/{orderId}")
-    public Optional<Order> getOrderById(@PathVariable Long orderId){
+    @GetMapping("/{orderId}")
+    public Order getOrderById(@PathVariable Long orderId){
         return orderService.getOrderById(orderId);
     }
 
