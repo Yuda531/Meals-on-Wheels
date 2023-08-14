@@ -3,6 +3,7 @@ import background from "../img/sedekah1.jpg";
 import StickyHeader from "../components/header";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 const Donor = () => {
   const [name, setName] = useState("");
@@ -238,6 +239,28 @@ const Donor = () => {
                   Donate
                 </button>
               </form>
+
+              <br />
+              <PayPalScriptProvider options={{ "client-id": "ASEN8REnqJZClRemwTgF7i-AyfChxvKWzzwipeyW6HApqkZNtFmGWx-ovLbB9ajN0TrHlAx6d5sHv2bt" }}>
+                <PayPalButtons
+                  createOrder={(data, actions) => {
+                    return actions.order.create({
+                      purchase_units: [
+                        {
+                          amount: {
+                            value: "10.0",
+                          },
+                        },
+                      ],
+                    });
+                  }}
+                  onApprove={(data, actions) => {
+                    return actions.order.capture().then(function (details) {
+                      alert("berhasil");
+                    });
+                  }}
+                />
+              </PayPalScriptProvider>
             </div>
           </div>
         </div>
