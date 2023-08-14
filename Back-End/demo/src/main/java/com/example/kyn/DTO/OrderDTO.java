@@ -16,7 +16,7 @@ public class OrderDTO {
     private String orderName;
     private String orderDescription;
     private double orderDistance;
-    private MemberDTO member;
+    private Long member;
     private PartnerDTO partner;
     private Meals meals;
 }

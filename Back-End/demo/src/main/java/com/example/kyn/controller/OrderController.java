@@ -44,20 +44,34 @@ public class OrderController {
     @PostMapping("/new")
     public ResponseEntity<Order> saveOrder(@RequestBody OrderDTO orderDTO) {
 
+<<<<<<< HEAD
         Optional<Member> idMember = memberRepository.findById(orderDTO.getMember().getMemberId());
 //        Optional<Partner> idPartner = partnerRepository.findById(orderDTO.getPartner().getPartnerId());
+=======
+        Member idMember = memberRepository.findByUserId(orderDTO.getMember());
+        Optional<Partner> idPartner = partnerRepository.findById(orderDTO.getPartner().getPartnerId());
+>>>>>>> f3beba1d27edd21dffbf6c196d843776b437b8cc
 
         Meals meals = new Meals();
         Optional<Meals> mealId = mealsRepo.findById(orderDTO.getMeals().getMeals_id());
         List<Meals> mealName = mealsRepo.findMealsByName(meals.getMeals_name());
         Meals mealFromdb = mealId.get();
 
+<<<<<<< HEAD
         if (idMember.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         Member memberFromDb = idMember.get();
 //        Partner partnerFromDb = idPartner.get();
+=======
+        if (idMember == null || idPartner.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        Member memberFromDb = idMember;
+        Partner partnerFromDb = idPartner.get();
+>>>>>>> f3beba1d27edd21dffbf6c196d843776b437b8cc
 
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setMemberId(memberFromDb.getMemberId());
