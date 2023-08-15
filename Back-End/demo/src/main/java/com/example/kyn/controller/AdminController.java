@@ -54,68 +54,38 @@ public class AdminController {
     public ResponseEntity<Order> assignOrder(@PathVariable Long orderId, @RequestBody OrderDTO orderDTO) {
 
         Optional<Partner> idPartner = partnerRepository.findById(orderDTO.getPartner().getPartnerId());
-        Partner selectedPartner = idPartner.get();
-        Order currentOrder = orderService.getOrderById(orderId);
-        if (currentOrder == null){
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("ORDER NOT FOUND");
+        if (idPartner.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Order());
         }
+        Partner selectedPartner = idPartner.get();
+
+        Optional<Order> optionalCurrentOrder = Optional.ofNullable(orderService.getOrderById(orderId));
+        if (optionalCurrentOrder.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Order());
+        }
+        Order currentOrder = optionalCurrentOrder.get();
 
         currentOrder.setOrderLocationLat(selectedPartner.getLatitude());
         currentOrder.setOrderLocationLng(selectedPartner.getLongitude());
 
         double latPartner = selectedPartner.getLatitude();
-        double lngPartner = selectedPartner.getLatitude();
+        double lngPartner = selectedPartner.getLongitude();
         double latMember = currentOrder.getOrderDestinationLat();
         double lngMember = currentOrder.getOrderDestinationLng();
 
         double orderDistance = orderService.calculateDistance(latPartner, lngPartner, latMember, lngMember);
         currentOrder.setOrderDistance(orderDistance);
 
-        if(orderDistance > 10.00){
-            currentOrder.setMoreThanTenKm(true);
-        } else {
-            currentOrder.setMoreThanTenKm(false);
-        }
+        currentOrder.setMoreThanTenKm(orderDistance > 10.00);
 
-        if(currentOrder.isMoreThanTenKm()){
+        if (currentOrder.isMoreThanTenKm()) {
             currentOrder.setFrozenFood(true);
         }
 
-        Order assignedOrder =  orderRepository.save(currentOrder);
+        Order assignedOrder = orderRepository.save(currentOrder);
         return ResponseEntity.ok(assignedOrder);
-
-//        Optional<Order> selectedOrder = Optional.ofNullable(orderService.getOrderById(orderId));
-//        Optional<Partner> partnerOptional = partnerRepository.findById(orderDTO.getPartner().getPartnerId());
-//
-//        if (selectedOrder.isEmpty() || partnerOptional.isEmpty()) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
-//
-//        Order selectedOrderDetails = selectedOrder.get();
-//        Partner partnerFromDb = partnerOptional.get();
-//
-//        selectedOrderDetails.setOrderLocationLat(partnerFromDb.getLatitude());
-//        selectedOrderDetails.setOrderLocationLng(partnerFromDb.getLongitude());
-//
-//        double partnerLat = partnerFromDb.getLatitude();
-//        double partnerLng = partnerFromDb.getLongitude();
-//        double memberLat = selectedOrderDetails.getOrderDestinationLat();
-//        double memberLng = selectedOrderDetails.getOrderDestinationLng();
-//
-//        double orderDistance = orderService.calculateDistance(partnerLat, partnerLng, memberLat, memberLng);
-//        selectedOrderDetails.setOrderDistance(orderDistance);
-//
-//        if (orderDistance > 10.00) {
-//            selectedOrderDetails.setMoreThanTenKm(true);
-//            selectedOrderDetails.setFrozenFood(true);
-//        } else {
-//            selectedOrderDetails.setMoreThanTenKm(false);
-//            selectedOrderDetails.setFrozenFood(false);
-//        }
-//
-//        Order updatedOrder = orderRepository.save(selectedOrderDetails);
-//        return ResponseEntity.ok(updatedOrder);
     }
+
 
 
     @PostMapping("/add-donate")

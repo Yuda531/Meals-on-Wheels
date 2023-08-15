@@ -55,10 +55,7 @@ public class Order {
 
     private Long mealsId;
 
-//    @OneToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "userId")
-//    private User userId;
-
+    private Long userId;
 
 
 
